@@ -1,6 +1,5 @@
-window.licker = window.licker || {};
-(function(ns) {
-  function Curve(components, maxFreqOpt) {
+export default Curve {
+  constructor(components, maxFreqOpt) {
     this.components = components;
     this.maxFreqOpt = maxFreqOpt;
 
@@ -30,13 +29,13 @@ window.licker = window.licker || {};
     }
   }
 
-  Curve.prototype.draw = function() {
+  draw() {
     var curve = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
     curve.setAttribute('points', this.vertexArr);
     ns.$canvas.append(curve);
-  };
+  }
 
-  Curve.prototype.toExpression = function() {
+  toExpression() {
     Math.sign = Math.sign || function(x) {
       x = +x; // convert to a number
       if (x === 0 || isNaN(x)) {
@@ -77,7 +76,5 @@ window.licker = window.licker || {};
       x: strPair[0],
       y: strPair[1]
     };
-  };
-
-  ns.Curve = Curve;
-}(window.licker));
+  }
+}

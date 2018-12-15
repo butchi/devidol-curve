@@ -1,3 +1,7 @@
+import MoviePlayer from './module/movie-player';
+import AnimationPlayer from './module/animation-player';
+import AudioPlayer from './module/audio-player';
+
 window.licker = window.licker || {};
 (function(ns) {
   "use strict";
@@ -63,9 +67,9 @@ window.licker = window.licker || {};
       ns.$canvas = $canvas; // TODO: do not use global variable
       var $audio = $('.audio');
 
-      audioPlayer = new ns.AudioPlayer($audio);
-      animationPlayer = new ns.AnimationPlayer();
-      moviePlayer = new ns.MoviePlayer(animationPlayer, audioPlayer);
+      audioPlayer = new AudioPlayer($audio);
+      animationPlayer = new AnimationPlayer();
+      moviePlayer = new MoviePlayer(animationPlayer, audioPlayer);
 
       ns.moviePlayer = moviePlayer;
       ns.animationPlayer = animationPlayer;

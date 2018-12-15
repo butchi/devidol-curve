@@ -1,6 +1,5 @@
-window.licker = window.licker || {};
-(function(ns) {
-  function MoviePlayer(animationPlayer, audioPlayer) {
+export default class MoviePlayer {
+  constructor(animationPlayer, audioPlayer) {
     this.animationPlayer = animationPlayer;
     this.audioPlayer = audioPlayer;
 
@@ -52,15 +51,15 @@ window.licker = window.licker || {};
     });
   }
 
-  MoviePlayer.prototype.getFrame = function() {
+  getFrame() {
     return Math.floor(this.audioPlayer.audioElm.currentTime * this.frameRate);
-  };
+  }
 
-  MoviePlayer.prototype.getCurrentTime = function() {
+  getCurrentTime() {
     return this.audioPlayer.audioElm.currentTime;
-  };
+  }
 
-  MoviePlayer.prototype.play = function() {
+  play() {
     this.audioPlayer.play();
     this.isPause = false;
 
@@ -75,13 +74,13 @@ window.licker = window.licker || {};
         requestAnimationFrame(loop);
       }
     }
-  };
+  }
 
-  MoviePlayer.prototype.pause = function() {
+  pause() {
     this.isPause = true;
-  };
+  }
 
-  MoviePlayer.prototype.showInfo = function() {
+  showInfo() {
     _self = this;
 
     var API_URL = 'https://www.wolframcloud.com/objects/65f6ffb2-c5c4-4295-ac84-ab3d304bbbe2';
@@ -108,7 +107,5 @@ window.licker = window.licker || {};
     }
 
     _self.$info.show();
-  };
-
-  ns.MoviePlayer = MoviePlayer;
-}(window.licker));
+  }
+}
