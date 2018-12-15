@@ -12,28 +12,19 @@ var audioPlayer;
 
 var totalBytesFirst = 58038364; // 低画質JSONのバイト数
 
-$.ajax({
-  url: 'data/fourier-array.json',
-  type: 'GET',
-  success: init,
-  error:function(data){
-    alert('error');
-  },
-  xhr:function(){
-    var xhr = $.ajaxSettings.xhr();
-    xhr.addEventListener("progress", this.progress);
-    return xhr;
-  },
-  progress:function(evt){
-    var ratio = evt.loaded / totalBytesFirst;
-    $('#mask--front, #mask--back').css({
-      translate: '0 ' + (ratio * 100) + 'px',
-    });
-    $('#wave--front, #wave--back').css({
-      translate: '0 ' + (- ratio * 100) + 'px',
-    });
-  }
-});
+fetch('data/fourier-array.json')
+  .then(res => {
+    res.json()
+      .then(json => {
+        init(json);
+      })
+    ;
+  })
+  .catch(err => {
+    alert(err);
+  })
+;
+
 
 function init(data) {
   ns.movieData = data;
