@@ -1,5 +1,7 @@
 import Curve from './curve';
 
+import ns from './ns';
+
 export default class AnimationPlayer {
   constructor(opts = {}) {
     this.currentFrame = 0;

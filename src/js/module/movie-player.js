@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 export default class MoviePlayer {
   constructor(animationPlayer, audioPlayer) {
     this.animationPlayer = animationPlayer;

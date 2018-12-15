@@ -1,4 +1,6 @@
-export default Curve {
+import ns from './ns';
+
+export default class Curve {
   constructor(components, maxFreqOpt) {
     this.components = components;
     this.maxFreqOpt = maxFreqOpt;
