@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import $ from 'jquery';
 
 export default class MoviePlayer {
@@ -11,43 +12,41 @@ export default class MoviePlayer {
 
     this.$info = $(); // set default value before override
 
-    var _self = this;
-
-    $(function() {
-      _self.$info = $('.info--pause');
-      _self.$blockInfo = _self.$info.find('.block-info');
+    $(() => {
+      this.$info = $('.info--pause');
+      this.$blockInfo = this.$info.find('.block-info');
     });
 
-    audioPlayer.$elm.on('play', function() {
+    audioPlayer.$elm.on('play', () => {
       // console.log('play');
-      _self.play();
+      this.play();
       try {
-        ns.ytPlayer.seekTo(_self.getCurrentTime(), true);
+        ns.ytPlayer.seekTo(this.getCurrentTime(), true);
         ns.ytPlayer.playVideo();
       } catch(_e) {
       }
 
-      _self.$info.hide();
+      this.$info.hide();
     });
 
-    audioPlayer.$elm.on('pause', function() {
+    audioPlayer.$elm.on('pause', () => {
       // console.log('pause');
-      _self.pause();
+      this.pause();
       try {
         ns.ytPlayer.pauseVideo();
       } catch(_e) {
       }
 
-      _self.showInfo();
+      this.showInfo();
     });
 
-    audioPlayer.$elm.on('seeking', function() {
+    audioPlayer.$elm.on('seeking', () => {
       // console.log('seeking');
 
-      _self.animationPlayer.drawFrame(_self.getFrame());
-      _self.showInfo();
+      this.animationPlayer.drawFrame(this.getFrame());
+      this.showInfo();
       try {
-        ns.ytPlayer.seekTo(_self.getCurrentTime(), false);
+        ns.ytPlayer.seekTo(this.getCurrentTime(), false);
       } catch(_e) {
       }
     });
@@ -65,17 +64,16 @@ export default class MoviePlayer {
     this.audioPlayer.play();
     this.isPause = false;
 
-    var _self = this;
-    requestAnimationFrame(loop);
-
-    function loop() {
+    const loop = () => {
       var frame;
-      if(!_self.isPause) {
-        _self.animationPlayer.drawFrame(_self.getFrame());
+      if(!this.isPause) {
+        this.animationPlayer.drawFrame(this.getFrame());
 
         requestAnimationFrame(loop);
       }
     }
+
+    requestAnimationFrame(loop);
   }
 
   pause() {
@@ -83,16 +81,14 @@ export default class MoviePlayer {
   }
 
   showInfo() {
-    _self = this;
-
     var API_URL = 'https://www.wolframcloud.com/objects/65f6ffb2-c5c4-4295-ac84-ab3d304bbbe2';
-    var curveArr = _self.animationPlayer.curveArr;
+    var curveArr = this.animationPlayer.curveArr;
     var compile = _.template('<dl><dt>x(t) = </dt><dd><%= x %></dd><dt>y(t) = </dt><dd><%= y %></dd><dt>plot: </dt><dd><a href="<%= api_url %>?x=<%= encodeURIComponent(x) %>&y=<%= encodeURIComponent(y) %>" target="_blank">Open the link</a></dd></dl>');
-    _self.$blockInfo.html('');
+    this.$blockInfo.html('');
 
     if(curveArr.length > 0) {
       var $curveList = $('<ol></ol>');
-      curveArr.forEach(function(curve) {
+      curveArr.forEach((curve) => {
         var htmlStr = '';
         var $curve = $('<li></li>');
         var expression = curve.toExpression();
@@ -105,9 +101,9 @@ export default class MoviePlayer {
         $curve.html(htmlStr);
         $curveList.append($curve);
       });
-      _self.$blockInfo.append($curveList);
+      this.$blockInfo.append($curveList);
     }
 
-    _self.$info.show();
+    this.$info.show();
   }
 }

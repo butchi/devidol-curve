@@ -47,14 +47,13 @@ export default class Curve {
     };
 
     var strPair = [];
-    var _self = this;
-    this.components.forEach(function(component, axisIndex) {
+    this.components.forEach((component, axisIndex) => {
       var len = component.length;
 
       var str = component[0];
       var i;
       var maxFreqOrg = len - 1; // 級数
-      var maxFreq = Math.min(_self.maxFreqOpt || maxFreqOrg, maxFreqOrg); // 何次まで拾うか
+      var maxFreq = Math.min(this.maxFreqOpt || maxFreqOrg, maxFreqOrg); // 何次まで拾うか
       for(i = 1; i <= maxFreq; i++) {
        var a = component[i][0];
         var aSgn = Math.sign(a);
