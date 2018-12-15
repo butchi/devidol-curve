@@ -13,7 +13,7 @@ var audioPlayer;
 var totalBytesFirst = 58038364; // 低画質JSONのバイト数
 
 $.ajax({
-  url: 'assets/data/fourier-array.json',
+  url: 'data/fourier-array.json',
   type: 'GET',
   success: init,
   error:function(data){
