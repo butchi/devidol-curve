@@ -67,7 +67,6 @@ export default class MoviePlayer {
     this.isPause = false;
 
     const loop = () => {
-      var frame;
       if(!this.isPause) {
         this.animationPlayer.drawFrame(this.getFrame());
 
@@ -83,18 +82,18 @@ export default class MoviePlayer {
   }
 
   showInfo() {
-    var API_URL = 'https://www.wolframcloud.com/objects/65f6ffb2-c5c4-4295-ac84-ab3d304bbbe2';
-    var curveArr = this.animationPlayer.curveArr;
-    var compile = _.template('<dl><dt>x(t) = </dt><dd><%= x %></dd><dt>y(t) = </dt><dd><%= y %></dd><dt>plot: </dt><dd><a href="<%= api_url %>?x=<%= encodeURIComponent(x) %>&y=<%= encodeURIComponent(y) %>" target="_blank">Open the link</a></dd></dl>');
+    const API_URL = 'https://www.wolframcloud.com/objects/65f6ffb2-c5c4-4295-ac84-ab3d304bbbe2';
+    const curveArr = this.animationPlayer.curveArr;
+    const compile = _.template('<dl><dt>x(t) = </dt><dd><%= x %></dd><dt>y(t) = </dt><dd><%= y %></dd><dt>plot: </dt><dd><a href="<%= api_url %>?x=<%= encodeURIComponent(x) %>&y=<%= encodeURIComponent(y) %>" target="_blank">Open the link</a></dd></dl>');
     this.$blockInfo.html('');
 
     if(curveArr.length > 0) {
-      var $curveList = $('<ol></ol>');
+      const $curveList = $('<ol></ol>');
       curveArr.forEach(curve => {
-        var htmlStr = '';
-        var $curve = $('<li></li>');
-        var expression = curve.toExpression();
-        var param = {
+        let htmlStr = '';
+        const $curve = $('<li></li>');
+        const expression = curve.toExpression();
+        const param = {
           x: expression['x'],
           y: expression['y'],
           api_url: API_URL,

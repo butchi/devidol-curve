@@ -6,11 +6,9 @@ import AnimationPlayer from './module/animation-player';
 import AudioPlayer from './module/audio-player';
 
 ns.movieData = {};
-var moviePlayer;
-var animationPlayer;
-var audioPlayer;
-
-var totalBytesFirst = 58038364; // 低画質JSONのバイト数
+let moviePlayer;
+let animationPlayer;
+let audioPlayer;
 
 fetch('data/fourier-array.json')
   .then(res => {
@@ -30,9 +28,9 @@ function init(data) {
   ns.currentFrame = 0;
 
   $('body').one('mdl-componentupgraded', evt => {
-    var $maxFreqController = $('.controller-max-freq');
+    const $maxFreqController = $('.controller-max-freq');
     $maxFreqController.on('updatevalue', function(evt) {
-      var val = $(this).attr('data-value');
+      const val = $(this).attr('data-value');
       animationPlayer.maxFreq = val;
       $maxFreqSlidebar.val(val);
       $maxFreqNumber.val(val);
@@ -42,8 +40,8 @@ function init(data) {
       }
     });
 
-    var $maxFreqSlidebar = $('.controller-max-freq__slidebar input');
-    var $maxFreqNumber = $('.controller-max-freq__number input');
+    const $maxFreqSlidebar = $('.controller-max-freq__slidebar input');
+    const $maxFreqNumber = $('.controller-max-freq__number input');
     $maxFreqSlidebar.on('input change', function() {
       $maxFreqController.attr('data-value', $(this).val());
       $maxFreqController.trigger('updatevalue');
@@ -53,9 +51,9 @@ function init(data) {
       $maxFreqController.trigger('updatevalue');
     });
 
-    var $canvas = $('.svg-canvas .svg-canvas__main');
+    const $canvas = $('.svg-canvas .svg-canvas__main');
     ns.$canvas = $canvas; // TODO: do not use global variable
-    var $audio = $('.audio');
+    const $audio = $('.audio');
 
     audioPlayer = new AudioPlayer($audio);
     animationPlayer = new AnimationPlayer();
@@ -97,47 +95,49 @@ function init(data) {
       }
     }).find(':checked').trigger('change');
 
-    $('.controller-color input[type="radio"]').on('change', function() {
-      var val = $(this).val();
-      var $parent = $(this).closest('.controller-color');
+    $('.controller-color input[type="radio"]').on('change', evt => {
+      const $elm = $(evt.target);
+      const val = $elm.val();
+      const $parent = $elm.closest('.controller-color');
 
       $parent.trigger('updatevalue', val);
     });
 
-    $('.controller-color input[type="color"]').on('change', function() {
-      var val = $(this).val();
-      var $parent = $(this).closest('.controller-color');
+    $('.controller-color input[type="color"]').on('change', evt => {
+      const $elm = $(evt.target);
+      const val = $elm.val();
+      const $parent = $elm.closest('.controller-color');
 
       $parent.trigger('updatevalue', val);
     });
 
-    $('.controller-color').on('updatevalue', function(_evt, val) {
-      var $this = $(this);
+    $('.controller-color').on('updatevalue', (evt, val) => {
+      var $elm = $(evt.target);
       var color = val;
-      $this.attr('data-color', color);
+      $elm.attr('data-color', color);
 
-      if($this.is('.controller-color--bg')) {
+      if($elm.is('.controller-color--bg')) {
         $('body').css({
           "background-color": color,
         });
       }
 
-      if($this.is('.controller-color--fill')) {
+      if($elm.is('.controller-color--fill')) {
         $('.svg-canvas .svg-canvas__main').css({
           fill: color,
         });
       }
 
-      if($this.is('.controller-color--line')) {
+      if($elm.is('.controller-color--line')) {
         $('.svg-canvas .svg-canvas__main').css({
           stroke: color,
         });
       }
     });
 
-    var $thicknessController = $('.controller-thickness');
-    $thicknessController.on('updatevalue', function(evt) {
-      var val = $(this).attr('data-value');
+    const $thicknessController = $('.controller-thickness');
+    $thicknessController.on('updatevalue', evt => {
+      var val = $(evt.target).attr('data-value');
       $('.svg-canvas .svg-canvas__main').css({
         "stroke-width": val,
       });
@@ -145,8 +145,8 @@ function init(data) {
       $thicknessNumber.val(val);
     });
 
-    var $thicknessSlidebar = $('.controller-thickness__slidebar input');
-    var $thicknessNumber = $('.controller-thickness__number input');
+    const $thicknessSlidebar = $('.controller-thickness__slidebar input');
+    const $thicknessNumber = $('.controller-thickness__number input');
     $thicknessSlidebar.on('input change', function() {
       $thicknessController.attr('data-value', $(this).val());
       $thicknessController.trigger('updatevalue');
@@ -167,7 +167,6 @@ window.onYouTubeIframeAPIReady = () => {
     videoId : 'gyDFoIbxB34',
     events  : {
       // プレイヤーの準備ができたときに実行されるコールバック関数
-      onReady : onPlayerReady,
       onStateChange: onStateChange,
     },
     playerVars: {
@@ -178,12 +177,6 @@ window.onYouTubeIframeAPIReady = () => {
     },
   });
 
-  function onPlayerReady() {
-    // if (moviePlayer && !moviePlayer.isPause) {
-    //   ytPlayer.playVideo();
-    // }
-  }
-
   function onStateChange(state) {
     switch (state.data) {
     case window.YT.PlayerState.PAUSED:
@@ -193,7 +186,6 @@ window.onYouTubeIframeAPIReady = () => {
       break;
 
     case window.YT.PlayerState.PLAYING:
-      moviePlayer.play();
       break;
     }
   }

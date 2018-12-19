@@ -14,12 +14,11 @@ export default class AnimationPlayer {
   drawFrame(frame) {
     ns.$canvas.children().remove();
     Object.keys(ns.movieData).forEach(color => {
-      var curveArr = ns.movieData[color][frame];
-      var c;
+      const curveArr = ns.movieData[color][frame];
       this.curveArr = [];
       if(curveArr) {
-        for(c = 0; c < curveArr.length; c++) {
-          var curve = new Curve(curveArr[c], this.maxFreq);
+        for(let c = 0; c < curveArr.length; c++) {
+          const curve = new Curve(curveArr[c], this.maxFreq);
           this.curveArr.push(curve);
           curve.draw();
         }
