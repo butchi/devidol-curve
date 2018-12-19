@@ -67,38 +67,6 @@ function init(data) {
 
     $maxFreqSlidebar.trigger('change');
 
-    $('[class^="controller-quality__button--"]').on('click', function() {
-      var $this = $(this);
-      var targetClassLi = {
-        lq: 'controller-quality__button--lq',
-        mq: 'controller-quality__button--mq',
-        hq: 'controller-quality__button--hq',
-      }
-
-      ns.quality = 'lq';
-
-      _.each(targetClassLi, function(elm, key) {
-        if($this.hasClass(targetClassLi[key])) {
-          ns.quality = key;
-        }
-      });
-
-      if(false) {
-      } else if(ns.quality === 'mq') {
-        $('.' + targetClassLi.mq).attr('disabled', true);
-
-        $maxFreqController.attr('data-value', 50).trigger('updatevalue');
-      } else if(ns.quality === 'hq') {
-        $('.' + targetClassLi.mq).attr('disabled', true);
-        $('.' + targetClassLi.hq).attr('disabled', true);
-
-        $maxFreqController.attr('data-value', 100).trigger('updatevalue');
-      }
-
-      $.getJSON('assets/data/fourier_arr_' + ns.quality + '.json', function(data) {
-        ns.movieData = data;
-      });
-    });
 
     $('.controller-compare').on('change', function() {
       var state = {
