@@ -1,6 +1,8 @@
 import _ from 'lodash';
 import $ from 'jquery';
 
+import ns from './ns';
+
 export default class MoviePlayer {
   constructor(animationPlayer, audioPlayer) {
     this.animationPlayer = animationPlayer;
@@ -88,7 +90,7 @@ export default class MoviePlayer {
 
     if(curveArr.length > 0) {
       var $curveList = $('<ol></ol>');
-      curveArr.forEach((curve) => {
+      curveArr.forEach(curve => {
         var htmlStr = '';
         var $curve = $('<li></li>');
         var expression = curve.toExpression();

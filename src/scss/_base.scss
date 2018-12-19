@@ -102,8 +102,20 @@ a {
 .original-movie {
   position: relative;
   float: left;
-  width: 480px;
+  width: 640px;
   height: 360px;
+
+  &::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 100%;
+  }
 }
 
 .svg-canvas .svg-canvas__main {

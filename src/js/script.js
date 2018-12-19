@@ -29,7 +29,7 @@ function init(data) {
   ns.movieData = data;
   ns.currentFrame = 0;
 
-  $(function() {
+  $('body').one('mdl-componentupgraded', evt => {
     var $maxFreqController = $('.controller-max-freq');
     $maxFreqController.on('updatevalue', function(evt) {
       var val = $(this).attr('data-value');
@@ -67,34 +67,35 @@ function init(data) {
 
     $maxFreqSlidebar.trigger('change');
 
+    $('.controller-compare').on('change', evt => {
+      const val = $(evt.target).val();
 
-    $('.controller-compare').on('change', function() {
-      var state = {
+      const state = {
         NORMAL:  'normal',
         COMPARE: 'compare',
         OVERLAY: 'overlay',
       }
 
-      var $movieArr = $('.array-movie');
+      const $movieArr = $('.array-movie');
 
-      if(false) {
-      } else if($(this).val() === state.NORMAL) {
+      if (false) {
+      } else if (val === state.NORMAL) {
         $movieArr.attr('data-mode', state.NORMAL);
-      } else if($(this).val() === state.COMPARE) {
+      } else if (val === state.COMPARE) {
         $movieArr.attr('data-mode', state.COMPARE);
-      } else if($(this).val() === state.OVERLAY) {
+      } else if (val === state.OVERLAY) {
         $('.controller-color--line [value="red"]').prop('checked', true).trigger('change');
         $movieArr.attr('data-mode', state.OVERLAY);
       } else {
       }
 
-      if($(this).val() === state.COMPARE || $(this).val() === state.OVERLAY) {
+      if (val === state.COMPARE || val === state.OVERLAY) {
         try {
           ns.ytPlayer.seekTo(moviePlayer.getCurrentTime(), true);
         } catch(_e) {
         }
       }
-    });
+    }).find(':checked').trigger('change');
 
     $('.controller-color input[type="radio"]').on('change', function() {
       var val = $(this).val();
@@ -156,7 +157,46 @@ function init(data) {
     });
 
     $thicknessSlidebar.trigger('change');
-
-    moviePlayer.play();
   });
 }
+
+window.onYouTubeIframeAPIReady = () => {
+  const ytPlayer = new YT.Player('original_movie', {
+    width   : '640',
+    height  : '360',
+    videoId : 'gyDFoIbxB34',
+    events  : {
+      // プレイヤーの準備ができたときに実行されるコールバック関数
+      onReady : onPlayerReady,
+      onStateChange: onStateChange,
+    },
+    playerVars: {
+      rel      : 0, // 関連動画
+      showinfo : 0, // 動画情報
+      controls : 0, // コントローラー
+      wmode    : 'transparent', // z-indexを有効にする
+    },
+  });
+
+  function onPlayerReady() {
+    // if (moviePlayer && !moviePlayer.isPause) {
+    //   ytPlayer.playVideo();
+    // }
+  }
+
+  function onStateChange(state) {
+    switch (state.data) {
+    case window.YT.PlayerState.PAUSED:
+      break;
+
+    case window.YT.PlayerState.ENDED:
+      break;
+
+    case window.YT.PlayerState.PLAYING:
+      moviePlayer.play();
+      break;
+    }
+  }
+
+  ns.ytPlayer = ytPlayer;
+};
