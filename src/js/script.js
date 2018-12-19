@@ -14,11 +14,10 @@ var totalBytesFirst = 58038364; // 低画質JSONのバイト数
 
 fetch('data/fourier-array.json')
   .then(res => {
-    res.json()
-      .then(json => {
-        init(json);
-      })
-    ;
+    return res.json();
+  })
+  .then(json => {
+    init(json);
   })
   .catch(err => {
     alert(err);
