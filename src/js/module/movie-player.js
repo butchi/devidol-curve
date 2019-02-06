@@ -14,12 +14,12 @@ export default class MoviePlayer {
 
     this.$info = $(); // set default value before override
 
-    $(() => {
+    $(_ => {
       this.$info = $('.info--pause');
       this.$blockInfo = this.$info.find('.block-info');
     });
 
-    audioPlayer.$elm.on('play', () => {
+    audioPlayer.$elm.on('play', _ => {
       // console.log('play');
       this.play();
       try {
@@ -31,7 +31,7 @@ export default class MoviePlayer {
       this.$info.hide();
     });
 
-    audioPlayer.$elm.on('pause', () => {
+    audioPlayer.$elm.on('pause', _ => {
       // console.log('pause');
       this.pause();
       try {
@@ -42,7 +42,7 @@ export default class MoviePlayer {
       this.showInfo();
     });
 
-    audioPlayer.$elm.on('seeking', () => {
+    audioPlayer.$elm.on('seeking', _ => {
       // console.log('seeking');
 
       this.animationPlayer.drawFrame(this.getFrame());
@@ -66,7 +66,7 @@ export default class MoviePlayer {
     this.audioPlayer.play();
     this.isPause = false;
 
-    const loop = () => {
+    const loop = _ => {
       if(!this.isPause) {
         this.animationPlayer.drawFrame(this.getFrame());
 
