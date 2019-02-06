@@ -42,12 +42,12 @@ function init(data) {
 
     const $maxFreqSlidebar = $('.controller-max-freq__slidebar input');
     const $maxFreqNumber = $('.controller-max-freq__number input');
-    $maxFreqSlidebar.on('input change', function() {
-      $maxFreqController.attr('data-value', $(this).val());
+    $maxFreqSlidebar.on('input change', evt => {
+      $maxFreqController.attr('data-value', $(evt.target).val());
       $maxFreqController.trigger('updatevalue');
     });
-    $maxFreqNumber.on('input change', function() {
-      $maxFreqController.attr('data-value', $(this).val());
+    $maxFreqNumber.on('input change', evt => {
+      $maxFreqController.attr('data-value', $(evt.target).val());
       $maxFreqController.trigger('updatevalue');
     });
 
@@ -147,12 +147,12 @@ function init(data) {
 
     const $thicknessSlidebar = $('.controller-thickness__slidebar input');
     const $thicknessNumber = $('.controller-thickness__number input');
-    $thicknessSlidebar.on('input change', function() {
-      $thicknessController.attr('data-value', $(this).val());
+    $thicknessSlidebar.on('input change', evt => {
+      $thicknessController.attr('data-value', $(evt.target).val());
       $thicknessController.trigger('updatevalue');
     });
-    $thicknessNumber.on('input change', function() {
-      $thicknessController.attr('data-value', $(this).val());
+    $thicknessNumber.on('input change', evt => {
+      $thicknessController.attr('data-value', $(evt.target).val());
       $thicknessController.trigger('updatevalue');
     });
 
@@ -160,7 +160,7 @@ function init(data) {
   });
 }
 
-window.onYouTubeIframeAPIReady = () => {
+window.onYouTubeIframeAPIReady = _ => {
   const ytPlayer = new YT.Player('original_movie', {
     width   : '640',
     height  : '360',
