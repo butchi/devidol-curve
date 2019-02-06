@@ -4,7 +4,11 @@ import $ from 'jquery';
 import ns from './ns';
 
 export default class MoviePlayer {
-  constructor(animationPlayer, audioPlayer) {
+  constructor(opts = {}) {
+    this.initialize(opts);
+  }
+
+  initialize({ animationPlayer, audioPlayer }) {
     this.animationPlayer = animationPlayer;
     this.audioPlayer = audioPlayer;
 
@@ -55,11 +59,11 @@ export default class MoviePlayer {
   }
 
   getFrame() {
-    return Math.floor(this.audioPlayer.audioElm.currentTime * this.frameRate);
+    return Math.floor(this.audioPlayer.elm.currentTime * this.frameRate);
   }
 
   getCurrentTime() {
-    return this.audioPlayer.audioElm.currentTime;
+    return this.audioPlayer.elm.currentTime;
   }
 
   play() {

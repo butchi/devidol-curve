@@ -53,11 +53,11 @@ function init(data) {
 
     const $canvas = $('.svg-canvas .svg-canvas__main');
     ns.$canvas = $canvas; // TODO: do not use global variable
-    const $audio = $('.audio');
+    const audioElm = document.querySelector('.audio');
 
-    audioPlayer = new AudioPlayer($audio);
+    audioPlayer = new AudioPlayer({ elm: audioElm });
     animationPlayer = new AnimationPlayer();
-    moviePlayer = new MoviePlayer(animationPlayer, audioPlayer);
+    moviePlayer = new MoviePlayer({ animationPlayer, audioPlayer });
 
     ns.moviePlayer = moviePlayer;
     ns.animationPlayer = animationPlayer;

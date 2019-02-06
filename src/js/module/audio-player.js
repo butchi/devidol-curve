@@ -1,19 +1,25 @@
+import $ from 'jquery';
+
 export default class AudioPlayer {
-  constructor($elm) {
-    this.audioElm = $elm.get(0);
-    this.$elm = $elm;
+  constructor(opts = {}) {
+    this.initialize(opts);
+  }
+
+  initialize({ elm }) {
+    this.elm = elm;
+    this.$elm = $(elm);
   }
 
   play() {
-    this.audioElm.play();
+    this.elm.play();
   }
 
   pause() {
-    this.audioElm.pause();
+    this.elm.pause();
   }
 
   stop() {
-    this.audioElm.pause();
-    this.audioElm.currentTime = 0;
+    this.elm.pause();
+    this.elm.currentTime = 0;
   }
 }
