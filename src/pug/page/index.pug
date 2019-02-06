@@ -29,79 +29,122 @@ block content-block
         span.controller-max-freq__number
           input(type='number', max='100', min='1', step='1', value='15')
       div
-        label.controller-compare.mdl-radio.mdl-js-radio.mdl-js-ripple-effect(for='controller-compare--normal')
-          input#controller-compare--normal.mdl-radio__button(type='radio', name='compare', value='normal')
-          span.mdl-radio__label
-            | 数式曲線
-        label.controller-compare.mdl-radio.mdl-js-radio.mdl-js-ripple-effect(for='controller-compare--compare')
-          input#controller-compare--compare.mdl-radio__button(type='radio', name='compare', value='compare', checked='')
-          span.mdl-radio__label
-            | オリジナルと比較
-        label.controller-compare.mdl-radio.mdl-js-radio.mdl-js-ripple-effect(for='controller-compare--overlay')
-          input#controller-compare--overlay.mdl-radio__button(type='radio', name='compare', value='overlay')
-          span.mdl-radio__label
-            | オーバーレイ
+        mixin controller-compare({ name, itemArr })
+          for item in itemArr
+            -
+              const { label, value, checked } = item;
+              const id = `controller-${name}--${value}`;
+            label.controller-compare.mdl-radio.mdl-js-radio.mdl-js-ripple-effect(for=id)
+              input.mdl-radio__button(id=id, type='radio', name=name, value=value, checked=checked)
+              span.mdl-radio__label
+                = label
 
-      .controller-color.controller-color--bg(data-color='transparent')
-        | 背景:
-        label
-          input(type='radio', name='bg', value='transparent')
-          | 透過
-        label
-          input(type='radio', name='bg', value='red')
-          | 赤
-        label
-          input(type='radio', name='bg', value='black')
-          | 黒
-        label
-          input(type='radio', name='bg', value='white')
-          | 白
-        label
-          input(type='radio', name='bg', value='lime')
-          | 緑
-        label
-          input(type='color')
-          | カスタム
-      .controller-color.controller-color--fill(data-color='transparent')
-        | 塗り:
-        label
-          input(type='radio', name='fill', value='transparent')
-          | 透過
-        label
-          input(type='radio', name='fill', value='red')
-          | 赤
-        label
-          input(type='radio', name='fill', value='black')
-          | 黒
-        label
-          input(type='radio', name='fill', value='white')
-          | 白
-        label
-          input(type='radio', name='fill', value='lime')
-          | 緑
-        label
-          input(type='color')
-          | カスタム
-      .controller-color.controller-color--line(data-color='white')
-        | 輪郭:
-        label
-          input(type='radio', name='line', value='transparent')
-          | 透過
-        label
-          input(type='radio', name='line', value='red')
-          | 赤
-        label
-          input(type='radio', name='line', value='black')
-          | 黒
-        label
-          input(type='radio', name='line', value='white')
-          | 白
-        label
-          input(type='radio', name='line', value='lime')
-          | 緑
-        label
-          input(type='color')
-          | カスタム
+        +controller-compare({
+          name: 'compare',
+          itemArr: [{
+            label: '数式曲線',
+            value: 'normal',
+          }, {
+            label: 'オリジナルと比較',
+            value: 'compare',
+            checked: true,
+          }, {
+            label: 'オーバーレイ',
+            value: 'overlay',
+          }],
+        })
+
+      mixin controller-color({ title, name, type, defaultColor, itemArr })
+        .controller-color(data-type=type, data-color=defaultColor)
+          | #{title}:
+          for item in itemArr
+            -
+              const { label, value, checked } = item;
+              const id = `controller-${name}--${type}--${item.value}`;
+            label.controller-compare.mdl-radio.mdl-js-radio.mdl-js-ripple-effect(for=id)
+              input.mdl-radio__button(id=id, type='radio', name=`${name}-${type}`, value=value, checked=checked)
+              span.mdl-radio__label
+                = label
+          label
+            input(type='color')
+            | カスタム
+
+      +controller-color({
+        title: '背景',
+        name: 'color',
+        type: 'bg',
+        defaultColor: 'black',
+        itemArr: [{
+          label: '透過',
+          value: 'transparent',
+        }, {
+          label: '赤',
+          value: 'red',
+        }, {
+          label: '黒',
+          value: 'black',
+          checked: true,
+        }, {
+          label: '白',
+          value: 'white',
+        }, {
+          label: '緑',
+          value: 'green',
+        }]
+      })
+
+      .mdl-card.mdl-shadow--2dp
+        .mdl-card__title
+          | キャラクター
+        .mdl-card__supporting-text(style="color: white;")
+          +controller-color({
+            title: '塗り',
+            name: 'color',
+            type: 'fill',
+            defaultColor: 'transparent',
+            itemArr: [{
+              label: '透過',
+              value: 'transparent',
+              checked: true,
+            }, {
+              label: '赤',
+              value: 'red',
+            }, {
+              label: '黒',
+              value: 'black',
+            }, {
+              label: '白',
+              value: 'white',
+            }, {
+              label: '緑',
+              value: 'green',
+            }]
+          })
+
+          +controller-color({
+            title: '輪郭',
+            name: 'color',
+            type: 'line',
+            defaultColor: 'transparent',
+            itemArr: [{
+              label: '透過',
+              value: 'transparent',
+              checked: true,
+            }, {
+              label: '赤',
+              value: 'red',
+            }, {
+              label: '黒',
+              value: 'black',
+            }, {
+              label: '白',
+              value: 'white',
+            }, {
+              label: '緑',
+              value: 'green',
+            }]
+          })
+
       .controller-thickness
         span.controller-thickness__slidebar
           label
@@ -109,6 +152,7 @@ block content-block
             input(type='range', max='100', min='0.1', step='0.1', value='1')
         span.controller-thickness__number
           input(type='number', max='100', min='0.1', step='0.1', value='1')
+
     ul.list-share
       li.item.item--facebook
         .fb-like(data-layout='button_count', data-action='like', data-show-faces='true', data-share='true')

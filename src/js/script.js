@@ -112,23 +112,23 @@ function init(data) {
     });
 
     $('.controller-color').on('updatevalue', (evt, val) => {
-      var $elm = $(evt.target);
-      var color = val;
+      const $elm = $(evt.target);
+      const color = val;
+
+      const type = $elm.attr('data-type');
+
       $elm.attr('data-color', color);
 
-      if($elm.is('.controller-color--bg')) {
-        $('body').css({
+      if (type == null) {
+      } else if (type === 'bg') {
+        $('.area-movie').css({
           "background-color": color,
         });
-      }
-
-      if($elm.is('.controller-color--fill')) {
+      } else if (type === 'fill') {
         $('.svg-canvas .svg-canvas__main').css({
           fill: color,
         });
-      }
-
-      if($elm.is('.controller-color--line')) {
+      } else if (type === 'line') {
         $('.svg-canvas .svg-canvas__main').css({
           stroke: color,
         });

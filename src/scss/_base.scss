@@ -2,7 +2,7 @@ body {
   // 文字サイズの自動調整を無効にする
   text-size-adjust: 100%;
 
-  background-color: #000;
+  background-color: #fff;
 
   color: white;
 }
@@ -97,6 +97,8 @@ a {
   float: left;
   width: 660px;
   height: 380px;
+
+  background-color: #000;
 }
 
 .original-movie {
