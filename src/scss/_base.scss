@@ -46,54 +46,54 @@ a {
 
 .array-movie {
   background-color: #000;
-}
 
-.array-movie:after {
-  /* clearfix */
-  content: "."; 
-  display: block; 
-  height: 0; 
-  font-size: 0;  
-  clear: both; 
-  visibility: hidden;
-}
+  &:after {
+    /* clearfix */
+    content: "."; 
+    display: block; 
+    height: 0; 
+    font-size: 0;  
+    clear: both; 
+    visibility: hidden;
+  }
 
-.array-movie[data-mode="normal"] {
-  display: block;
-}
+  &[data-mode="normal"] {
+    display: block;
 
-.array-movie[data-mode="normal"] .original-movie {
-  display: none;
-}
+    .original-movie {
+      display: none;
+    }
+  }
 
-.array-movie[data-mode="compare"] {
-  display: block;
-}
+  &[data-mode="compare"] {
+    display: block;
 
-.array-movie[data-mode="compare"] .item-movie {
-  display: block;
-}
+    .item-movie {
+      display: block;
+    }
+  }
 
-.array-movie[data-mode="overlay"] {
-  display: block;
-  position: relative;
-  width: 640px;
-  height: 380px;
-}
+  &[data-mode="overlay"] {
+    display: block;
+    position: relative;
+    width: 640px;
+    height: 380px;
 
-.array-movie[data-mode="overlay"] .item-movie {
-  display: block;
-  position: absolute;
-  left: 0;
-  top: 0;
-}
+    .item-movie {
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
 
-.array-movie[data-mode="overlay"] .area-movie {
-  z-index: 1;
-}
+    .area-movie {
+      z-index: 1;
+    }
 
-.array-movie[data-mode="overlay"] .original-movie {
-  z-index: 0;
+    .original-movie {
+      z-index: 0;
+    }
+  }
 }
 
 .area-movie {
