@@ -18,7 +18,10 @@ export default class AnimationPlayer {
       this.curveArr = [];
       if(curveArr) {
         for(let c = 0; c < curveArr.length; c++) {
-          const curve = new Curve(curveArr[c], this.maxFreq);
+          const curve = new Curve({
+            components: curveArr[c],
+            maxFreqOpt: this.maxFreq,
+          });
           this.curveArr.push(curve);
           curve.draw();
         }

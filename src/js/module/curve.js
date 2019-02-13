@@ -1,7 +1,11 @@
 import ns from './ns';
 
 export default class Curve {
-  constructor(components, maxFreqOpt) {
+  constructor(opts = {}) {
+    this.initialize(opts);
+  }
+
+  initialize({ components, maxFreqOpt }) {
     this.components = components;
     this.maxFreqOpt = maxFreqOpt;
 
@@ -26,7 +30,7 @@ export default class Curve {
 
     this.vertexArr = [];
 
-    for (let t = 0; t < 2 * Math.PI; t += Math.PI/256) {
+    for (let t = 0; t < 2 * Math.PI; t += Math.PI / 256) {
       this.vertexArr.push([this.funcX(t), this.funcY(t)]);
     }
   }
