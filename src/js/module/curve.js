@@ -12,7 +12,7 @@ export default class Curve {
         let ret = components[axis][0]; // 定数（周波数0）
         const maxFreqOrg = components[axis].length - 1; // 級数
         const maxFreq = Math.min(maxFreqOpt || maxFreqOrg, maxFreqOrg); // 何次まで拾うか
-        for(let i = 1; i <= maxFreq; i++) {
+        for (let i = 1; i <= maxFreq; i++) {
           const cmp = components[axis][i];
           // cmp[0]: 係数, cmp[1]: 位相
           ret += cmp[0] * Math.sin(i * t + cmp[1]);
@@ -20,10 +20,12 @@ export default class Curve {
         return ret;
       };
     };
+
     this.funcX = this.func(0);
     this.funcY = this.func(1);
 
     this.vertexArr = [];
+
     for (let t = 0; t < 2 * Math.PI; t += Math.PI/256) {
       this.vertexArr.push([this.funcX(t), this.funcY(t)]);
     }
@@ -31,7 +33,9 @@ export default class Curve {
 
   draw() {
     const curve = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
+
     curve.setAttribute('points', this.vertexArr);
+
     ns.$canvas.append(curve);
   }
 
@@ -44,13 +48,15 @@ export default class Curve {
     }
 
     const strPair = [];
+
     this.components.forEach((component, axisIndex) => {
       const len = component.length;
 
       let str = component[0];
       const maxFreqOrg = len - 1; // 級数
       const maxFreq = Math.min(this.maxFreqOpt || maxFreqOrg, maxFreqOrg); // 何次まで拾うか
-      for(let i = 1; i <= maxFreq; i++) {
+
+      for (let i = 1; i <= maxFreq; i++) {
         const a = component[i][0];
         const aSgn = Math.sign(a);
         const aAbs = Math.abs(a);
@@ -71,7 +77,7 @@ export default class Curve {
 
     return {
       x: strPair[0],
-      y: strPair[1]
+      y: strPair[1],
     };
   }
 }
