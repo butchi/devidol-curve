@@ -12,13 +12,19 @@ export default class AnimationPlayer {
   }
 
   drawFrame(frame) {
-    ns.$canvas.children().remove();
     Object.keys(ns.movieData).forEach(color => {
+      const $elm = ns.$canvas.find(`.${color}`);
+      const elm = $elm.get(0);
+
+      $elm.children().remove();
+
       const curveArr = ns.movieData[color][frame];
       this.curveArr = [];
-      if(curveArr) {
-        for(let c = 0; c < curveArr.length; c++) {
+
+      if (curveArr) {
+        for (let c = 0; c < curveArr.length; c++) {
           const curve = new Curve({
+            elm,
             components: curveArr[c],
             maxFreqOpt: this.maxFreq,
           });

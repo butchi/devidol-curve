@@ -15,6 +15,10 @@ block content-block
         svg.svg-canvas(width='640', height='380', xmlns='http://www.w3.org/2000/svg')
           desc でびどる曲線！
           g.svg-canvas__main
+            g.white
+            g.aira
+            g.shima
+            g.hana
         aside.info--pause
           .block-info
       .original-movie.item-movie
@@ -54,8 +58,8 @@ block content-block
           }],
         })
 
-      mixin controller-color({ title, name, type, defaultColor, itemArr })
-        .controller-color(data-type=type, data-color=defaultColor)
+      mixin controller-color({ title, name, type, character, defaultColor, itemArr })
+        .controller-color(data-type=type, data-character=character, data-color=defaultColor)
           | #{title}:
           for item in itemArr
             -
@@ -77,73 +81,123 @@ block content-block
         itemArr: [{
           label: '透過',
           value: 'transparent',
+          checked: true,
+        }, {
+          label: '黒',
+          value: 'black',
+        }, {
+          label: '白',
+          value: 'white',
         }, {
           label: '赤',
           value: 'red',
         }, {
-          label: '黒',
-          value: 'black',
-          checked: true,
+          label: '青',
+          value: 'blue',
         }, {
-          label: '白',
-          value: 'white',
+          label: '黄',
+          value: 'yellow',
         }, {
           label: '緑',
           value: 'green',
         }]
       })
 
-      .mdl-card.mdl-shadow--2dp
-        .mdl-card__title
-          | キャラクター
-        .mdl-card__supporting-text(style="color: white;")
-          +controller-color({
-            title: '塗り',
-            name: 'color',
-            type: 'fill',
-            defaultColor: 'transparent',
-            itemArr: [{
-              label: '透過',
-              value: 'transparent',
-              checked: true,
-            }, {
-              label: '赤',
-              value: 'red',
-            }, {
-              label: '黒',
-              value: 'black',
-            }, {
-              label: '白',
-              value: 'white',
-            }, {
-              label: '緑',
-              value: 'green',
-            }]
-          })
+      mixin controller-card({ title, character, color })
+        .controller-card.mdl-card.mdl-shadow--2dp(data-character=character)
+          .mdl-card__title(style=`color: ${color};`)
+            = title
+          .mdl-card__supporting-text(style="color: white;")
+            +controller-color({
+              title: '塗り',
+              name: `color-${character}`,
+              type: 'fill',
+              character,
+              defaultColor: 'transparent',
+              itemArr: [{
+                label: '透過',
+                value: 'transparent',
+              }, {
+                label: '黒',
+                value: 'black',
+              }, {
+                label: '白',
+                value: 'white',
+                checked: character === 'white'
+              }, {
+                label: '赤',
+                value: 'red',
+                checked: character === 'aira'
+              }, {
+                label: '青',
+                value: 'blue',
+                checked: character === 'shima'
+              }, {
+                label: '黄',
+                value: 'yellow',
+                checked: character === 'hana'
+              }, {
+                label: '緑',
+                value: 'green',
+              }]
+            })
 
-          +controller-color({
-            title: '輪郭',
-            name: 'color',
-            type: 'line',
-            defaultColor: 'transparent',
-            itemArr: [{
-              label: '透過',
-              value: 'transparent',
-              checked: true,
-            }, {
-              label: '赤',
-              value: 'red',
-            }, {
-              label: '黒',
-              value: 'black',
-            }, {
-              label: '白',
-              value: 'white',
-            }, {
-              label: '緑',
-              value: 'green',
-            }]
-          })
+            +controller-color({
+              title: '輪郭',
+              name: `color-${character}`,
+              type: 'line',
+              character,
+              defaultColor: 'transparent',
+              itemArr: [{
+                label: '透過',
+                value: 'transparent',
+                checked: true,
+              }, {
+                label: '白',
+                value: 'white',
+              }, {
+                label: '黒',
+                value: 'black',
+              }, {
+                label: '赤',
+                value: 'red',
+              }, {
+                label: '青',
+                value: 'blue',
+              }, {
+                label: '黄',
+                value: 'yellow',
+              }, {
+                label: '緑',
+                value: 'green',
+              }]
+            })
+
+
+      +controller-card({
+        title: '白',
+        character: 'white',
+        color: 'white',
+      })
+
+      +controller-card({
+        title: 'アイラ',
+        character: 'aira',
+        color: 'red',
+      })
+
+      +controller-card({
+        title: 'シマ',
+        character: 'shima',
+        color: 'blue',
+      })
+
+      +controller-card({
+        title: 'はな',
+        character: 'hana',
+        color: 'yellow',
+      })
+
 
       .controller-thickness
         span.controller-thickness__slidebar

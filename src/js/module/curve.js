@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 import ns from './ns';
 
 export default class Curve {
@@ -5,7 +7,8 @@ export default class Curve {
     this.initialize(opts);
   }
 
-  initialize({ components, maxFreqOpt }) {
+  initialize({ elm, components, maxFreqOpt }) {
+    this.elm = elm;
     this.components = components;
     this.maxFreqOpt = maxFreqOpt;
 
@@ -40,7 +43,7 @@ export default class Curve {
 
     curve.setAttribute('points', this.vertexArr);
 
-    ns.$canvas.append(curve);
+    $(this.elm).append(curve);
   }
 
   toExpression() {

@@ -97,23 +97,25 @@ function init(data) {
 
     $('.controller-color input[type="radio"]').on('change', evt => {
       const $elm = $(evt.target);
-      const val = $elm.val();
+      const value = $elm.val();
       const $parent = $elm.closest('.controller-color');
+      const character = $parent.attr('data-character');
 
-      $parent.trigger('updatevalue', val);
+      $parent.trigger('updatevalue', { value, character });
     });
 
     $('.controller-color input[type="color"]').on('change', evt => {
       const $elm = $(evt.target);
-      const val = $elm.val();
+      const value = $elm.val();
       const $parent = $elm.closest('.controller-color');
+      const character = $parent.attr('data-character');
 
-      $parent.trigger('updatevalue', val);
+      $parent.trigger('updatevalue', { value, character });
     });
 
-    $('.controller-color').on('updatevalue', (evt, val) => {
+    $('.controller-color').on('updatevalue', (evt, { value, character }) => {
       const $elm = $(evt.target);
-      const color = val;
+      const color = value;
 
       const type = $elm.attr('data-type');
 
@@ -125,11 +127,11 @@ function init(data) {
           "background-color": color,
         });
       } else if (type === 'fill') {
-        $('.svg-canvas .svg-canvas__main').css({
+        $(`.svg-canvas .svg-canvas__main .${character}`).css({
           fill: color,
         });
       } else if (type === 'line') {
-        $('.svg-canvas .svg-canvas__main').css({
+        $(`.svg-canvas .svg-canvas__main .${character}`).css({
           stroke: color,
         });
       }

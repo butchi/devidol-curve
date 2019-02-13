@@ -44,6 +44,10 @@ a {
   font-size: 0;
 }
 
+.array-movie {
+  background-color: #000;
+}
+
 .array-movie:after {
   /* clearfix */
   content: "."; 
@@ -97,8 +101,6 @@ a {
   float: left;
   width: 660px;
   height: 380px;
-
-  background-color: #000;
 }
 
 .original-movie {
@@ -122,8 +124,24 @@ a {
 
 .svg-canvas .svg-canvas__main {
   fill: none;
-  stroke: #fff;
+  stroke: transparent;
   stroke-width: 1px;
+
+  .white {
+    fill: white;
+  }
+
+  .aira {
+    fill: red;
+  }
+
+  .shima {
+    fill: blue;
+  }
+
+  .hana {
+    fill: yellow;
+  }
 }
 
 #svg--loading {
@@ -259,6 +277,12 @@ a {
 .group-controller, .link-original-movie, .link-author-home {
   text-shadow: 1px 1px 0 #000;
   /*background-color: rgba(0, 0, 0, 0.5);*/
+}
+
+.controller-card {
+  margin-top: 20px;
+
+  width: 550px;
 }
 
 .list-share {
