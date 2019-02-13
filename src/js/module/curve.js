@@ -36,13 +36,12 @@ export default class Curve {
   }
 
   toExpression() {
-    Math.sign = Math.sign || function(x) {
-      x = +x; // convert to a number
-      if (x === 0 || isNaN(x)) {
-        return x;
-      }
-      return x > 0 ? 1 : -1;
-    };
+    // https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Math/sign#Polyfill
+    if (!Math.sign) {
+      Math.sign = function(x) {
+        return ((x > 0) - (x < 0)) || +x;
+      };
+    }
 
     const strPair = [];
     this.components.forEach((component, axisIndex) => {
