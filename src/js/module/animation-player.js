@@ -4,7 +4,7 @@ import ns from './ns';
 
 export default class AnimationPlayer {
   constructor(opts = {}) {
-    this.currentFrame = 0;
+    this.currentFrame = null;
     this.curveLi = {};
   }
 
@@ -12,35 +12,39 @@ export default class AnimationPlayer {
   }
 
   drawFrame(frame) {
-    const curveLi = this.curveLi;
+    const prevFrame = this.currentFrame;
 
-    Object.keys(ns.movieData).forEach(color => {
-      const $elm = ns.$canvas.find(`.${color}`);
-      const elm = $elm.get(0);
+    if (frame !== prevFrame) {
+      const curveLi = this.curveLi;
 
-      $elm.children().remove();
+      Object.keys(ns.movieData).forEach(color => {
+        const $elm = ns.$canvas.find(`.${color}`);
+        const elm = $elm.get(0);
 
-      const frameData = ns.movieData[color][frame];
+        $elm.children().remove();
 
-      const curveArr = [];
-      curveLi[color] = curveArr;
+        const frameData = ns.movieData[color][frame];
 
-      if (frameData) {
-        for (let c = 0; c < frameData.length; c++) {
-          const curve = new Curve({
-            elm,
-            components: frameData[c],
-            maxFreqOpt: this.maxFreq,
-          });
+        const curveArr = [];
+        curveLi[color] = curveArr;
 
-          curveArr.push(curve);
+        if (frameData) {
+          for (let c = 0; c < frameData.length; c++) {
+            const curve = new Curve({
+              elm,
+              components: frameData[c],
+              maxFreqOpt: this.maxFreq,
+            });
 
-          curve.draw();
+            curveArr.push(curve);
+
+            curve.draw();
+          }
         }
-      }
-    });
+      });
 
-    this.currentFrame = frame;
+      ns.currentFrame = this.currentFrame = frame;
+    }
   }
 
   redraw() {
