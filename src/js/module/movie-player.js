@@ -86,23 +86,22 @@ export default class MoviePlayer {
   }
 
   showInfo() {
-    const API_URL = 'https://www.wolframcloud.com/objects/65f6ffb2-c5c4-4295-ac84-ab3d304bbbe2';
     const curveArr = this.animationPlayer.curveArr;
-    const compile = lodash.template('<dl><dt>x(t) = </dt><dd><%= x %></dd><dt>y(t) = </dt><dd><%= y %></dd><dt>plot: </dt><dd><a href="<%= api_url %>?x=<%= encodeURIComponent(x) %>&y=<%= encodeURIComponent(y) %>" target="_blank">Open the link</a></dd></dl>');
+    const compile = lodash.template(`<ul><li>x(t) = <%= x %></li><li>y(t) = <%= y %></li></ul>`);
     this.$blockInfo.html('');
 
     if(curveArr.length > 0) {
       const $curveList = $('<ol></ol>');
       curveArr.forEach(curve => {
         let htmlStr = '';
+
         const $curve = $('<li></li>');
+
         const expression = curve.toExpression();
-        const param = {
-          x: expression['x'],
-          y: expression['y'],
-          api_url: API_URL,
-        };
-        htmlStr += compile(param);
+        const {x, y} = expression;
+
+        htmlStr += compile({x, y});
+
         $curve.html(htmlStr);
         $curveList.append($curve);
       });

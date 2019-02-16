@@ -82,9 +82,8 @@ export default class Curve {
       strPair[axisIndex] = str;
     });
 
-    return {
-      x: strPair[0],
-      y: strPair[1],
-    };
+    const [x, y] = strPair;
+
+    return {x, y};
   }
 }
