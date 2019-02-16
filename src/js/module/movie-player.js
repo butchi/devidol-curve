@@ -87,8 +87,6 @@ export default class MoviePlayer {
     const compile = lodash.template(`<ul><li>x<sub><%= index %></sub>(t) = <%= x %></li><li>y<sub><%= index %></sub>(t) = <%= y %></li></ul>`);
     this.$blockInfo.html('');
 
-    console.log(ns.currentFrame);
-
     if (ns.currentFrame < 100) {
       const initStr =`RESET;
 HAN
