@@ -19,7 +19,7 @@ export default class MoviePlayer {
     this.$info = $(); // set default value before override
 
     $(_ => {
-      this.$info = $('.info--pause');
+      this.$info = $('.info');
       this.$blockInfo = this.$info.find('.block-info');
     });
 
@@ -31,8 +31,6 @@ export default class MoviePlayer {
         ns.ytPlayer.playVideo();
       } catch(_e) {
       }
-
-      this.$info.hide();
     });
 
     audioPlayer.$elm.on('pause', _ => {
@@ -42,15 +40,13 @@ export default class MoviePlayer {
         ns.ytPlayer.pauseVideo();
       } catch(_e) {
       }
-
-      this.showInfo();
     });
 
     audioPlayer.$elm.on('seeking', _ => {
       // console.log('seeking');
 
       this.animationPlayer.drawFrame(this.getFrame());
-      this.showInfo();
+      this.updateInfo();
       try {
         ns.ytPlayer.seekTo(this.getCurrentTime(), false);
       } catch(_e) {
@@ -73,6 +69,7 @@ export default class MoviePlayer {
     const loop = _ => {
       if(!this.isPause) {
         this.animationPlayer.drawFrame(this.getFrame());
+        this.updateInfo();
 
         requestAnimationFrame(loop);
       }
@@ -85,29 +82,44 @@ export default class MoviePlayer {
     this.isPause = true;
   }
 
-  showInfo() {
-    const curveArr = this.animationPlayer.curveArr;
-    const compile = lodash.template(`<ul><li>x(t) = <%= x %></li><li>y(t) = <%= y %></li></ul>`);
+  updateInfo() {
+    const curveLi = this.animationPlayer.curveLi;
+    const compile = lodash.template(`<ul><li>x<sub><%= index %></sub>(t) = <%= x %></li><li>y<sub><%= index %></sub>(t) = <%= y %></li></ul>`);
     this.$blockInfo.html('');
 
-    if(curveArr.length > 0) {
-      const $curveList = $('<ol></ol>');
-      curveArr.forEach(curve => {
-        let htmlStr = '';
+    Object.keys(curveLi).forEach(color => {
+      const curveArr = curveLi[color];
 
-        const $curve = $('<li></li>');
+      if(curveArr.length > 0) {
+        const $blockColor = $(`<div></div>`);
 
-        const expression = curve.toExpression();
-        const {x, y} = expression;
+        const $label = $(`<div></div>`)
+        const $colorComponent = $('<div></div>');
 
-        htmlStr += compile({x, y});
+        $blockColor.append($label);
+        $blockColor.append($colorComponent);
 
-        $curve.html(htmlStr);
-        $curveList.append($curve);
-      });
-      this.$blockInfo.append($curveList);
-    }
+        this.$blockInfo.append($blockColor);
 
-    this.$info.show();
+        $label.text(`${color}:`);
+
+        const $curveList = $(`<ol></ol>`);
+        curveArr.forEach((curve, index) => {
+          let htmlStr = '';
+
+          const $curve = $('<li></li>');
+
+          const expression = curve.toExpression();
+          const {x, y} = expression;
+
+          htmlStr += compile({index, x, y});
+
+          $curve.html(htmlStr);
+          $curveList.append($curve);
+        });
+
+        $colorComponent.append($curveList);
+      }
+    });
   }
 }

@@ -5,30 +5,36 @@ import ns from './ns';
 export default class AnimationPlayer {
   constructor(opts = {}) {
     this.currentFrame = 0;
-    this.curveArr = [];
+    this.curveLi = {};
   }
 
   play() {
   }
 
   drawFrame(frame) {
+    const curveLi = this.curveLi;
+
     Object.keys(ns.movieData).forEach(color => {
       const $elm = ns.$canvas.find(`.${color}`);
       const elm = $elm.get(0);
 
       $elm.children().remove();
 
-      const curveArr = ns.movieData[color][frame];
-      this.curveArr = [];
+      const frameData = ns.movieData[color][frame];
 
-      if (curveArr) {
-        for (let c = 0; c < curveArr.length; c++) {
+      const curveArr = [];
+      curveLi[color] = curveArr;
+
+      if (frameData) {
+        for (let c = 0; c < frameData.length; c++) {
           const curve = new Curve({
             elm,
-            components: curveArr[c],
+            components: frameData[c],
             maxFreqOpt: this.maxFreq,
           });
-          this.curveArr.push(curve);
+
+          curveArr.push(curve);
+
           curve.draw();
         }
       }
