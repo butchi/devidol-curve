@@ -107,7 +107,7 @@ DE DE DEDEDE
 DE DE DEDEDE.............`
       ;
 
-      const len = Math.floor(ns.currentFrame / 80 * initStr.length);
+      const len = Math.max(0, Math.floor((ns.currentFrame - 20) / 60 * initStr.length));
 
       const sliceStr = initStr.slice(0, len);
 
