@@ -87,6 +87,35 @@ export default class MoviePlayer {
     const compile = lodash.template(`<ul><li>x<sub><%= index %></sub>(t) = <%= x %></li><li>y<sub><%= index %></sub>(t) = <%= y %></li></ul>`);
     this.$blockInfo.html('');
 
+    console.log(ns.currentFrame);
+
+    if (ns.currentFrame < 100) {
+      const initStr =`RESET;
+HAN
+SHM
+AIR
+RCT
+
+AKB
+ISL
+
+ISL#f19f00
+IDL
+DVL IMETIME
+LDA#LOADING
+ECO INIMON
+
+DE DE DEDEDE
+DE DE DEDEDE.............`
+      ;
+
+      const len = Math.floor(ns.currentFrame / 80 * initStr.length);
+
+      const sliceStr = initStr.slice(0, len);
+
+      this.$blockInfo.html(`<pre>${sliceStr}</pre>`);
+    }
+
     Object.keys(curveLi).forEach(color => {
       const curveArr = curveLi[color];
 
