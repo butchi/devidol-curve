@@ -159,10 +159,7 @@ a {
   left: 0;
   top: 0;
 
-  overflow: auto;
-
-  background-color: #666;
-  background-color: rgba(0, 0, 0, 0.2);
+  overflow: hidden;
 
   .block-info {
     font-size: 10px;
