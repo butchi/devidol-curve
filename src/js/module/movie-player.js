@@ -18,6 +18,12 @@ export default class MoviePlayer {
 
     this.$info = $(); // set default value before override
 
+    videojs('my-player', {
+      controls: true,
+      autoplay: false,
+      preload: 'auto'
+    });
+
     $(_ => {
       this.$info = $('.info');
       this.$blockInfo = this.$info.find('.block-info');

@@ -32,6 +32,7 @@
     "reset.css": "^2.0.2",
     "sass-loader": "^6.0.7",
     "underscore": "^1.9.1",
+    "video.js": "^7.4.1",
     "webpack": "^4.4.1",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.1",
