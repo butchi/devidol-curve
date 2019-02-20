@@ -3,12 +3,10 @@ import $ from 'jquery';
 import ns from './module/ns';
 import MoviePlayer from './module/movie-player';
 import AnimationPlayer from './module/animation-player';
-import AudioPlayer from './module/audio-player';
 
 ns.movieData = {};
 let moviePlayer;
 let animationPlayer;
-let audioPlayer;
 
 fetch('data/fourier-array.json')
   .then(res => {
@@ -53,15 +51,12 @@ function init(data) {
 
     const $canvas = $('.svg-canvas .svg-canvas__main');
     ns.$canvas = $canvas; // TODO: do not use global variable
-    const audioElm = document.querySelector('.audio');
 
-    audioPlayer = new AudioPlayer({ elm: audioElm });
     animationPlayer = new AnimationPlayer();
-    moviePlayer = new MoviePlayer({ animationPlayer, audioPlayer });
+    moviePlayer = new MoviePlayer({ animationPlayer });
 
     ns.moviePlayer = moviePlayer;
     ns.animationPlayer = animationPlayer;
-    ns.audioPlayer = audioPlayer;
 
     $maxFreqSlidebar.trigger('change');
 

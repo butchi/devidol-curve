@@ -12,9 +12,10 @@ block content-block
         img(src='img/icon-mathematica.png', alt='get source!', width='69', height='69')
 
     .videoContainer
-      video#myVideo(controls='', preload='auto', poster='', width='380')
-        source(src='', type='video/mp4')
-        p Your browser does not support the video tag.
+      video#myVideo(controls, preload="auto", width="640")
+        source(src="video/blank.mp4", type="video/mp4")
+        p
+          | Your browser does not support the video tag.
       .caption Prometheus
       .control
         .btmControl
@@ -46,7 +47,6 @@ block content-block
           .block-info
       .original-movie.item-movie
         #original_movie
-    audio.audio(src='audio/blank.mp3', controls='')
     .group-controller
       .controller-max-freq
         span.controller-max-freq__slidebar
