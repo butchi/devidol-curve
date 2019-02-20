@@ -10,6 +10,29 @@ block content-block
     p.link-get-source
       a(href='https://github.com/butchi/devidol-curve/tree/master/_src', target='_blank')
         img(src='img/icon-mathematica.png', alt='get source!', width='69', height='69')
+
+    .videoContainer
+      video#myVideo(controls='', preload='auto', poster='', width='380')
+        source(src='', type='video/mp4')
+        p Your browser does not support the video tag.
+      .caption Prometheus
+      .control
+        .btmControl
+          .btnPlay.btn(title='Play/Pause video')
+            span.icon-play
+          .progress-bar
+            .progress
+              span.bufferBar
+              span.timeBar
+          //
+            <div class="volume" title="Set volume">
+            <span class="volumeBar"></span>
+            </div>
+          .sound.sound2.btn(title='Mute/Unmute sound')
+            span.icon-sound
+          .btnFS.btn(title='Switch to full screen')
+            span.icon-fullscreen
+
     .array-movie(data-mode='normal')
       .area-movie.item-movie
         svg.svg-canvas(width='640', height='380', xmlns='http://www.w3.org/2000/svg')
