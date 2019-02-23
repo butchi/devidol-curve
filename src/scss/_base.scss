@@ -192,6 +192,16 @@ a {
   top: 0;
 }
 
+.controller-slider {
+  [data-slidebar] {
+    display: inline-block;
+  }
+
+  [data-number] {
+    display: inline-block;
+  }
+}
+
 .controller-card {
   position: absolute;
 
