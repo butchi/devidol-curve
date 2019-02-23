@@ -61,7 +61,7 @@
   position: absolute;
   top: 340px;
   left: 10px;
-  width: 360px;
+  width: 620px;
   z-index: 5;
   display: none;
 }
@@ -150,13 +150,13 @@
 
 }
 .progress {
-  width:240px;
-  height:7px;
-  position:relative;
-  cursor:pointer;
+  width: 500px;
+  height: 7px;
+  position: relative;
+  cursor: pointer;
   background: rgba(0,0,0,0.4); /* fallback */
   box-shadow: 0 1px 0 rgba(255,255,255,0.1), inset 0 1px 1px rgba(0,0,0,1);
-  border-radius:10px;
+  border-radius: 10px;
 }
 .progress span {
   height:100%;

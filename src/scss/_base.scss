@@ -193,9 +193,29 @@ a {
 }
 
 .controller-card {
-  margin-top: 20px;
+  position: absolute;
 
-  width: 550px;
+  left: 19px;
+  top: 150px;
+
+  width: 600px;
+  min-height: 150px;
+
+  background-color: rgba(255, 255, 255, 0.3);
+
+  [data-actions] {
+    padding: 0;
+  }
+
+  .controller-panel {
+    padding: 20px;
+  }
+}
+
+.tab-character {
+  [data-tab-bar] {
+    justify-content: flex-start;
+  }
 }
 
 .list-share {
