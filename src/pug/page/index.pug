@@ -125,6 +125,15 @@ block content-block
       }]
     })
 
+    mixin controller-thickness({ character })
+      .controller-thickness(data-character=character)
+        span.controller-thickness__slidebar
+          label
+            span 太さ: 
+            input(type='range', max='100', min='0.1', step='0.1', value='1')
+        span.controller-thickness__number
+          input(type='number', max='100', min='0.1', step='0.1', value='1')
+
     mixin controller-card({ title, character, color })
       .controller-card.mdl-card.mdl-shadow--2dp(data-character=character)
         .mdl-card__title(style=`color: ${color};`)
@@ -195,6 +204,10 @@ block content-block
             }]
           })
 
+          +controller-thickness({
+            character,
+          })
+
 
     +controller-card({
       title: '白',
@@ -220,14 +233,6 @@ block content-block
       color: 'yellow',
     })
 
-
-    .controller-thickness
-      span.controller-thickness__slidebar
-        label
-          span 太さ: 
-          input(type='range', max='100', min='0.1', step='0.1', value='1')
-      span.controller-thickness__number
-        input(type='number', max='100', min='0.1', step='0.1', value='1')
 
   ul.list-share
     li.item.item--facebook

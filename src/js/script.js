@@ -133,23 +133,28 @@ function init(data) {
     });
 
     const $thicknessController = $('.controller-thickness');
-    $thicknessController.on('updatevalue', evt => {
-      var val = $(evt.target).attr('data-value');
+    $thicknessController.on('updatevalue', (evt, { value, character }) => {
       $('.svg-canvas .svg-canvas__main').css({
-        "stroke-width": val,
+        "stroke-width": value,
       });
-      $thicknessSlidebar.val(val);
-      $thicknessNumber.val(val);
+      $(`.controller-thickness[data-character=${character}] .controller-thickness__slidebar input`).val(value);
+      $(`.controller-thickness[data-character=${character}] .controller-thickness__number input`).val(value);
     });
 
     const $thicknessSlidebar = $('.controller-thickness__slidebar input');
     const $thicknessNumber = $('.controller-thickness__number input');
     $thicknessSlidebar.on('input change', evt => {
-      $thicknessController.attr('data-value', $(evt.target).val());
-      $thicknessController.trigger('updatevalue');
+      const $elm = $(evt.target);
+      const value = $elm.val();
+
+      const $parent = $elm.closest('.controller-thickness');
+      const character = $parent.attr('data-character');
+
+      $thicknessController.trigger('updatevalue', { value, character });
     });
     $thicknessNumber.on('input change', evt => {
-      $thicknessController.attr('data-value', $(evt.target).val());
+      const value = $(evt.target).val();
+
       $thicknessController.trigger('updatevalue');
     });
 
