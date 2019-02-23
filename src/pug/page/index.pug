@@ -15,7 +15,20 @@ block content-block
       source(src="video/blank.mp4", type="video/mp4")
       p
         | Your browser does not support the video tag.
-    .caption Prometheus
+    .array-movie(data-mode='normal')
+      .area-movie.item-movie
+        svg.svg-canvas(width='640', height='380', xmlns='http://www.w3.org/2000/svg')
+          desc でびどる曲線！
+          g.svg-canvas__main
+            g.white
+            g.aira
+            g.shima
+            g.hana
+        aside.info
+          .block-info
+      .original-movie.item-movie
+        #original_movie
+
     .control
       .btmControl
         .btnPlay.btn(title='Play/Pause video')
@@ -33,19 +46,6 @@ block content-block
         .btnFS.btn(title='Switch to full screen')
           span.icon-fullscreen
 
-  .array-movie(data-mode='normal')
-    .area-movie.item-movie
-      svg.svg-canvas(width='640', height='380', xmlns='http://www.w3.org/2000/svg')
-        desc でびどる曲線！
-        g.svg-canvas__main
-          g.white
-          g.aira
-          g.shima
-          g.hana
-      aside.info
-        .block-info
-    .original-movie.item-movie
-      #original_movie
   .group-controller
     .controller-max-freq
       span.controller-max-freq__slidebar

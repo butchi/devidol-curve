@@ -1,15 +1,25 @@
 /* video container */
 .videoContainer{
-  width:380px;
-  height:163px;
-  position:relative;
-  overflow:hidden;
-  background:#000;
-  color:#ccc;
+  width: 640px;
+  height: 720px;
+  position: relative;
+  overflow: hidden;
+  background: #000;
+  color: #ccc;
   border-radius: 6px;
   border: 1px solid rgba(0,0,0,0.8);
   box-shadow: 0 0 5px rgba(0,0,0,0.5);
   margin: 50px auto 0;
+
+  video {
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 1px;
+    height: 1px;
+  }
 }
 .videoContainer:before {
   content: '';
