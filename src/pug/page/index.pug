@@ -4,6 +4,103 @@ prepend config-block
   - page_name = '';
 
 block content-block
+  mixin controller-color({ title, name, type, character, defaultColor, itemArr })
+    .controller-color(data-type=type, data-character=character, data-color=defaultColor)
+      | #{title}:
+      for item in itemArr
+        -
+          const { label, value, checked } = item;
+          const id = `controller-${name}--${type}--${item.value}`;
+        label.controller-compare.mdl-radio.mdl-js-radio.mdl-js-ripple-effect(for=id)
+          input.mdl-radio__button(id=id, type='radio', name=`${name}-${type}`, value=value, checked=checked)
+          span.mdl-radio__label
+            = label
+      label
+        input(type='color')
+        | カスタム
+
+  - ;
+
+  mixin controller-thickness({ character })
+    .controller-thickness(data-character=character)
+      span(data-slidebar)
+        label
+          span 太さ: 
+          input(type='range', max='100', min='0.1', step='0.1', value='1')
+      span(data-number)
+        input(type='number', max='100', min='0.1', step='0.1', value='1')
+
+  mixin controller-panel({ title, character, color })
+    .controller-panel(data-character=character)
+      +controller-color({
+        title: '塗り',
+        name: `color-${character}`,
+        type: 'fill',
+        character,
+        defaultColor: 'transparent',
+        itemArr: [{
+          label: '透過',
+          value: 'transparent',
+        }, {
+          label: '黒',
+          value: 'black',
+        }, {
+          label: '白',
+          value: 'white',
+          checked: character === 'white'
+        }, {
+          label: '赤',
+          value: 'red',
+          checked: character === 'aira'
+        }, {
+          label: '青',
+          value: 'blue',
+          checked: character === 'shima'
+        }, {
+          label: '黄',
+          value: 'yellow',
+          checked: character === 'hana'
+        }, {
+          label: '緑',
+          value: 'green',
+        }]
+      })
+
+      +controller-color({
+        title: '輪郭',
+        name: `color-${character}`,
+        type: 'line',
+        character,
+        defaultColor: 'transparent',
+        itemArr: [{
+          label: '透過',
+          value: 'transparent',
+          checked: true,
+        }, {
+          label: '白',
+          value: 'white',
+        }, {
+          label: '黒',
+          value: 'black',
+        }, {
+          label: '赤',
+          value: 'red',
+        }, {
+          label: '青',
+          value: 'blue',
+        }, {
+          label: '黄',
+          value: 'yellow',
+        }, {
+          label: '緑',
+          value: 'green',
+        }]
+      })
+
+      +controller-thickness({
+        character,
+      })
+
   header.mdl-layout__header.mdl-layout__header--scroll
     .mdl-layout__header-row
       h1.title(data-heading-level='1') でびどる曲線！
@@ -33,103 +130,6 @@ block content-block
           #original_movie
 
       .group-controller
-        mixin controller-color({ title, name, type, character, defaultColor, itemArr })
-          .controller-color(data-type=type, data-character=character, data-color=defaultColor)
-            | #{title}:
-            for item in itemArr
-              -
-                const { label, value, checked } = item;
-                const id = `controller-${name}--${type}--${item.value}`;
-              label.controller-compare.mdl-radio.mdl-js-radio.mdl-js-ripple-effect(for=id)
-                input.mdl-radio__button(id=id, type='radio', name=`${name}-${type}`, value=value, checked=checked)
-                span.mdl-radio__label
-                  = label
-            label
-              input(type='color')
-              | カスタム
-
-        - ;
-
-        mixin controller-thickness({ character })
-          .controller-thickness(data-character=character)
-            span(data-slidebar)
-              label
-                span 太さ: 
-                input(type='range', max='100', min='0.1', step='0.1', value='1')
-            span(data-number)
-              input(type='number', max='100', min='0.1', step='0.1', value='1')
-
-        mixin controller-panel({ title, character, color })
-          .controller-panel(data-character=character)
-            +controller-color({
-              title: '塗り',
-              name: `color-${character}`,
-              type: 'fill',
-              character,
-              defaultColor: 'transparent',
-              itemArr: [{
-                label: '透過',
-                value: 'transparent',
-              }, {
-                label: '黒',
-                value: 'black',
-              }, {
-                label: '白',
-                value: 'white',
-                checked: character === 'white'
-              }, {
-                label: '赤',
-                value: 'red',
-                checked: character === 'aira'
-              }, {
-                label: '青',
-                value: 'blue',
-                checked: character === 'shima'
-              }, {
-                label: '黄',
-                value: 'yellow',
-                checked: character === 'hana'
-              }, {
-                label: '緑',
-                value: 'green',
-              }]
-            })
-
-            +controller-color({
-              title: '輪郭',
-              name: `color-${character}`,
-              type: 'line',
-              character,
-              defaultColor: 'transparent',
-              itemArr: [{
-                label: '透過',
-                value: 'transparent',
-                checked: true,
-              }, {
-                label: '白',
-                value: 'white',
-              }, {
-                label: '黒',
-                value: 'black',
-              }, {
-                label: '赤',
-                value: 'red',
-              }, {
-                label: '青',
-                value: 'blue',
-              }, {
-                label: '黄',
-                value: 'yellow',
-              }, {
-                label: '緑',
-                value: 'green',
-              }]
-            })
-
-            +controller-thickness({
-              character,
-            })
-
         .controller-card.mdl-card.mdl-shadow--2dp
           .mdl-card__actions(data-actions, style="color: white;")
             .tab-character.mdl-tabs.mdl-js-tabs.mdl-js-ripple-effect
