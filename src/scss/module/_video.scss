@@ -1,5 +1,5 @@
 /* video container */
-.videoContainer{
+.movie-player {
   width: 640px;
   height: 720px;
   position: relative;
@@ -11,7 +11,7 @@
   box-shadow: 0 0 5px rgba(0,0,0,0.5);
   margin: 0 auto;
 
-  video {
+  [data-elm="video"] {
     position: absolute;
 
     left: 0;
@@ -20,18 +20,19 @@
     width: 1px;
     height: 1px;
   }
-}
-.videoContainer:before {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  box-shadow: inset 0 1px 2px rgba(255,255,255,0.3);
-  z-index: 6;
-  border-radius: 6px;
-  pointer-events: none;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    box-shadow: inset 0 1px 2px rgba(255,255,255,0.3);
+    z-index: 6;
+    border-radius: 6px;
+    pointer-events: none;
+  }
 }
 
 /* video caption css */

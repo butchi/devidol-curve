@@ -52,8 +52,10 @@ function init(data) {
     const $canvas = $('.svg-canvas .svg-canvas__main');
     ns.$canvas = $canvas; // TODO: do not use global variable
 
+    const moviePlayerElm = $('.movie-player').get(0);
+
     animationPlayer = new AnimationPlayer();
-    moviePlayer = new MoviePlayer({ animationPlayer });
+    moviePlayer = new MoviePlayer({ elm: moviePlayerElm, animationPlayer });
 
     ns.moviePlayer = moviePlayer;
     ns.animationPlayer = animationPlayer;

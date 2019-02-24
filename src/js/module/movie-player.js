@@ -8,7 +8,9 @@ export default class MoviePlayer {
     this.initialize(opts);
   }
 
-  initialize({ animationPlayer }) {
+  initialize({ elm, animationPlayer }) {
+    this.elm = elm;
+
     this.initVideo();
     this.animationPlayer = animationPlayer;
 
@@ -33,48 +35,50 @@ export default class MoviePlayer {
     */
 
     //INITIALIZE
-    var video = $('#myVideo');
-    this.$video = video;
-    this.videoElm = video.get(0);
+    const elm = this.elm;
+    const $video = $(elm).find('[data-elm="video"]');
+    const videoElm = $video.get(0);
+    this.videoElm = videoElm;
     
     //remove default control when JS loaded
-    video[0].removeAttribute("controls");
+    videoElm.removeAttribute("controls");
     $('.control').fadeIn(500);
     $('.caption').fadeIn(500);
    
     //before everything get started
-    video.on('loadedmetadata', function() {
+    $video.on('loadedmetadata', function() {
         
       //set video properties
       $('.current').text(timeFormat(0));
-      $('.duration').text(timeFormat(video[0].duration));
+      $('.duration').text(timeFormat(videoElm.duration));
       updateVolume(0, 0.7);
         
       //start to get video buffering data 
       setTimeout(startBuffer, 150);
         
       //bind video events
-      $('.videoContainer')
-      .hover(function() {
-        $('.control').stop().fadeIn();
-        $('.caption').stop().fadeIn();
-      }, function() {
-        if(!volumeDrag && !timeDrag){
-          $('.control').stop().fadeOut();
-          $('.caption').stop().fadeOut();
-        }
-      })
-      .on('click', function() {
-        $('.btnPlay').find('.icon-play').addClass('icon-pause').removeClass('icon-play');
-        $(this).unbind('click');
-        video[0].play();
-      });
+      $(this.elm)
+        .hover(function() {
+          $('.control').stop().fadeIn();
+          $('.caption').stop().fadeIn();
+        }, function() {
+          if(!volumeDrag && !timeDrag){
+            $('.control').stop().fadeOut();
+            $('.caption').stop().fadeOut();
+          }
+        })
+        .on('click', function() {
+          $('.btnPlay').find('.icon-play').addClass('icon-pause').removeClass('icon-play');
+          $(this).unbind('click');
+          videoElm.play();
+        })
+      ;
     });
     
     //display video buffering bar
     var startBuffer = function() {
-      var currentBuffer = video[0].buffered.end(0);
-      var maxduration = video[0].duration;
+      var currentBuffer = videoElm.buffered.end(0);
+      var maxduration = videoElm.duration;
       var perc = 100 * currentBuffer / maxduration;
       $('.bufferBar').css('width',perc+'%');
         
@@ -84,9 +88,9 @@ export default class MoviePlayer {
     };  
     
     //display current video play time
-    video.on('timeupdate', function() {
-      var currentPos = video[0].currentTime;
-      var maxduration = video[0].duration;
+    $video.on('timeupdate', function() {
+      var currentPos = videoElm.currentTime;
+      var maxduration = videoElm.duration;
       var perc = 100 * currentPos / maxduration;
       $('.timeBar').css('width',perc+'%');  
       $('.current').text(timeFormat(currentPos)); 
@@ -97,19 +101,19 @@ export default class MoviePlayer {
     //video screen and play button clicked
 
     const playpause = _ => {
-      if(video[0].paused || video[0].ended) {
+      if(videoElm.paused || videoElm.ended) {
         $('.btnPlay').addClass('paused');
         $('.btnPlay').find('.icon-play').addClass('icon-pause').removeClass('icon-play');
-        video[0].play();
+        videoElm.play();
       }
       else {
         $('.btnPlay').removeClass('paused');
         $('.btnPlay').find('.icon-pause').removeClass('icon-pause').addClass('icon-play');
-        video[0].pause();
+        videoElm.pause();
       }
     };
 
-    video.on('click', _ => {
+    $video.on('click', _ => {
       playpause();
     });
     $('.btnPlay').on('click', _ => {
@@ -119,11 +123,11 @@ export default class MoviePlayer {
     
     //fullscreen button clicked
     $('.btnFS').on('click', function() {
-      if($.isFunction(video[0].webkitEnterFullscreen)) {
-        video[0].webkitEnterFullscreen();
+      if($.isFunction(videoElm.webkitEnterFullscreen)) {
+        videoElm.webkitEnterFullscreen();
       } 
-      else if ($.isFunction(video[0].mozRequestFullScreen)) {
-        video[0].mozRequestFullScreen();
+      else if ($.isFunction(videoElm.mozRequestFullScreen)) {
+        videoElm.mozRequestFullScreen();
       }
       else {
         alert('Your browsers doesn\'t support fullscreen');
@@ -132,37 +136,37 @@ export default class MoviePlayer {
     
     //sound button clicked
     $('.sound').click(function() {
-      video[0].muted = !video[0].muted;
+      videoElm.muted = !videoElm.muted;
       $(this).toggleClass('muted');
-      if(video[0].muted) {
+      if(videoElm.muted) {
         $('.volumeBar').css('width',0);
       }
       else{
-        $('.volumeBar').css('width', video[0].volume*100+'%');
+        $('.volumeBar').css('width', videoElm.volume*100+'%');
       }
     });
     
     //VIDEO EVENTS
     //video canplay event
-    video.on('canplay', function() {
+    $video.on('canplay', function() {
       $('.loading').fadeOut(100);
     });
     
     //video canplaythrough event
     //solve Chrome cache issue
     var completeloaded = false;
-    video.on('canplaythrough', function() {
+    $video.on('canplaythrough', function() {
       completeloaded = true;
     });
     
     //video ended event
-    video.on('ended', function() {
+    $video.on('ended', function() {
       $('.btnPlay').removeClass('paused');
-      video[0].pause();
+      videoElm.pause();
     });
 
     //video seeking event
-    video.on('seeking', function() {
+    $video.on('seeking', function() {
       //if video fully loaded, ignore loading screen
       if(!completeloaded) { 
         $('.loading').fadeIn(200);
@@ -170,10 +174,10 @@ export default class MoviePlayer {
     });
     
     //video seeked event
-    video.on('seeked', function() { });
+    $video.on('seeked', function() { });
     
     //video waiting for more data event
-    video.on('waiting', function() {
+    $video.on('waiting', function() {
       $('.loading').fadeIn(200);
     });
     
@@ -201,7 +205,7 @@ export default class MoviePlayer {
       //calculate drag position
       //and update video currenttime
       //as well as progress bar
-      var maxduration = video[0].duration;
+      var maxduration = videoElm.duration;
       var position = x - progress.offset().left;
       var percentage = 100 * position / progress.width();
       if(percentage > 100) {
@@ -211,7 +215,7 @@ export default class MoviePlayer {
         percentage = 0;
       }
       $('.timeBar').css('width',percentage+'%');  
-      video[0].currentTime = maxduration * percentage / 100;
+      videoElm.currentTime = maxduration * percentage / 100;
     };
 
     //VOLUME BAR
@@ -219,7 +223,7 @@ export default class MoviePlayer {
     var volumeDrag = false;
     $('.volume').on('mousedown', function(e) {
       volumeDrag = true;
-      video[0].muted = false;
+      videoElm.muted = false;
       $('.sound').removeClass('muted');
       updateVolume(e.pageX);
     });
@@ -256,13 +260,13 @@ export default class MoviePlayer {
       
       //update volume bar and video volume
       $('.volumeBar').css('width',percentage+'%');  
-      video[0].volume = percentage / 100;
+      videoElm.volume = percentage / 100;
       
       //change sound icon based on volume
-      if(video[0].volume == 0){
+      if(videoElm.volume == 0){
         $('.sound').removeClass('sound2').addClass('muted');
       }
-      else if(video[0].volume > 0.5){
+      else if(videoElm.volume > 0.5){
         $('.sound').removeClass('muted').addClass('sound2');
       }
       else{
@@ -279,7 +283,7 @@ export default class MoviePlayer {
     };
 
 
-    video.on('play', _ => {
+    $video.on('play', _ => {
       // console.log('play');
       this.play();
       try {
@@ -289,7 +293,7 @@ export default class MoviePlayer {
       }
     });
 
-    video.on('pause', _ => {
+    $video.on('pause', _ => {
       // console.log('pause');
       this.pause();
       try {
@@ -298,7 +302,7 @@ export default class MoviePlayer {
       }
     });
 
-    video.on('seeking', _ => {
+    $video.on('seeking', _ => {
       // console.log('seeking');
 
       this.animationPlayer.drawFrame(this.getFrame());
