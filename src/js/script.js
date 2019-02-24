@@ -52,7 +52,8 @@ function init(data) {
     const $canvas = $('.svg-canvas .svg-canvas__main');
     ns.$canvas = $canvas; // TODO: do not use global variable
 
-    const moviePlayerElm = $('.movie-player').get(0);
+    const $moviePlayer = $('.movie-player');
+    const moviePlayerElm = $moviePlayer.get(0);
 
     animationPlayer = new AnimationPlayer();
     moviePlayer = new MoviePlayer({ elm: moviePlayerElm, animationPlayer });
@@ -71,16 +72,14 @@ function init(data) {
         OVERLAY: 'overlay',
       }
 
-      const $movieArr = $('.array-movie');
-
       if (false) {
       } else if (val === state.NORMAL) {
-        $movieArr.attr('data-mode', state.NORMAL);
+        $moviePlayer.attr('data-mode', state.NORMAL);
       } else if (val === state.COMPARE) {
-        $movieArr.attr('data-mode', state.COMPARE);
+        $moviePlayer.attr('data-mode', state.COMPARE);
       } else if (val === state.OVERLAY) {
         $('.controller-color--line [value="red"]').prop('checked', true).trigger('change');
-        $movieArr.attr('data-mode', state.OVERLAY);
+        $moviePlayer.attr('data-mode', state.OVERLAY);
       } else {
       }
 

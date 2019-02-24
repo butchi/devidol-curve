@@ -1,7 +1,6 @@
 /* video container */
 .movie-player {
   width: 640px;
-  height: 720px;
   position: relative;
   overflow: hidden;
   background: #000;
@@ -60,7 +59,7 @@
 .control{
   color: #ccc;
   position: absolute;
-  top: 340px;
+  top: 320px;
   left: 10px;
   width: 620px;
   z-index: 5;
