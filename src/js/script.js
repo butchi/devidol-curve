@@ -3,10 +3,12 @@ import $ from 'jquery';
 import ns from './module/ns';
 import MoviePlayer from './module/movie-player';
 import AnimationPlayer from './module/animation-player';
+import AudioPlayer from './module/audio-player';
 
 ns.movieData = {};
 let moviePlayer;
 let animationPlayer;
+let audioPlayer;
 
 fetch('data/fourier-array.json')
   .then(res => {
@@ -55,8 +57,12 @@ function init(data) {
     const $moviePlayer = $('.movie-player');
     const moviePlayerElm = $moviePlayer.get(0);
 
+    const $audio = $moviePlayer.find('[data-elm="audio"]');
+    const audioElm = $audio.get(0);
+
     animationPlayer = new AnimationPlayer();
-    moviePlayer = new MoviePlayer({ elm: moviePlayerElm, animationPlayer });
+    audioPlayer = new AudioPlayer({ elm: audioElm });
+    moviePlayer = new MoviePlayer({ elm: moviePlayerElm, animationPlayer, audioPlayer });
 
     ns.moviePlayer = moviePlayer;
     ns.animationPlayer = animationPlayer;

@@ -14,10 +14,7 @@ block content-block
 
   main.main-content.mdl-layout__content
     .movie-player
-      video#movie-player__video(data-elm="video", controls, preload="auto", width="640")
-        source(src="video/blank.mp4", type="video/mp4")
-        p
-          | Your browser does not support the video tag.
+      audio#movie-player__audio(data-elm="audio", src="audio/blank.mp3")
       .array-movie(data-mode='normal')
         .area-movie.item-movie
           svg.svg-canvas(width='640', height='380', xmlns='http://www.w3.org/2000/svg')

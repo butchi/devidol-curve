@@ -8,11 +8,11 @@ export default class MoviePlayer {
     this.initialize(opts);
   }
 
-  initialize({ elm, animationPlayer }) {
+  initialize({ elm, animationPlayer, audioPlayer }) {
     this.elm = elm;
 
-    this.initVideo();
     this.animationPlayer = animationPlayer;
+    this.audioPlayer = audioPlayer;
 
     this.frameRate = 12;
 
@@ -23,6 +23,118 @@ export default class MoviePlayer {
     $(_ => {
       this.$info = $('.info');
       this.$blockInfo = this.$info.find('.block-info');
+    });
+
+    audioPlayer.$elm.on('play', _ => {
+      // console.log('play');
+      this.play();
+      try {
+        ns.ytPlayer.seekTo(this.getCurrentTime(), true);
+        ns.ytPlayer.playVideo();
+      } catch(_e) {
+      }
+    });
+
+    audioPlayer.$elm.on('pause', _ => {
+      // console.log('pause');
+      this.pause();
+      try {
+        ns.ytPlayer.pauseVideo();
+      } catch(_e) {
+      }
+    });
+
+    audioPlayer.$elm.on('seeking', _ => {
+      // console.log('seeking');
+
+      this.animationPlayer.drawFrame(this.getFrame());
+      this.updateInfo();
+      try {
+        ns.ytPlayer.seekTo(this.getCurrentTime(), false);
+      } catch(_e) {
+      }
+    });
+
+    //Time format converter - 00:00
+    const timeFormat = (seconds) => {
+      var m = Math.floor(seconds / 60) < 10 ? "0" + Math.floor(seconds / 60) : Math.floor(seconds / 60);
+      var s = Math.floor(seconds - (m * 60)) < 10 ? "0" + Math.floor(seconds - (m * 60)) : Math.floor(seconds - (m * 60));
+
+      return `${m}:${s}`;
+    };
+
+    //display current video play time
+    audioPlayer.$elm.on('timeupdate', _ => {
+      const currentPos = this.audioPlayer.elm.currentTime;
+      const maxduration = this.audioPlayer.elm.duration;
+      const perc = 100 * currentPos / maxduration;
+
+      $('.timeBar').css('width', `${perc}%`);  
+      $('.current').text(timeFormat(currentPos)); 
+    });
+
+    const playpause = _ => {
+      const { elm } = this.audioPlayer;
+
+      if(elm.paused || elm.ended) {
+        $('.btnPlay').addClass('paused');
+        $('.btnPlay').find('.icon-play').addClass('icon-pause').removeClass('icon-play');
+
+        elm.play();
+      }
+      else {
+        $('.btnPlay').removeClass('paused');
+        $('.btnPlay').find('.icon-pause').removeClass('icon-pause').addClass('icon-play');
+        elm.pause();
+      }
+    };
+
+    $('.btnPlay').on('click', _ => {
+      playpause();
+    });
+
+
+    //VIDEO PROGRESS BAR
+    //when video timebar clicked
+
+    const updatebar = x => {
+      const { elm } = this.audioPlayer;
+      const progress = $('.progress');
+
+      //calculate drag position
+      //and update video currenttime
+      //as well as progress bar
+      const maxduration = elm.duration;
+      const position = x - progress.offset().left;
+      let percentage = 100 * position / progress.width();
+
+      if (percentage > 100) {
+        percentage = 100;
+      }
+
+      if (percentage < 0) {
+        percentage = 0;
+      }
+
+      $('.timeBar').css('width', `${percentage}%`);  
+      elm.currentTime = maxduration * percentage / 100;
+    };
+
+    let timeDrag = false; /* check for drag event */
+    $('.progress').on('mousedown', e => {
+      timeDrag = true;
+      updatebar(e.pageX);
+    });
+    $(document).on('mouseup', e => {
+      if (timeDrag) {
+        timeDrag = false;
+        updatebar(e.pageX);
+      }
+    });
+    $(document).on('mousemove', e => {
+      if(timeDrag) {
+        updatebar(e.pageX);
+      }
     });
   }
 
@@ -315,15 +427,15 @@ export default class MoviePlayer {
   }
 
   getFrame() {
-    return Math.floor(this.videoElm.currentTime * this.frameRate);
+    return Math.floor(this.audioPlayer.elm.currentTime * this.frameRate);
   }
 
   getCurrentTime() {
-    return this.videoElm.currentTime;
+    return this.audioPlayer.elm.currentTime;
   }
 
   play() {
-    // this.$video.trigger('play');
+    this.audioPlayer.play();
     this.isPause = false;
 
     const loop = _ => {
