@@ -15,39 +15,9 @@ a {
   color: #c00;
 }
 
-.title {
-  color: #000;
-  font-family: "Roboto", sans-serif;
-  text-shadow: 1px 1px 0 #f66, -1px -1px 0 #fff;
-  margin: 10px 10px 30px;
-}
-
-.wrapper {
-  > .heading {
-    position: absolute;
-    width: 4em;
-    height: 1em;
-    left: 220px;
-    top: 30px;
-
-    margin: 0;
-    line-height: 1;
-
-    font-family: "Roboto", sans-serif;
-
-    -webkit-transform: rotate(-10deg);
-    transform: rotate(-10deg);
-  }
-}
-
-.link-get-source {
-  position: absolute;
-  left: 450px;
-  top: 0;
-
-  margin: 0;
-  padding: 0;
-  font-size: 0;
+.main-content {
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 
 .array-movie {
@@ -218,28 +188,71 @@ a {
   }
 }
 
-.list-share {
-  margin-top: 10px;
-  padding: 0;
+.global-footer {
+  padding-top: 10px;
+  padding-bottom: 15px;
 
-  list-style: none;
+  @include mq-large {
+    padding-top: 10px;
+    padding-bottom: 40px;
+  }
 
-  font-size: 0;
+  .link-list {
+    padding: 0;
 
-  .item {
-    display: inline-block;
-    vertical-align: top;
+    list-style: none;
 
-    + .item {
+    font-size: 0;
+
+    .link-item {
+      display: inline-block;
+
+      + .link-item {
+        margin-left: 10px;
+      }
+    }
+
+    .list-sns {
+      display: inline-block;
+
+      padding-top: 5px;
+
+      font-size: 0;
+
+      .link-item {
+        &[data-sns="facebook"] {
+          span {
+            vertical-align:baseline !important;
+          }
+        }
+      }
+    }
+
+    .link-original-movie {
       margin-left: 10px;
+      padding-top: 10px;
+
+      vertical-align: top;
+
+      font-size: 14px;
+
+      @include mq-small {
+        display: block;
+
+        margin-left: 0;
+      }
     }
   }
-}
 
-.link-original-movie {
-  font-size: 14px;
-}
+  .block-author {
+    .link-author-home {
+      font-size: 14px;
 
-.link-author-home {
-  font-size: 14px;
+      a {
+        display: inline-block;
+        margin: 0;
+        margin-left: 10px;
+      }
+    }
+  }
 }

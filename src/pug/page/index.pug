@@ -1,266 +1,274 @@
 extends ../layout/_default-layout
 
 prepend config-block
-  - page_name = ''
+  - page_name = '';
 
 block content-block
-  h1.title(data-heading-level='1') でびどる曲線！
-  h2.heading(data-heading-level='2') Demo
-  p.link-get-source
-    a(href='https://github.com/butchi/devidol-curve/tree/master/_src', target='_blank')
-      img(src='img/icon-mathematica.png', alt='get source!', width='69', height='69')
+  header.mdl-layout__header.mdl-layout__header--scroll
+    .mdl-layout__header-row
+      h1.title(data-heading-level='1') でびどる曲線！
+      .mdl-layout-spacer
+      p.link-get-source
+        a(href='https://github.com/butchi/devidol-curve/tree/master/_src', target='_blank')
+          img(src='img/icon-mathematica.png', alt='get source!', width='69', height='69')
 
-  .videoContainer
-    video#myVideo(controls, preload="auto", width="640")
-      source(src="video/blank.mp4", type="video/mp4")
-      p
-        | Your browser does not support the video tag.
-    .array-movie(data-mode='normal')
-      .area-movie.item-movie
-        svg.svg-canvas(width='640', height='380', xmlns='http://www.w3.org/2000/svg')
-          desc でびどる曲線！
-          g.svg-canvas__main
-            g.white
-            g.aira
-            g.shima
-            g.hana
-        aside.info
-          .block-info
-      .original-movie.item-movie
-        #original_movie
+  main.main-content.mdl-layout__content
+    .videoContainer
+      video#myVideo(controls, preload="auto", width="640")
+        source(src="video/blank.mp4", type="video/mp4")
+        p
+          | Your browser does not support the video tag.
+      .array-movie(data-mode='normal')
+        .area-movie.item-movie
+          svg.svg-canvas(width='640', height='380', xmlns='http://www.w3.org/2000/svg')
+            desc でびどる曲線！
+            g.svg-canvas__main
+              g.white
+              g.aira
+              g.shima
+              g.hana
+          aside.info
+            .block-info
+        .original-movie.item-movie
+          #original_movie
 
-    .group-controller
-      mixin controller-color({ title, name, type, character, defaultColor, itemArr })
-        .controller-color(data-type=type, data-character=character, data-color=defaultColor)
-          | #{title}:
-          for item in itemArr
-            -
-              const { label, value, checked } = item;
-              const id = `controller-${name}--${type}--${item.value}`;
-            label.controller-compare.mdl-radio.mdl-js-radio.mdl-js-ripple-effect(for=id)
-              input.mdl-radio__button(id=id, type='radio', name=`${name}-${type}`, value=value, checked=checked)
-              span.mdl-radio__label
-                = label
-          label
-            input(type='color')
-            | カスタム
-
-      mixin controller-thickness({ character })
-        .controller-thickness(data-character=character)
-          span.controller-thickness__slidebar
+      .group-controller
+        mixin controller-color({ title, name, type, character, defaultColor, itemArr })
+          .controller-color(data-type=type, data-character=character, data-color=defaultColor)
+            | #{title}:
+            for item in itemArr
+              -
+                const { label, value, checked } = item;
+                const id = `controller-${name}--${type}--${item.value}`;
+              label.controller-compare.mdl-radio.mdl-js-radio.mdl-js-ripple-effect(for=id)
+                input.mdl-radio__button(id=id, type='radio', name=`${name}-${type}`, value=value, checked=checked)
+                span.mdl-radio__label
+                  = label
             label
-              span 太さ: 
-              input(type='range', max='100', min='0.1', step='0.1', value='1')
-          span.controller-thickness__number
-            input(type='number', max='100', min='0.1', step='0.1', value='1')
+              input(type='color')
+              | カスタム
 
-      mixin controller-panel({ title, character, color })
-        .controller-panel(data-character=character)
-          +controller-color({
-            title: '塗り',
-            name: `color-${character}`,
-            type: 'fill',
-            character,
-            defaultColor: 'transparent',
-            itemArr: [{
-              label: '透過',
-              value: 'transparent',
-            }, {
-              label: '黒',
-              value: 'black',
-            }, {
-              label: '白',
-              value: 'white',
-              checked: character === 'white'
-            }, {
-              label: '赤',
-              value: 'red',
-              checked: character === 'aira'
-            }, {
-              label: '青',
-              value: 'blue',
-              checked: character === 'shima'
-            }, {
-              label: '黄',
-              value: 'yellow',
-              checked: character === 'hana'
-            }, {
-              label: '緑',
-              value: 'green',
-            }]
-          })
+        - ;
 
-          +controller-color({
-            title: '輪郭',
-            name: `color-${character}`,
-            type: 'line',
-            character,
-            defaultColor: 'transparent',
-            itemArr: [{
-              label: '透過',
-              value: 'transparent',
-              checked: true,
-            }, {
-              label: '白',
-              value: 'white',
-            }, {
-              label: '黒',
-              value: 'black',
-            }, {
-              label: '赤',
-              value: 'red',
-            }, {
-              label: '青',
-              value: 'blue',
-            }, {
-              label: '黄',
-              value: 'yellow',
-            }, {
-              label: '緑',
-              value: 'green',
-            }]
-          })
+        mixin controller-thickness({ character })
+          .controller-thickness(data-character=character)
+            span.controller-thickness__slidebar
+              label
+                span 太さ: 
+                input(type='range', max='100', min='0.1', step='0.1', value='1')
+            span.controller-thickness__number
+              input(type='number', max='100', min='0.1', step='0.1', value='1')
 
-          +controller-thickness({
-            character,
-          })
+        mixin controller-panel({ title, character, color })
+          .controller-panel(data-character=character)
+            +controller-color({
+              title: '塗り',
+              name: `color-${character}`,
+              type: 'fill',
+              character,
+              defaultColor: 'transparent',
+              itemArr: [{
+                label: '透過',
+                value: 'transparent',
+              }, {
+                label: '黒',
+                value: 'black',
+              }, {
+                label: '白',
+                value: 'white',
+                checked: character === 'white'
+              }, {
+                label: '赤',
+                value: 'red',
+                checked: character === 'aira'
+              }, {
+                label: '青',
+                value: 'blue',
+                checked: character === 'shima'
+              }, {
+                label: '黄',
+                value: 'yellow',
+                checked: character === 'hana'
+              }, {
+                label: '緑',
+                value: 'green',
+              }]
+            })
 
-      .controller-card.mdl-card.mdl-shadow--2dp
-        .mdl-card__actions(data-actions, style="color: white;")
-          .tab-character.mdl-tabs.mdl-js-tabs.mdl-js-ripple-effect
-            .mdl-tabs__tab-bar(data-tab-bar)
-              a.tab-item.mdl-tabs__tab.is-active(href='#panel-common')
-                | 共通
-              a.tab-item.mdl-tabs__tab(href='#panel-white', style="color: white;")
-                | 白
-              a.tab-item.mdl-tabs__tab(href='#panel-aira', style="color: red;")
-                | アイラ
-              a.tab-item.mdl-tabs__tab(href='#panel-shima', style="color: blue;")
-                | シマ
-              a.tab-item.mdl-tabs__tab(href='#panel-hana', style="color: yellow;")
-                | はな
+            +controller-color({
+              title: '輪郭',
+              name: `color-${character}`,
+              type: 'line',
+              character,
+              defaultColor: 'transparent',
+              itemArr: [{
+                label: '透過',
+                value: 'transparent',
+                checked: true,
+              }, {
+                label: '白',
+                value: 'white',
+              }, {
+                label: '黒',
+                value: 'black',
+              }, {
+                label: '赤',
+                value: 'red',
+              }, {
+                label: '青',
+                value: 'blue',
+              }, {
+                label: '黄',
+                value: 'yellow',
+              }, {
+                label: '緑',
+                value: 'green',
+              }]
+            })
 
-            #panel-common.mdl-tabs__panel.is-active
-              .controller-panel(data-character=character)
-                +controller-color({
-                  title: '背景',
-                  name: 'color',
-                  type: 'bg',
-                  defaultColor: 'black',
-                  itemArr: [{
-                    label: '透過',
-                    value: 'transparent',
-                    checked: true,
-                  }, {
-                    label: '黒',
-                    value: 'black',
-                  }, {
-                    label: '白',
-                    value: 'white',
-                  }, {
-                    label: '赤',
-                    value: 'red',
-                  }, {
-                    label: '青',
-                    value: 'blue',
-                  }, {
-                    label: '黄',
-                    value: 'yellow',
-                  }, {
-                    label: '緑',
-                    value: 'green',
-                  }]
-                })
+            +controller-thickness({
+              character,
+            })
 
-                .controller-max-freq
-                  span.controller-max-freq__slidebar
-                    label
-                      span 次数（周波数上限）: 
-                      input(type='range', max='100', min='1', step='1', value='15')
-                  span.controller-max-freq__number
-                    input(type='number', max='100', min='1', step='1', value='15')
-                div
-                  mixin controller-compare({ name, itemArr })
-                    for item in itemArr
-                      -
-                        const { label, value, checked } = item;
-                        const id = `controller-${name}--${value}`;
-                      label.controller-compare.mdl-radio.mdl-js-radio.mdl-js-ripple-effect(for=id)
-                        input.mdl-radio__button(id=id, type='radio', name=name, value=value, checked=checked)
-                        span.mdl-radio__label
-                          = label
+        .controller-card.mdl-card.mdl-shadow--2dp
+          .mdl-card__actions(data-actions, style="color: white;")
+            .tab-character.mdl-tabs.mdl-js-tabs.mdl-js-ripple-effect
+              .mdl-tabs__tab-bar(data-tab-bar)
+                a.tab-item.mdl-tabs__tab.is-active(href='#panel-common')
+                  | 共通
+                a.tab-item.mdl-tabs__tab(href='#panel-white', style="color: white;")
+                  | 白
+                a.tab-item.mdl-tabs__tab(href='#panel-aira', style="color: red;")
+                  | アイラ
+                a.tab-item.mdl-tabs__tab(href='#panel-shima', style="color: blue;")
+                  | シマ
+                a.tab-item.mdl-tabs__tab(href='#panel-hana', style="color: yellow;")
+                  | はな
 
-                  +controller-compare({
-                    name: 'compare',
+              #panel-common.mdl-tabs__panel.is-active
+                .controller-panel(data-character=character)
+                  +controller-color({
+                    title: '背景',
+                    name: 'color',
+                    type: 'bg',
+                    defaultColor: 'black',
                     itemArr: [{
-                      label: '数式曲線',
-                      value: 'normal',
-                    }, {
-                      label: 'オリジナルと比較',
-                      value: 'compare',
+                      label: '透過',
+                      value: 'transparent',
                       checked: true,
                     }, {
-                      label: 'オーバーレイ',
-                      value: 'overlay',
-                    }],
+                      label: '黒',
+                      value: 'black',
+                    }, {
+                      label: '白',
+                      value: 'white',
+                    }, {
+                      label: '赤',
+                      value: 'red',
+                    }, {
+                      label: '青',
+                      value: 'blue',
+                    }, {
+                      label: '黄',
+                      value: 'yellow',
+                    }, {
+                      label: '緑',
+                      value: 'green',
+                    }]
                   })
 
-            #panel-white.mdl-tabs__panel
-              +controller-panel({
-                title: '白',
-                character: 'white',
-                color: 'white',
-              })
+                  .controller-max-freq
+                    span.controller-max-freq__slidebar
+                      label
+                        span 次数（周波数上限）: 
+                        input(type='range', max='100', min='1', step='1', value='15')
+                    span.controller-max-freq__number
+                      input(type='number', max='100', min='1', step='1', value='15')
+                  div
+                    mixin controller-compare({ name, itemArr })
+                      for item in itemArr
+                        -
+                          const { label, value, checked } = item;
+                          const id = `controller-${name}--${value}`;
+                        label.controller-compare.mdl-radio.mdl-js-radio.mdl-js-ripple-effect(for=id)
+                          input.mdl-radio__button(id=id, type='radio', name=name, value=value, checked=checked)
+                          span.mdl-radio__label
+                            = label
 
-            #panel-aira.mdl-tabs__panel
-              +controller-panel({
-                title: 'アイラ',
-                character: 'aira',
-                color: 'red',
-              })
+                    +controller-compare({
+                      name: 'compare',
+                      itemArr: [{
+                        label: '数式曲線',
+                        value: 'normal',
+                      }, {
+                        label: 'オリジナルと比較',
+                        value: 'compare',
+                        checked: true,
+                      }, {
+                        label: 'オーバーレイ',
+                        value: 'overlay',
+                      }],
+                    })
 
-            #panel-shima.mdl-tabs__panel
-              +controller-panel({
-                title: 'シマ',
-                character: 'shima',
-                color: 'blue',
-              })
+              #panel-white.mdl-tabs__panel
+                +controller-panel({
+                  title: '白',
+                  character: 'white',
+                  color: 'white',
+                })
 
-            #panel-hana.mdl-tabs__panel
-              +controller-panel({
-                title: 'はな',
-                character: 'hana',
-                color: 'yellow',
-              })
+              #panel-aira.mdl-tabs__panel
+                +controller-panel({
+                  title: 'アイラ',
+                  character: 'aira',
+                  color: 'red',
+                })
 
+              #panel-shima.mdl-tabs__panel
+                +controller-panel({
+                  title: 'シマ',
+                  character: 'shima',
+                  color: 'blue',
+                })
 
-      .control
-        .btmControl
-          .btnPlay.btn(title='Play/Pause video')
-            span.icon-play
-          .progress-bar
-            .progress
-              span.bufferBar
-              span.timeBar
-          .sound.sound2.btn(title='Mute/Unmute sound')
-            span.icon-sound
-          .btnFS.btn(title='Switch to full screen')
-            span.icon-fullscreen
+              #panel-hana.mdl-tabs__panel
+                +controller-panel({
+                  title: 'はな',
+                  character: 'hana',
+                  color: 'yellow',
+                })
 
+        - ;
 
-  ul.list-share
-    li.item.item--facebook
-      .fb-like(data-layout='button_count', data-action='like', data-show-faces='true', data-share='true')
-    li.item.item--twitter
-      a.twitter-share-button(href='https://twitter.com/share') Tweet
-      script.
-        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
-  p.link-original-movie
-    | Original: 
-    a(href='https://www.youtube.com/watch?v=gyDFoIbxB34', target='_blank')
-      | TVアニメ「でびどる！」オープニングＰＶ
-  p.link-author-home
-    a(href='https://www.youtube.com/', target='_blank')
-      | created by 
-    a(href='http://butchi.jp/', target='_blank')
-      | IWABUCHI Yu(u)ki
+        .control
+          .btmControl
+            .btnPlay.btn(title='Play/Pause video')
+              span.icon-play
+            .progress-bar
+              .progress
+                span.bufferBar
+                span.timeBar
+            .sound.sound2.btn(title='Mute/Unmute sound')
+              span.icon-sound
+            .btnFS.btn(title='Switch to full screen')
+              span.icon-fullscreen
+
+  footer.global-footer.mdl-mini-footer.mdl-mini-footer--scroll
+    .block-link.mdl-mini-footer__left-section
+      .link-list
+        ul.list-sns
+          li.link-item(data-sns="facebook")
+            .fb-like(data-layout='button_count', data-action='like', data-show-faces='true', data-share='true')
+          li.link-item(data-sns="twitter")
+            a.twitter-share-button(href='https://twitter.com/share') Tweet
+            script.
+              !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+        .link-item.link-original-movie
+          | Original: 
+          a(href='https://www.youtube.com/watch?v=gyDFoIbxB34', target='_blank')
+            | TVアニメ「でびどる！」オープニングＰＶ
+    .block-author.mdl-mega-footer__right-section
+      .link-author-home
+        | created by 
+        a(href='https://www.butchi.jp/', target='_blank')
+          | IWABUCHI Yu(u)ki
