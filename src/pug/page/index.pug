@@ -52,11 +52,11 @@ block content-block
 
         mixin controller-thickness({ character })
           .controller-thickness(data-character=character)
-            span.controller-thickness__slidebar
+            span(data-slidebar)
               label
                 span 太さ: 
                 input(type='range', max='100', min='0.1', step='0.1', value='1')
-            span.controller-thickness__number
+            span(data-number)
               input(type='number', max='100', min='0.1', step='0.1', value='1')
 
         mixin controller-panel({ title, character, color })
@@ -178,11 +178,11 @@ block content-block
                   })
 
                   .controller-max-freq
-                    span.controller-max-freq__slidebar
+                    span(data-slidebar)
                       label
                         span 次数（周波数上限）: 
                         input(type='range', max='100', min='1', step='1', value='15')
-                    span.controller-max-freq__number
+                    span(data-number)
                       input(type='number', max='100', min='1', step='1', value='15')
                   div
                     mixin controller-compare({ name, itemArr })

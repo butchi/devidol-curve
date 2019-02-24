@@ -38,8 +38,8 @@ function init(data) {
       }
     });
 
-    const $maxFreqSlidebar = $('.controller-max-freq__slidebar input');
-    const $maxFreqNumber = $('.controller-max-freq__number input');
+    const $maxFreqSlidebar = $('.controller-max-freq [data-slidebar] input');
+    const $maxFreqNumber = $('.controller-max-freq [data-number] input');
     $maxFreqSlidebar.on('input change', evt => {
       $maxFreqController.attr('data-value', $(evt.target).val());
       $maxFreqController.trigger('updatevalue');
@@ -137,12 +137,12 @@ function init(data) {
       $('.svg-canvas .svg-canvas__main').css({
         "stroke-width": value,
       });
-      $(`.controller-thickness[data-character=${character}] .controller-thickness__slidebar input`).val(value);
-      $(`.controller-thickness[data-character=${character}] .controller-thickness__number input`).val(value);
+      $(`.controller-thickness[data-character=${character}] [data-slidebar] input`).val(value);
+      $(`.controller-thickness[data-character=${character}] [data-number] input`).val(value);
     });
 
-    const $thicknessSlidebar = $('.controller-thickness__slidebar input');
-    const $thicknessNumber = $('.controller-thickness__number input');
+    const $thicknessSlidebar = $thicknessController.find('[data-slidebar] input');
+    const $thicknessNumber = $thicknessController.find('[data-number] input');
     $thicknessSlidebar.on('input change', evt => {
       const $elm = $(evt.target);
       const value = $elm.val();
