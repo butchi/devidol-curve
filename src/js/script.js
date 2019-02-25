@@ -10,6 +10,18 @@ let moviePlayer;
 let animationPlayer;
 let audioPlayer;
 
+
+const initIframeApi = _ => {
+  const tag = document.createElement('script');
+
+  tag.src = "https://www.youtube.com/iframe_api";
+  const firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+}
+
+initIframeApi();
+
+
 fetch('data/fourier-array.json')
   .then(res => {
     return res.json();
