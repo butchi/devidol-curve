@@ -23,6 +23,8 @@ a {
 .movie-player {
   height: 360px;
 
+  transform-origin: 0 0;
+
   &[data-mode="normal"] {
     .array-movie {
       display: block;
@@ -104,6 +106,8 @@ a {
     background-color: black;
 
     z-index: 5;
+
+    cursor: pointer;
 
     .icon-play {
       position: absolute;

@@ -211,3 +211,20 @@ window.onYouTubeIframeAPIReady = _ => {
 
   ns.ytPlayer = ytPlayer;
 };
+
+
+$(window).on('resize', _evt => {
+  const w = $(window).width();
+
+  const $moviePlayer = $('.movie-player');
+
+  if (w < 640) {
+    $moviePlayer.css({
+      "transform": `scale(${w / 640})`,
+    });
+  } else {
+    $moviePlayer.css({
+      "transform": '',
+    });
+  }
+}).trigger('resize');
