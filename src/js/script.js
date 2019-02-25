@@ -22,6 +22,12 @@ fetch('data/fourier-array.json')
   })
 ;
 
+function initMovie(data) {
+  ns.movieData = data;
+  ns.currentFrame = 0;
+}
+
+
 const initDevidolCurve = _ => {
   const $maxFreqController = $('.controller-max-freq');
   $maxFreqController.on('updatevalue', function(evt) {
@@ -167,11 +173,6 @@ $('body').one('mdl-componentupgraded', _evt => {
   initDevidolCurve();
 });
 
-
-function initMovie(data) {
-  ns.movieData = data;
-  ns.currentFrame = 0;
-}
 
 window.onYouTubeIframeAPIReady = _ => {
   const onStateChange = state => {
