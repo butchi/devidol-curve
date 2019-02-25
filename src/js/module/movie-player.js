@@ -65,8 +65,8 @@ export default class MoviePlayer {
 
     //display current video play time
     audioPlayer.$elm.on('timeupdate', _ => {
-      const currentPos = this.audioPlayer.elm.currentTime;
-      const maxduration = this.audioPlayer.elm.duration;
+      const currentPos = this.audioPlayer.currentTime;
+      const maxduration = this.audioPlayer.duration;
       const perc = 100 * currentPos / maxduration;
 
       $('.timeBar').css('width', `${perc}%`);  
@@ -74,18 +74,15 @@ export default class MoviePlayer {
     });
 
     const playpause = _ => {
-      const { elm } = this.audioPlayer;
-
-      if(elm.paused || elm.ended) {
         $('.btnPlay').addClass('paused');
         $('.btnPlay').find('.icon-play').addClass('icon-pause').removeClass('icon-play');
-
-        elm.play();
+      if (audioPlayer.paused || audioPlayer.ended) {
+        audioPlayer.play();
       }
       else {
         $('.btnPlay').removeClass('paused');
         $('.btnPlay').find('.icon-pause').removeClass('icon-pause').addClass('icon-play');
-        elm.pause();
+        audioPlayer.pause();
       }
     };
 
@@ -98,13 +95,12 @@ export default class MoviePlayer {
     //when video timebar clicked
 
     const updatebar = x => {
-      const { elm } = this.audioPlayer;
       const progress = $('.progress');
 
       //calculate drag position
       //and update video currenttime
       //as well as progress bar
-      const maxduration = elm.duration;
+      const maxduration = this.audioPlayer.duration;
       const position = x - progress.offset().left;
       let percentage = 100 * position / progress.width();
 
@@ -117,7 +113,7 @@ export default class MoviePlayer {
       }
 
       $('.timeBar').css('width', `${percentage}%`);  
-      elm.currentTime = maxduration * percentage / 100;
+      this.audioPlayer.currentTime = maxduration * percentage / 100;
     };
 
     let timeDrag = false; /* check for drag event */
@@ -427,15 +423,14 @@ export default class MoviePlayer {
   }
 
   getFrame() {
-    return Math.floor(this.audioPlayer.elm.currentTime * this.frameRate);
+    return Math.floor(this.audioPlayer.currentTime * this.frameRate);
   }
 
   getCurrentTime() {
-    return this.audioPlayer.elm.currentTime;
+    return this.audioPlayer.currentTime;
   }
 
   play() {
-    this.audioPlayer.play();
     this.isPause = false;
 
     const loop = _ => {

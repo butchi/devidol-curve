@@ -53,14 +53,14 @@ const initDevidolCurve = _ => {
   const moviePlayerElm = $moviePlayer.get(0);
 
   const $audio = $moviePlayer.find('[data-elm="audio"]');
-  const audioElm = $audio.get(0);
 
   animationPlayer = new AnimationPlayer();
-  audioPlayer = new AudioPlayer({ elm: audioElm });
+  audioPlayer = new AudioPlayer({ $elm: $({}) });
   moviePlayer = new MoviePlayer({ elm: moviePlayerElm, animationPlayer, audioPlayer });
 
   ns.moviePlayer = moviePlayer;
   ns.animationPlayer = animationPlayer;
+  ns.audioPlayer = audioPlayer;
 
   $maxFreqSlidebar.trigger('change');
 
