@@ -186,7 +186,6 @@ window.onYouTubeIframeAPIReady = _ => {
       ;
 
       case window.YT.PlayerState.PLAYING:
-        console.log(1);
         break
       ;
     }
