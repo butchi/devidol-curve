@@ -5,6 +5,7 @@
     <!-- meta-->
     <title>でびどる曲線！</title>
     <meta name="description" content="数式で『でびどる！』OPをアニメーションさせてみた">
+    <meta name="keywords" content="でびどる, アニメ, OP, フーリエ変換, フーリエ解析, SVG">
     <link rel="shortcut icon" href="./favicon.ico" type="image/vnd.microsoft.icon">
     <link rel="icon" href="./favicon.ico" type="image/vnd.microsoft.icon">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
@@ -14,141 +15,390 @@
     <!-- ogp-->
     <meta property="fb:app_id" content="903742642995033">
     <meta property="og:url" content="https://butchi.github.io/devidol-curve/">
+    <meta property="og:image" content="https://butchi.github.io/devidol-curve/ogp.png">
     <meta property="og:type" content="website">
     <meta property="og:title" content="でびどる曲線！">
     <meta property="og:site_name" content="でびどる曲線！">
     <meta property="og:description" content="数式で『でびどる！』OPをアニメーションさせてみた">
     <meta property="og:locale" content="ja_JP">
     <!-- twitter card-->
-    <meta property="twitter:card" content="summary">
+    <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:title" content="でびどる曲線！">
     <meta property="twitter:description" content="数式で『でびどる！』OPをアニメーションさせてみた">
+    <meta property="twitter:image" content="https://butchi.github.io/devidol-curve/ogp.png">
     <!-- canonical url-->
     <link rel="canonical" href="https://butchi.github.io/devidol-curve/">
     <!-- stylesheet-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.red-yellow.min.css">
   <link href="/css/style.css" rel="stylesheet"></head>
   <body>
+    <div id="fb-root"></div>
+    <script async defer src="https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&amp;version=v3.2&amp;appId=903742642995033&amp;autoLogAppEvents=1"></script>
     <div class="wrapper">
-      <div class="wrapper">
-        <h1 class="title" data-heading-level="1">でびどる曲線！</h1>
-        <h2 class="heading" data-heading-level="2">Demo</h2>
-        <p class="link-get-source"><a href="https://github.com/butchi/devidol-curve/tree/master/_src" target="_blank"><img src="img/icon-mathematica.png" alt="get source!" width="69" height="69"></a></p>
-        <div class="array-movie" data-mode="normal">
-          <div class="area-movie item-movie">
-            <svg class="svg-canvas" width="640" height="380" xmlns="http://www.w3.org/2000/svg">
-              <desc>でびどる曲線！</desc>
-              <g class="svg-canvas__main"></g>
-            </svg>
-            <aside class="info--pause">
-              <div class="block-info"></div>
-            </aside>
+      <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header mdl-layout__header--scroll">
+          <div class="mdl-layout__header-row">
+            <h1 class="title" data-heading-level="1">でびどる曲線！</h1>
+            <div class="mdl-layout-spacer"></div>
+            <p class="link-get-source"><a href="https://github.com/butchi/devidol-curve/tree/master/_src" target="_blank"><img src="img/icon-mathematica.png" alt="get source!" width="69" height="69"></a></p>
           </div>
-          <div class="original-movie item-movie">
-            <div id="original_movie"></div>
+        </header>
+        <main class="main-content mdl-layout__content">
+          <div class="movie-player">
+            <div class="array-movie" data-mode="normal">
+              <div class="area-movie item-movie">
+                <svg class="svg-canvas" width="640" height="380" xmlns="http://www.w3.org/2000/svg">
+                  <desc>でびどる曲線！</desc>
+                  <g class="svg-canvas__main">
+                    <g class="white"></g>
+                    <g class="aira"></g>
+                    <g class="shima"></g>
+                    <g class="hana"></g>
+                  </g>
+                </svg>
+                <aside class="info">
+                  <div class="block-info"></div>
+                </aside>
+                <div class="group-controller">
+                  <div class="controller-card mdl-card mdl-shadow--2dp">
+                    <div class="mdl-card__actions" data-actions style="color: white;">
+                      <div class="tab-character mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+                        <div class="mdl-tabs__tab-bar" data-tab-bar><a class="tab-item mdl-tabs__tab is-active" href="#panel-common">共通</a><a class="tab-item mdl-tabs__tab" href="#panel-white" style="color: white;">白</a><a class="tab-item mdl-tabs__tab" href="#panel-aira" style="color: red;">アイラ</a><a class="tab-item mdl-tabs__tab" href="#panel-shima" style="color: blue;">シマ</a><a class="tab-item mdl-tabs__tab" href="#panel-hana" style="color: yellow;">はな</a></div>
+                        <div class="mdl-tabs__panel is-active" id="panel-common">
+                          <div class="controller-panel">
+                                              <div class="controller-color" data-type="bg" data-color="black">背景:
+                                                <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color--bg--black">
+                                                  <input class="mdl-radio__button" id="controller-color--bg--black" type="radio" name="color-bg" value="black" checked><span class="mdl-radio__label">黒</span>
+                                                </label>
+                                                <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color--bg--white">
+                                                  <input class="mdl-radio__button" id="controller-color--bg--white" type="radio" name="color-bg" value="white"><span class="mdl-radio__label">白</span>
+                                                </label>
+                                                <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color--bg--red">
+                                                  <input class="mdl-radio__button" id="controller-color--bg--red" type="radio" name="color-bg" value="red"><span class="mdl-radio__label">赤</span>
+                                                </label>
+                                                <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color--bg--blue">
+                                                  <input class="mdl-radio__button" id="controller-color--bg--blue" type="radio" name="color-bg" value="blue"><span class="mdl-radio__label">青</span>
+                                                </label>
+                                                <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color--bg--yellow">
+                                                  <input class="mdl-radio__button" id="controller-color--bg--yellow" type="radio" name="color-bg" value="yellow"><span class="mdl-radio__label">黄</span>
+                                                </label>
+                                                <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color--bg--green">
+                                                  <input class="mdl-radio__button" id="controller-color--bg--green" type="radio" name="color-bg" value="green"><span class="mdl-radio__label">緑</span>
+                                                </label>
+                                                <label>
+                                                  <input type="color">カスタム
+                                                </label>
+                                              </div>
+                            <div class="controller-max-freq"><span data-slidebar>
+                                <label><span>次数（周波数上限）: </span>
+                                  <input type="range" max="100" min="1" step="1" value="15">
+                                </label></span><span data-number>
+                                <input type="number" max="100" min="1" step="1" value="15"></span></div>
+                            <div>
+                                                            <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-compare--normal">
+                                                              <input class="mdl-radio__button" id="controller-compare--normal" type="radio" name="compare" value="normal"><span class="mdl-radio__label">数式曲線</span>
+                                                            </label>
+                                                            <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-compare--compare">
+                                                              <input class="mdl-radio__button" id="controller-compare--compare" type="radio" name="compare" value="compare" checked><span class="mdl-radio__label">オリジナルと比較</span>
+                                                            </label>
+                                                            <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-compare--overlay">
+                                                              <input class="mdl-radio__button" id="controller-compare--overlay" type="radio" name="compare" value="overlay"><span class="mdl-radio__label">オーバーレイ</span>
+                                                            </label>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="mdl-tabs__panel" id="panel-white">
+                                            <div class="controller-panel" data-character="white">
+                                                                <div class="controller-color" data-type="fill" data-character="white" data-color="transparent">塗り:
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-white--fill--transparent">
+                                                                    <input class="mdl-radio__button" id="controller-color-white--fill--transparent" type="radio" name="color-white-fill" value="transparent"><span class="mdl-radio__label">透過</span>
+                                                                  </label>
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-white--fill--black">
+                                                                    <input class="mdl-radio__button" id="controller-color-white--fill--black" type="radio" name="color-white-fill" value="black"><span class="mdl-radio__label">黒</span>
+                                                                  </label>
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-white--fill--white">
+                                                                    <input class="mdl-radio__button" id="controller-color-white--fill--white" type="radio" name="color-white-fill" value="white" checked><span class="mdl-radio__label">白</span>
+                                                                  </label>
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-white--fill--red">
+                                                                    <input class="mdl-radio__button" id="controller-color-white--fill--red" type="radio" name="color-white-fill" value="red"><span class="mdl-radio__label">赤</span>
+                                                                  </label>
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-white--fill--blue">
+                                                                    <input class="mdl-radio__button" id="controller-color-white--fill--blue" type="radio" name="color-white-fill" value="blue"><span class="mdl-radio__label">青</span>
+                                                                  </label>
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-white--fill--yellow">
+                                                                    <input class="mdl-radio__button" id="controller-color-white--fill--yellow" type="radio" name="color-white-fill" value="yellow"><span class="mdl-radio__label">黄</span>
+                                                                  </label>
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-white--fill--green">
+                                                                    <input class="mdl-radio__button" id="controller-color-white--fill--green" type="radio" name="color-white-fill" value="green"><span class="mdl-radio__label">緑</span>
+                                                                  </label>
+                                                                  <label>
+                                                                    <input type="color">カスタム
+                                                                  </label>
+                                                                </div>
+                                                                <div class="controller-color" data-type="line" data-character="white" data-color="transparent">輪郭:
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-white--line--transparent">
+                                                                    <input class="mdl-radio__button" id="controller-color-white--line--transparent" type="radio" name="color-white-line" value="transparent" checked><span class="mdl-radio__label">透過</span>
+                                                                  </label>
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-white--line--black">
+                                                                    <input class="mdl-radio__button" id="controller-color-white--line--black" type="radio" name="color-white-line" value="black"><span class="mdl-radio__label">黒</span>
+                                                                  </label>
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-white--line--white">
+                                                                    <input class="mdl-radio__button" id="controller-color-white--line--white" type="radio" name="color-white-line" value="white"><span class="mdl-radio__label">白</span>
+                                                                  </label>
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-white--line--red">
+                                                                    <input class="mdl-radio__button" id="controller-color-white--line--red" type="radio" name="color-white-line" value="red"><span class="mdl-radio__label">赤</span>
+                                                                  </label>
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-white--line--blue">
+                                                                    <input class="mdl-radio__button" id="controller-color-white--line--blue" type="radio" name="color-white-line" value="blue"><span class="mdl-radio__label">青</span>
+                                                                  </label>
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-white--line--yellow">
+                                                                    <input class="mdl-radio__button" id="controller-color-white--line--yellow" type="radio" name="color-white-line" value="yellow"><span class="mdl-radio__label">黄</span>
+                                                                  </label>
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-white--line--green">
+                                                                    <input class="mdl-radio__button" id="controller-color-white--line--green" type="radio" name="color-white-line" value="green"><span class="mdl-radio__label">緑</span>
+                                                                  </label>
+                                                                  <label>
+                                                                    <input type="color">カスタム
+                                                                  </label>
+                                                                </div>
+                                                                <div class="controller-thickness" data-character="white"><span data-slidebar>
+                                                                    <label><span>太さ: </span>
+                                                                      <input type="range" max="100" min="0.1" step="0.1" value="1">
+                                                                    </label></span><span data-number>
+                                                                    <input type="number" max="100" min="0.1" step="0.1" value="1"></span></div>
+                                            </div>
+                        </div>
+                        <div class="mdl-tabs__panel" id="panel-aira">
+                                            <div class="controller-panel" data-character="aira">
+                                                                <div class="controller-color" data-type="fill" data-character="aira" data-color="transparent">塗り:
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-aira--fill--transparent">
+                                                                    <input class="mdl-radio__button" id="controller-color-aira--fill--transparent" type="radio" name="color-aira-fill" value="transparent"><span class="mdl-radio__label">透過</span>
+                                                                  </label>
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-aira--fill--black">
+                                                                    <input class="mdl-radio__button" id="controller-color-aira--fill--black" type="radio" name="color-aira-fill" value="black"><span class="mdl-radio__label">黒</span>
+                                                                  </label>
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-aira--fill--white">
+                                                                    <input class="mdl-radio__button" id="controller-color-aira--fill--white" type="radio" name="color-aira-fill" value="white"><span class="mdl-radio__label">白</span>
+                                                                  </label>
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-aira--fill--red">
+                                                                    <input class="mdl-radio__button" id="controller-color-aira--fill--red" type="radio" name="color-aira-fill" value="red" checked><span class="mdl-radio__label">赤</span>
+                                                                  </label>
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-aira--fill--blue">
+                                                                    <input class="mdl-radio__button" id="controller-color-aira--fill--blue" type="radio" name="color-aira-fill" value="blue"><span class="mdl-radio__label">青</span>
+                                                                  </label>
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-aira--fill--yellow">
+                                                                    <input class="mdl-radio__button" id="controller-color-aira--fill--yellow" type="radio" name="color-aira-fill" value="yellow"><span class="mdl-radio__label">黄</span>
+                                                                  </label>
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-aira--fill--green">
+                                                                    <input class="mdl-radio__button" id="controller-color-aira--fill--green" type="radio" name="color-aira-fill" value="green"><span class="mdl-radio__label">緑</span>
+                                                                  </label>
+                                                                  <label>
+                                                                    <input type="color">カスタム
+                                                                  </label>
+                                                                </div>
+                                                                <div class="controller-color" data-type="line" data-character="aira" data-color="transparent">輪郭:
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-aira--line--transparent">
+                                                                    <input class="mdl-radio__button" id="controller-color-aira--line--transparent" type="radio" name="color-aira-line" value="transparent" checked><span class="mdl-radio__label">透過</span>
+                                                                  </label>
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-aira--line--black">
+                                                                    <input class="mdl-radio__button" id="controller-color-aira--line--black" type="radio" name="color-aira-line" value="black"><span class="mdl-radio__label">黒</span>
+                                                                  </label>
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-aira--line--white">
+                                                                    <input class="mdl-radio__button" id="controller-color-aira--line--white" type="radio" name="color-aira-line" value="white"><span class="mdl-radio__label">白</span>
+                                                                  </label>
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-aira--line--red">
+                                                                    <input class="mdl-radio__button" id="controller-color-aira--line--red" type="radio" name="color-aira-line" value="red"><span class="mdl-radio__label">赤</span>
+                                                                  </label>
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-aira--line--blue">
+                                                                    <input class="mdl-radio__button" id="controller-color-aira--line--blue" type="radio" name="color-aira-line" value="blue"><span class="mdl-radio__label">青</span>
+                                                                  </label>
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-aira--line--yellow">
+                                                                    <input class="mdl-radio__button" id="controller-color-aira--line--yellow" type="radio" name="color-aira-line" value="yellow"><span class="mdl-radio__label">黄</span>
+                                                                  </label>
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-aira--line--green">
+                                                                    <input class="mdl-radio__button" id="controller-color-aira--line--green" type="radio" name="color-aira-line" value="green"><span class="mdl-radio__label">緑</span>
+                                                                  </label>
+                                                                  <label>
+                                                                    <input type="color">カスタム
+                                                                  </label>
+                                                                </div>
+                                                                <div class="controller-thickness" data-character="aira"><span data-slidebar>
+                                                                    <label><span>太さ: </span>
+                                                                      <input type="range" max="100" min="0.1" step="0.1" value="1">
+                                                                    </label></span><span data-number>
+                                                                    <input type="number" max="100" min="0.1" step="0.1" value="1"></span></div>
+                                            </div>
+                        </div>
+                        <div class="mdl-tabs__panel" id="panel-shima">
+                                            <div class="controller-panel" data-character="shima">
+                                                                <div class="controller-color" data-type="fill" data-character="shima" data-color="transparent">塗り:
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-shima--fill--transparent">
+                                                                    <input class="mdl-radio__button" id="controller-color-shima--fill--transparent" type="radio" name="color-shima-fill" value="transparent"><span class="mdl-radio__label">透過</span>
+                                                                  </label>
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-shima--fill--black">
+                                                                    <input class="mdl-radio__button" id="controller-color-shima--fill--black" type="radio" name="color-shima-fill" value="black"><span class="mdl-radio__label">黒</span>
+                                                                  </label>
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-shima--fill--white">
+                                                                    <input class="mdl-radio__button" id="controller-color-shima--fill--white" type="radio" name="color-shima-fill" value="white"><span class="mdl-radio__label">白</span>
+                                                                  </label>
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-shima--fill--red">
+                                                                    <input class="mdl-radio__button" id="controller-color-shima--fill--red" type="radio" name="color-shima-fill" value="red"><span class="mdl-radio__label">赤</span>
+                                                                  </label>
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-shima--fill--blue">
+                                                                    <input class="mdl-radio__button" id="controller-color-shima--fill--blue" type="radio" name="color-shima-fill" value="blue" checked><span class="mdl-radio__label">青</span>
+                                                                  </label>
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-shima--fill--yellow">
+                                                                    <input class="mdl-radio__button" id="controller-color-shima--fill--yellow" type="radio" name="color-shima-fill" value="yellow"><span class="mdl-radio__label">黄</span>
+                                                                  </label>
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-shima--fill--green">
+                                                                    <input class="mdl-radio__button" id="controller-color-shima--fill--green" type="radio" name="color-shima-fill" value="green"><span class="mdl-radio__label">緑</span>
+                                                                  </label>
+                                                                  <label>
+                                                                    <input type="color">カスタム
+                                                                  </label>
+                                                                </div>
+                                                                <div class="controller-color" data-type="line" data-character="shima" data-color="transparent">輪郭:
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-shima--line--transparent">
+                                                                    <input class="mdl-radio__button" id="controller-color-shima--line--transparent" type="radio" name="color-shima-line" value="transparent" checked><span class="mdl-radio__label">透過</span>
+                                                                  </label>
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-shima--line--black">
+                                                                    <input class="mdl-radio__button" id="controller-color-shima--line--black" type="radio" name="color-shima-line" value="black"><span class="mdl-radio__label">黒</span>
+                                                                  </label>
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-shima--line--white">
+                                                                    <input class="mdl-radio__button" id="controller-color-shima--line--white" type="radio" name="color-shima-line" value="white"><span class="mdl-radio__label">白</span>
+                                                                  </label>
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-shima--line--red">
+                                                                    <input class="mdl-radio__button" id="controller-color-shima--line--red" type="radio" name="color-shima-line" value="red"><span class="mdl-radio__label">赤</span>
+                                                                  </label>
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-shima--line--blue">
+                                                                    <input class="mdl-radio__button" id="controller-color-shima--line--blue" type="radio" name="color-shima-line" value="blue"><span class="mdl-radio__label">青</span>
+                                                                  </label>
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-shima--line--yellow">
+                                                                    <input class="mdl-radio__button" id="controller-color-shima--line--yellow" type="radio" name="color-shima-line" value="yellow"><span class="mdl-radio__label">黄</span>
+                                                                  </label>
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-shima--line--green">
+                                                                    <input class="mdl-radio__button" id="controller-color-shima--line--green" type="radio" name="color-shima-line" value="green"><span class="mdl-radio__label">緑</span>
+                                                                  </label>
+                                                                  <label>
+                                                                    <input type="color">カスタム
+                                                                  </label>
+                                                                </div>
+                                                                <div class="controller-thickness" data-character="shima"><span data-slidebar>
+                                                                    <label><span>太さ: </span>
+                                                                      <input type="range" max="100" min="0.1" step="0.1" value="1">
+                                                                    </label></span><span data-number>
+                                                                    <input type="number" max="100" min="0.1" step="0.1" value="1"></span></div>
+                                            </div>
+                        </div>
+                        <div class="mdl-tabs__panel" id="panel-hana">
+                                            <div class="controller-panel" data-character="hana">
+                                                                <div class="controller-color" data-type="fill" data-character="hana" data-color="transparent">塗り:
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-hana--fill--transparent">
+                                                                    <input class="mdl-radio__button" id="controller-color-hana--fill--transparent" type="radio" name="color-hana-fill" value="transparent"><span class="mdl-radio__label">透過</span>
+                                                                  </label>
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-hana--fill--black">
+                                                                    <input class="mdl-radio__button" id="controller-color-hana--fill--black" type="radio" name="color-hana-fill" value="black"><span class="mdl-radio__label">黒</span>
+                                                                  </label>
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-hana--fill--white">
+                                                                    <input class="mdl-radio__button" id="controller-color-hana--fill--white" type="radio" name="color-hana-fill" value="white"><span class="mdl-radio__label">白</span>
+                                                                  </label>
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-hana--fill--red">
+                                                                    <input class="mdl-radio__button" id="controller-color-hana--fill--red" type="radio" name="color-hana-fill" value="red"><span class="mdl-radio__label">赤</span>
+                                                                  </label>
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-hana--fill--blue">
+                                                                    <input class="mdl-radio__button" id="controller-color-hana--fill--blue" type="radio" name="color-hana-fill" value="blue"><span class="mdl-radio__label">青</span>
+                                                                  </label>
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-hana--fill--yellow">
+                                                                    <input class="mdl-radio__button" id="controller-color-hana--fill--yellow" type="radio" name="color-hana-fill" value="yellow" checked><span class="mdl-radio__label">黄</span>
+                                                                  </label>
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-hana--fill--green">
+                                                                    <input class="mdl-radio__button" id="controller-color-hana--fill--green" type="radio" name="color-hana-fill" value="green"><span class="mdl-radio__label">緑</span>
+                                                                  </label>
+                                                                  <label>
+                                                                    <input type="color">カスタム
+                                                                  </label>
+                                                                </div>
+                                                                <div class="controller-color" data-type="line" data-character="hana" data-color="transparent">輪郭:
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-hana--line--transparent">
+                                                                    <input class="mdl-radio__button" id="controller-color-hana--line--transparent" type="radio" name="color-hana-line" value="transparent" checked><span class="mdl-radio__label">透過</span>
+                                                                  </label>
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-hana--line--black">
+                                                                    <input class="mdl-radio__button" id="controller-color-hana--line--black" type="radio" name="color-hana-line" value="black"><span class="mdl-radio__label">黒</span>
+                                                                  </label>
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-hana--line--white">
+                                                                    <input class="mdl-radio__button" id="controller-color-hana--line--white" type="radio" name="color-hana-line" value="white"><span class="mdl-radio__label">白</span>
+                                                                  </label>
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-hana--line--red">
+                                                                    <input class="mdl-radio__button" id="controller-color-hana--line--red" type="radio" name="color-hana-line" value="red"><span class="mdl-radio__label">赤</span>
+                                                                  </label>
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-hana--line--blue">
+                                                                    <input class="mdl-radio__button" id="controller-color-hana--line--blue" type="radio" name="color-hana-line" value="blue"><span class="mdl-radio__label">青</span>
+                                                                  </label>
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-hana--line--yellow">
+                                                                    <input class="mdl-radio__button" id="controller-color-hana--line--yellow" type="radio" name="color-hana-line" value="yellow"><span class="mdl-radio__label">黄</span>
+                                                                  </label>
+                                                                  <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-color-hana--line--green">
+                                                                    <input class="mdl-radio__button" id="controller-color-hana--line--green" type="radio" name="color-hana-line" value="green"><span class="mdl-radio__label">緑</span>
+                                                                  </label>
+                                                                  <label>
+                                                                    <input type="color">カスタム
+                                                                  </label>
+                                                                </div>
+                                                                <div class="controller-thickness" data-character="hana"><span data-slidebar>
+                                                                    <label><span>太さ: </span>
+                                                                      <input type="range" max="100" min="0.1" step="0.1" value="1">
+                                                                    </label></span><span data-number>
+                                                                    <input type="number" max="100" min="0.1" step="0.1" value="1"></span></div>
+                                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="control">
+                    <div class="btmControl">
+                      <div class="btnPlay btn" title="Play/Pause video"><span class="icon-play"></span></div>
+                      <div class="progress-bar">
+                        <div class="progress"><span class="bufferBar"></span><span class="timeBar"></span></div>
+                      </div>
+                      <div class="sound sound2 btn" title="Mute/Unmute sound"><span class="icon-sound"></span></div>
+                      <div class="btnFS btn" title="Switch to full screen"><span class="icon-fullscreen"></span></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="cover">
+                  <div class="icon-play material-icons">play_arrow</div>
+                </div>
+              </div>
+              <div class="original-movie item-movie">
+                <div id="original_movie"></div>
+                <div class="cover"></div>
+              </div>
+            </div>
           </div>
-        </div>
-        <audio class="audio" src="audio/blank.mp3" controls=""></audio>
-        <div class="group-controller">
-          <div class="controller-max-freq"><span class="controller-max-freq__slidebar">
-              <label><span>次数（周波数上限）: </span>
-                <input type="range" max="100" min="1" step="1" value="15">
-              </label></span><span class="controller-max-freq__number">
-              <input type="number" max="100" min="1" step="1" value="15"></span></div>
-          <div class="controller-quality">
-            <button class="controller-quality__button--lq" disabled="">標準画質</button>
-            <button class="controller-quality__button--mq">高画質</button>
-            <button class="controller-quality__button--hq">最高画質</button>
+        </main>
+        <footer class="global-footer mdl-mini-footer mdl-mini-footer--scroll">
+          <div class="block-link mdl-mini-footer__left-section">
+            <div class="link-list">
+              <ul class="list-sns">
+                <li class="link-item" data-sns="facebook">
+                  <div class="fb-like" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+                </li>
+                <li class="link-item" data-sns="twitter"><a class="twitter-share-button" href="https://twitter.com/share">Tweet</a>
+                  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                </li>
+              </ul>
+              <div class="link-item link-original-movie">Original: <a href="https://www.youtube.com/watch?v=gyDFoIbxB34" target="_blank">TVアニメ「でびどる！」オープニングＰＶ</a></div>
+            </div>
           </div>
-          <div>
-            <label>
-              <input class="controller-compare" type="radio" name="compare" value="normal" checked="">数式曲線
-            </label>
-            <label>
-              <input class="controller-compare" type="radio" name="compare" value="compare">オリジナルと比較
-            </label>
-            <label>
-              <input class="controller-compare" type="radio" name="compare" value="overlay">オーバーレイ
-            </label>
+          <div class="block-author mdl-mega-footer__right-section">
+            <div class="link-author-home">created by <a href="https://www.butchi.jp/" target="_blank">IWABUCHI Yu(u)ki</a></div>
           </div>
-          <div class="controller-color controller-color--bg" data-color="transparent">背景:
-            <label>
-              <input type="radio" name="bg" value="transparent">透過
-            </label>
-            <label>
-              <input type="radio" name="bg" value="red">赤
-            </label>
-            <label>
-              <input type="radio" name="bg" value="black">黒
-            </label>
-            <label>
-              <input type="radio" name="bg" value="white">白
-            </label>
-            <label>
-              <input type="radio" name="bg" value="lime">緑
-            </label>
-            <label>
-              <input type="color">カスタム
-            </label>
-          </div>
-          <div class="controller-color controller-color--fill" data-color="transparent">塗り:
-            <label>
-              <input type="radio" name="fill" value="transparent">透過
-            </label>
-            <label>
-              <input type="radio" name="fill" value="red">赤
-            </label>
-            <label>
-              <input type="radio" name="fill" value="black">黒
-            </label>
-            <label>
-              <input type="radio" name="fill" value="white">白
-            </label>
-            <label>
-              <input type="radio" name="fill" value="lime">緑
-            </label>
-            <label>
-              <input type="color">カスタム
-            </label>
-          </div>
-          <div class="controller-color controller-color--line" data-color="white">輪郭:
-            <label>
-              <input type="radio" name="line" value="transparent">透過
-            </label>
-            <label>
-              <input type="radio" name="line" value="red">赤
-            </label>
-            <label>
-              <input type="radio" name="line" value="black">黒
-            </label>
-            <label>
-              <input type="radio" name="line" value="white">白
-            </label>
-            <label>
-              <input type="radio" name="line" value="lime">緑
-            </label>
-            <label>
-              <input type="color">カスタム
-            </label>
-          </div>
-          <div class="controller-thickness"><span class="controller-thickness__slidebar">
-              <label><span>太さ: </span>
-                <input type="range" max="100" min="0.1" step="0.1" value="1">
-              </label></span><span class="controller-thickness__number">
-              <input type="number" max="100" min="0.1" step="0.1" value="1"></span></div>
-        </div>
-        <ul class="list-share">
-          <li class="item item--facebook">
-            <div class="fb-like" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
-          </li>
-          <li class="item item--twitter"><a class="twitter-share-button" href="https://twitter.com/share">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-          </li>
-        </ul>
-        <p class="link-original-movie">Original: <a href="https://www.youtube.com/" target="_blank">YouTube</a></p><a href="https://www.youtube.com/" target="_blank"></a>
-        <p class="link-author-home"><a href="https://www.youtube.com/" target="_blank">created by </a><a href="http://butchi.jp/" target="_blank">IWABUCHI Yu(u)ki</a></p>
+        </footer>
       </div>
     </div>
     <!-- javascript-->
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 <script>
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -158,5 +408,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 ga('create', 'UA-2779957-9', 'auto');
 ga('send', 'pageview');
 </script>
+    <script src="http://www.youtube.com/iframe_api"></script>
   <script type="text/javascript" src="/js/script.js"></script></body>
 </html>
