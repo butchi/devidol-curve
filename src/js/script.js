@@ -204,6 +204,7 @@ window.onYouTubeIframeAPIReady = _ => {
       showinfo : 0, // 動画情報
       controls : 0, // コントローラー
       wmode    : 'transparent', // z-indexを有効にする
+      playsinline: 1, // iOSでインライン再生する 
     },
   });
 
