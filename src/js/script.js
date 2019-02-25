@@ -15,14 +15,14 @@ fetch('data/fourier-array.json')
     return res.json();
   })
   .then(json => {
-    init(json);
+    initMovie(json);
   })
   .catch(err => {
     alert(err);
   })
 ;
 
-$('body').one('mdl-componentupgraded', evt => {
+const initDevidolCurve = _ => {
   const $maxFreqController = $('.controller-max-freq');
   $maxFreqController.on('updatevalue', function(evt) {
     const val = $(this).attr('data-value');
@@ -161,10 +161,14 @@ $('body').one('mdl-componentupgraded', evt => {
   });
 
   $thicknessSlidebar.trigger('change');
+}
+
+$('body').one('mdl-componentupgraded', _evt => {
+  initDevidolCurve();
 });
 
 
-function init(data) {
+function initMovie(data) {
   ns.movieData = data;
   ns.currentFrame = 0;
 }
