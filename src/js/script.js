@@ -174,13 +174,30 @@ function initMovie(data) {
 }
 
 window.onYouTubeIframeAPIReady = _ => {
+  const onStateChange = state => {
+    switch (state.data) {
+      case window.YT.PlayerState.PAUSED:
+        break
+      ;
+
+      case window.YT.PlayerState.ENDED:
+        break
+      ;
+
+      case window.YT.PlayerState.PLAYING:
+        console.log(1);
+        break
+      ;
+    }
+  }
+
   const ytPlayer = new YT.Player('original_movie', {
     width   : '640',
     height  : '360',
     videoId : 'gyDFoIbxB34',
     events  : {
       // プレイヤーの準備ができたときに実行されるコールバック関数
-      onStateChange: onStateChange,
+      onStateChange,
     },
     playerVars: {
       rel      : 0, // 関連動画
@@ -189,19 +206,6 @@ window.onYouTubeIframeAPIReady = _ => {
       wmode    : 'transparent', // z-indexを有効にする
     },
   });
-
-  function onStateChange(state) {
-    switch (state.data) {
-    case window.YT.PlayerState.PAUSED:
-      break;
-
-    case window.YT.PlayerState.ENDED:
-      break;
-
-    case window.YT.PlayerState.PLAYING:
-      break;
-    }
-  }
 
   ns.ytPlayer = ytPlayer;
 };
