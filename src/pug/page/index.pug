@@ -25,24 +25,27 @@ block content-block
               g.hana
           aside.info
             .block-info
+          .group-controller
+            include ../_partial/controller-panel
+
+            .control
+              .btmControl
+                .btnPlay.btn(title='Play/Pause video')
+                  span.icon-play
+                .progress-bar
+                  .progress
+                    span.bufferBar
+                    span.timeBar
+                .sound.sound2.btn(title='Mute/Unmute sound')
+                  span.icon-sound
+                .btnFS.btn(title='Switch to full screen')
+                  span.icon-fullscreen
+          .cover
+            .icon-play.material-icons
+              | play_arrow
         .original-movie.item-movie
           #original_movie
-
-      .group-controller
-        include ../_partial/controller-panel
-
-        .control
-          .btmControl
-            .btnPlay.btn(title='Play/Pause video')
-              span.icon-play
-            .progress-bar
-              .progress
-                span.bufferBar
-                span.timeBar
-            .sound.sound2.btn(title='Mute/Unmute sound')
-              span.icon-sound
-            .btnFS.btn(title='Switch to full screen')
-              span.icon-fullscreen
+          .cover
 
   footer.global-footer.mdl-mini-footer.mdl-mini-footer--scroll
     .block-link.mdl-mini-footer__left-section

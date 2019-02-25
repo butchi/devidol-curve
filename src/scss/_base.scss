@@ -91,6 +91,36 @@ a {
   float: left;
   width: 640px;
   height: 360px;
+
+  .cover {
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: black;
+
+    z-index: 5;
+
+    .icon-play {
+      position: absolute;
+
+      left: 50%;
+      top: 50%;
+
+      width: 100px;
+      height: 100px;
+      margin-left: -50px;
+      margin-top: -50px;
+
+      font-size: 100px;
+
+      color: red;
+    }
+  }
 }
 
 .original-movie {
@@ -99,9 +129,7 @@ a {
   width: 640px;
   height: 360px;
 
-  &::after {
-    content: "";
-
+  .cover {
     position: absolute;
 
     left: 0;
@@ -109,6 +137,14 @@ a {
 
     width: 100%;
     height: 100%;
+
+    background-color: rgba(0, 0, 0, 0.75);
+  }
+
+  &[data-show="true"] {
+    .cover {
+      background-color: transparent;
+    }
   }
 }
 

@@ -28,6 +28,8 @@ export default class MoviePlayer {
     audioPlayer.$elm.on('play', _ => {
       // console.log('play');
       this.play();
+      $('.btnPlay').removeClass('paused');
+      $('.btnPlay').find('.icon-play').addClass('icon-pause').removeClass('icon-play');
       try {
         ns.ytPlayer.seekTo(this.getCurrentTime(), true);
         ns.ytPlayer.playVideo();
@@ -38,6 +40,8 @@ export default class MoviePlayer {
     audioPlayer.$elm.on('pause', _ => {
       // console.log('pause');
       this.pause();
+      $('.btnPlay').addClass('paused');
+      $('.btnPlay').find('.icon-pause').removeClass('icon-pause').addClass('icon-play');
       try {
         ns.ytPlayer.pauseVideo();
       } catch(_e) {
@@ -50,7 +54,7 @@ export default class MoviePlayer {
       this.animationPlayer.drawFrame(this.getFrame());
       this.updateInfo();
       try {
-        ns.ytPlayer.seekTo(this.getCurrentTime(), false);
+        ns.ytPlayer.seekTo(this.getCurrentTime(), true);
       } catch(_e) {
       }
     });
@@ -74,19 +78,22 @@ export default class MoviePlayer {
     });
 
     const playpause = _ => {
-        $('.btnPlay').addClass('paused');
-        $('.btnPlay').find('.icon-play').addClass('icon-pause').removeClass('icon-play');
       if (audioPlayer.paused || audioPlayer.ended) {
         audioPlayer.play();
       }
       else {
-        $('.btnPlay').removeClass('paused');
-        $('.btnPlay').find('.icon-pause').removeClass('icon-pause').addClass('icon-play');
         audioPlayer.pause();
       }
     };
 
-    $('.btnPlay').on('click', _ => {
+    $('.btnPlay').on('click', _evt => {
+      playpause();
+    });
+    $('.area-movie .cover').on('click', _evt => {
+      $('.original-movie').attr('data-show', true);
+
+      $('.area-movie .cover').hide();
+
       playpause();
     });
 
