@@ -18,6 +18,8 @@ export default class MoviePlayer {
 
     this.isPause = true;
 
+    this.isMute = false;
+
     this.$info = $(); // set default value before override
 
     $(_ => {
@@ -96,6 +98,23 @@ export default class MoviePlayer {
 
       playpause();
     });
+
+
+    $('.sound.btn').on('click', evt => {
+      if (this.isMute) {
+        ns.ytPlayer.unMute();
+
+        $(evt.target).closest('.btn').removeClass('muted');
+
+        this.isMute = false;
+      } else {
+        ns.ytPlayer.mute();
+
+        $(evt.target).closest('.btn').addClass('muted');
+
+        this.isMute = true;
+      }
+    })
 
 
     //VIDEO PROGRESS BAR
