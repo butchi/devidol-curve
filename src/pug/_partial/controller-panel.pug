@@ -8,12 +8,10 @@ mixin controller-color({ title, name, type, character, defaultColor, itemArr })
       label.controller-compare.mdl-radio.mdl-js-radio.mdl-js-ripple-effect(for=id)
         input.mdl-radio__button(id=id, type='radio', name=`${name}-${type}`, value=value, checked=checked)
         span.mdl-radio__label
-          = label
+          | #{label}
     label
       input(type='color')
       | カスタム
-
-- ;
 
 mixin controller-thickness({ character })
   .controller-thickness(data-character=character)
@@ -155,7 +153,7 @@ mixin controller-panel({ title, character, color })
                 label.controller-compare.mdl-radio.mdl-js-radio.mdl-js-ripple-effect(for=id)
                   input.mdl-radio__button(id=id, type='radio', name=name, value=value, checked=checked)
                   span.mdl-radio__label
-                    = label
+                    | #{label}
 
             +controller-compare({
               name: 'compare',
