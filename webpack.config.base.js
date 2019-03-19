@@ -88,7 +88,7 @@ module.exports = {
                         {
                             loader: 'sass-loader',
                             options: {
-                                includePaths: [ `${SRC}/scss` ],
+                                includePaths: [ './node_modules', `${SRC}/scss` ],
                             },
                         }
                     ]
