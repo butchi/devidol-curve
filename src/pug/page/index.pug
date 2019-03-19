@@ -5,13 +5,14 @@ prepend config-block
     page_name = '';
 
 block content-block
-  header.mdl-layout__header.mdl-layout__header--scroll
-    .mdl-layout__header-row
-      h1.title(data-heading-level='1') でびどる曲線！
-      .mdl-layout-spacer
-      p.link-get-source
-        a(href='https://github.com/butchi/devidol-curve/tree/master/_src', target='_blank')
-          img(src='img/icon-mathematica.png', alt='get source!', width='69', height='69')
+  header.mdc-top-app-bar
+    .mdc-top-app-bar__row
+      .mdc-top-app-bar__section.mdc-top-app-bar__section--align-start
+        h1.mdc-top-app-bar__title(data-heading-level='1') でびどる曲線！
+      .mdc-top-app-bar__section.mdc-top-app-bar__section--align-end
+        p.link-get-source
+          a(href='https://github.com/butchi/devidol-curve/tree/master/_src', target='_blank')
+            img(src='img/icon-mathematica.png', alt='get source!', width='69', height='69')
 
   main.main-content.mdl-layout__content
     .movie-player
