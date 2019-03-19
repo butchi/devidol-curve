@@ -239,6 +239,11 @@ a {
 
   .controller-panel {
     padding: 20px;
+
+    .controller-color,
+    .controller-compare {
+      color: white;
+    }
   }
 }
 

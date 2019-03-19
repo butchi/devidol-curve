@@ -1,14 +1,18 @@
 mixin controller-color({ title, name, type, character, defaultColor, itemArr })
-  .controller-color(data-type=type, data-character=character, data-color=defaultColor)
+  .controller-color.mdc-form-field(data-type=type, data-character=character, data-color=defaultColor)
     | #{title}:
     for item in itemArr
       -
         const { label, value, checked } = item;
         const id = `controller-${name}--${type}--${item.value}`;
-      label.controller-compare.mdl-radio.mdl-js-radio.mdl-js-ripple-effect(for=id)
-        input.mdl-radio__button(id=id, type='radio', name=`${name}-${type}`, value=value, checked=checked)
-        span.mdl-radio__label
-          | #{label}
+      .mdc-radio.controller-compare
+        input.mdc-radio__native-control(id=id, type='radio', name=`${name}-${type}`, value=value, checked=checked)
+        .mdc-radio__background
+          .mdc-radio__outer-circle
+          .mdc-radio__inner-circle
+      label(for=id)
+        | #{label}
+
     label
       input(type='color')
       | カスタム
@@ -150,9 +154,13 @@ mixin controller-panel({ title, character, color })
                 -
                   const { label, value, checked } = item;
                   const id = `controller-${name}--${value}`;
-                label.controller-compare.mdl-radio.mdl-js-radio.mdl-js-ripple-effect(for=id)
-                  input.mdl-radio__button(id=id, type='radio', name=name, value=value, checked=checked)
-                  span.mdl-radio__label
+                .mdc-form-field.controller-compare
+                  .mdc-radio
+                    input.mdc-radio__native-control(id=id, type='radio', name=name, value=value, checked=checked)
+                    .mdc-radio__background
+                      .mdc-radio__outer-circle
+                      .mdc-radio__inner-circle
+                  label(for=id)
                     | #{label}
 
             +controller-compare({
