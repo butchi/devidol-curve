@@ -5,7 +5,7 @@ prepend config-block
     page_name = '';
 
 block content-block
-  header.mdc-top-app-bar
+  header.mdc-top-app-bar(data-mdc="top-app-bar")
     .mdc-top-app-bar__row
       .mdc-top-app-bar__section.mdc-top-app-bar__section--align-start
         h1.mdc-top-app-bar__title(data-heading-level='1') でびどる曲線！
@@ -14,57 +14,58 @@ block content-block
           a(href='https://github.com/butchi/devidol-curve/tree/master/_src', target='_blank')
             img(src='img/icon-mathematica.png', alt='get source!', width='69', height='69')
 
-  main.main-content.mdl-layout__content
-    .movie-player
-      .array-movie(data-mode='normal')
-        .area-movie.item-movie
-          svg.svg-canvas(width='640', height='380', xmlns='http://www.w3.org/2000/svg')
-            desc でびどる曲線！
-            g.svg-canvas__main
-              g.white
-              g.aira
-              g.shima
-              g.hana
-          aside.info
-            .block-info
-          .group-controller
-            include ../_partial/controller-panel
+  .mdc-top-app-bar--fixed-adjust
+    main.main-content
+      .movie-player
+        .array-movie(data-mode='normal')
+          .area-movie.item-movie
+            svg.svg-canvas(width='640', height='380', xmlns='http://www.w3.org/2000/svg')
+              desc でびどる曲線！
+              g.svg-canvas__main
+                g.white
+                g.aira
+                g.shima
+                g.hana
+            aside.info
+              .block-info
+            .group-controller
+              include ../_partial/controller-panel
 
-            .control
-              .btmControl
-                .btnPlay.btn(title='Play/Pause video')
-                  span.icon-play
-                .progress-bar
-                  .progress
-                    span.bufferBar
-                    span.timeBar
-                .sound.sound2.btn(title='Mute/Unmute sound')
-                  span.icon-sound
-                .btnFS.btn(title='Switch to full screen')
-                  span.icon-fullscreen
-          .cover
-            .icon-play.material-icons
-              | play_arrow
-        .original-movie.item-movie
-          #original_movie
-          .cover
+              .control
+                .btmControl
+                  .btnPlay.btn(title='Play/Pause video')
+                    span.icon-play
+                  .progress-bar
+                    .progress
+                      span.bufferBar
+                      span.timeBar
+                  .sound.sound2.btn(title='Mute/Unmute sound')
+                    span.icon-sound
+                  .btnFS.btn(title='Switch to full screen')
+                    span.icon-fullscreen
+            .cover
+              .icon-play.material-icons
+                | play_arrow
+          .original-movie.item-movie
+            #original_movie
+            .cover
 
-  footer.global-footer.mdl-mini-footer.mdl-mini-footer--scroll
-    .block-link.mdl-mini-footer__left-section
-      .link-list
-        ul.list-sns
-          li.link-item(data-sns="facebook")
-            .fb-like(data-layout='button_count', data-action='like', data-show-faces='true', data-share='true')
-          li.link-item(data-sns="twitter")
-            a.twitter-share-button(href='https://twitter.com/share') Tweet
-            script.
-              !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
-        .link-item.link-original-movie
-          | Original: 
-          a(href='https://www.youtube.com/watch?v=gyDFoIbxB34', target='_blank')
-            | TVアニメ「でびどる！」オープニングＰＶ
-    .block-author.mdl-mega-footer__right-section
-      .link-author-home
-        | created by 
-        a(href='https://twitter.com/butchi_y', target='_blank')
-          | IWABUCHI Yu(u)ki (butchi)
+    footer.global-footer.mdl-mini-footer.mdl-mini-footer--scroll
+      .block-link.mdl-mini-footer__left-section
+        .link-list
+          ul.list-sns
+            li.link-item(data-sns="facebook")
+              .fb-like(data-layout='button_count', data-action='like', data-show-faces='true', data-share='true')
+            li.link-item(data-sns="twitter")
+              a.twitter-share-button(href='https://twitter.com/share') Tweet
+              script.
+                !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+          .link-item.link-original-movie
+            | Original: 
+            a(href='https://www.youtube.com/watch?v=gyDFoIbxB34', target='_blank')
+              | TVアニメ「でびどる！」オープニングＰＶ
+      .block-author.mdl-mega-footer__right-section
+        .link-author-home
+          | created by 
+          a(href='https://twitter.com/butchi_y', target='_blank')
+            | IWABUCHI Yu(u)ki - butchi
