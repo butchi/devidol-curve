@@ -186,6 +186,30 @@ const initDevidolCurve = _ => {
       $('.info').hide();
     }
   });
+
+  const mouseenterHandler = _evt => {
+    ns.moviePlayer.showController();
+  };
+
+  const mouseleaveHandler = _evt => {
+    ns.moviePlayer.hideController();
+  };
+
+  $('.area-movie').on('mouseenter', mouseenterHandler);
+  $('.area-movie').on('mouseleave', mouseleaveHandler);
+  $('.area-movie').on('click', mouseenterHandler);
+  $('.wrapper').on('click', evt => {
+    mouseleaveHandler(evt);
+  });
+  $('.area-movie').on('click', evt => {
+    evt.stopPropagation();
+  });
+  $('.controller-card').on('click', evt => {
+    evt.stopPropagation();
+  });
+  $('.area-movie .cover').on('click', evt => {
+    evt.stopPropagation();
+  });
 }
 
 $('body').one('mdl-componentupgraded', _evt => {

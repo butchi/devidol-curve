@@ -96,6 +96,10 @@ export default class MoviePlayer {
 
       $('.area-movie .cover').hide();
 
+      setTimeout(_ => {
+        this.hideController();
+      }, 3000);
+
       playpause();
     });
 
@@ -253,5 +257,13 @@ DE DE DEDEDE.............`
         $colorComponent.append($curveList);
       }
     });
+  }
+
+  showController() {
+    $('.controller-card').attr('data-is-hidden', false);
+  }
+
+  hideController() {
+    $('.controller-card').attr('data-is-hidden', true);
   }
 }
