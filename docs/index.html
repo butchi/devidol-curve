@@ -31,7 +31,7 @@
     <!-- stylesheet-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.red-yellow.min.css">
-  <link href="/devidol-curve/css/style.css" rel="stylesheet"></head>
+  <link href="css/style.css" rel="stylesheet"></head>
   <body>
     <div id="fb-root"></div>
     <script async defer src="https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&amp;version=v3.2&amp;appId=903742642995033&amp;autoLogAppEvents=1"></script>
@@ -90,11 +90,12 @@
                                                   <input type="color">カスタム
                                                 </label>
                                               </div>
-                            <div class="controller-max-freq"><span data-slidebar>
-                                <label><span>次数（周波数上限）: </span>
-                                  <input type="range" max="100" min="1" step="1" value="15">
-                                </label></span><span data-number>
-                                <input type="number" max="100" min="1" step="1" value="15"></span></div>
+                            <div class="controller-max-freq"><span class="label">次数（周波数上限）: </span><span class="slider" data-slidebar>
+                                <input class="mdl-slider mdl-js-slider" type="range" max="100" min="1" step="1" value="15"></span>
+                              <div class="textfield mdl-textfield mdl-js-textfield" data-number>
+                                <input class="mdl-textfield__input" type="number" max="100" min="1" step="1" value="15">
+                              </div>
+                            </div>
                             <div>
                                                             <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-compare--normal">
                                                               <input class="mdl-radio__button" id="controller-compare--normal" type="radio" name="compare" value="normal"><span class="mdl-radio__label">数式曲線</span>
@@ -105,6 +106,9 @@
                                                             <label class="controller-compare mdl-radio mdl-js-radio mdl-js-ripple-effect" for="controller-compare--overlay">
                                                               <input class="mdl-radio__button" id="controller-compare--overlay" type="radio" name="compare" value="overlay"><span class="mdl-radio__label">オーバーレイ</span>
                                                             </label>
+                              <label class="switch-equation mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-equation">
+                                <input class="mdl-switch__input" id="switch-equation" type="checkbox" checked=""><span class="mdl-switch__label">数式</span>
+                              </label>
                             </div>
                           </div>
                         </div>
@@ -162,11 +166,12 @@
                                                                     <input type="color">カスタム
                                                                   </label>
                                                                 </div>
-                                                                <div class="controller-thickness" data-character="white"><span data-slidebar>
-                                                                    <label><span>太さ: </span>
-                                                                      <input type="range" max="100" min="0.1" step="0.1" value="1">
-                                                                    </label></span><span data-number>
-                                                                    <input type="number" max="100" min="0.1" step="0.1" value="1"></span></div>
+                                                                <div class="controller-thickness" data-character="white"><span class="label">太さ: </span><span class="slider" data-slidebar>
+                                                                    <input class="mdl-slider mdl-js-slider" type="range" max="100" min="0.1" step="0.1" value="1"></span>
+                                                                  <div class="textfield mdl-textfield mdl-js-textfield" data-number>
+                                                                    <input class="mdl-textfield__input" type="number" max="100" min="0.1" step="0.1" value="1">
+                                                                  </div>
+                                                                </div>
                                             </div>
                         </div>
                         <div class="mdl-tabs__panel" id="panel-aira">
@@ -223,11 +228,12 @@
                                                                     <input type="color">カスタム
                                                                   </label>
                                                                 </div>
-                                                                <div class="controller-thickness" data-character="aira"><span data-slidebar>
-                                                                    <label><span>太さ: </span>
-                                                                      <input type="range" max="100" min="0.1" step="0.1" value="1">
-                                                                    </label></span><span data-number>
-                                                                    <input type="number" max="100" min="0.1" step="0.1" value="1"></span></div>
+                                                                <div class="controller-thickness" data-character="aira"><span class="label">太さ: </span><span class="slider" data-slidebar>
+                                                                    <input class="mdl-slider mdl-js-slider" type="range" max="100" min="0.1" step="0.1" value="1"></span>
+                                                                  <div class="textfield mdl-textfield mdl-js-textfield" data-number>
+                                                                    <input class="mdl-textfield__input" type="number" max="100" min="0.1" step="0.1" value="1">
+                                                                  </div>
+                                                                </div>
                                             </div>
                         </div>
                         <div class="mdl-tabs__panel" id="panel-shima">
@@ -284,11 +290,12 @@
                                                                     <input type="color">カスタム
                                                                   </label>
                                                                 </div>
-                                                                <div class="controller-thickness" data-character="shima"><span data-slidebar>
-                                                                    <label><span>太さ: </span>
-                                                                      <input type="range" max="100" min="0.1" step="0.1" value="1">
-                                                                    </label></span><span data-number>
-                                                                    <input type="number" max="100" min="0.1" step="0.1" value="1"></span></div>
+                                                                <div class="controller-thickness" data-character="shima"><span class="label">太さ: </span><span class="slider" data-slidebar>
+                                                                    <input class="mdl-slider mdl-js-slider" type="range" max="100" min="0.1" step="0.1" value="1"></span>
+                                                                  <div class="textfield mdl-textfield mdl-js-textfield" data-number>
+                                                                    <input class="mdl-textfield__input" type="number" max="100" min="0.1" step="0.1" value="1">
+                                                                  </div>
+                                                                </div>
                                             </div>
                         </div>
                         <div class="mdl-tabs__panel" id="panel-hana">
@@ -345,11 +352,12 @@
                                                                     <input type="color">カスタム
                                                                   </label>
                                                                 </div>
-                                                                <div class="controller-thickness" data-character="hana"><span data-slidebar>
-                                                                    <label><span>太さ: </span>
-                                                                      <input type="range" max="100" min="0.1" step="0.1" value="1">
-                                                                    </label></span><span data-number>
-                                                                    <input type="number" max="100" min="0.1" step="0.1" value="1"></span></div>
+                                                                <div class="controller-thickness" data-character="hana"><span class="label">太さ: </span><span class="slider" data-slidebar>
+                                                                    <input class="mdl-slider mdl-js-slider" type="range" max="100" min="0.1" step="0.1" value="1"></span>
+                                                                  <div class="textfield mdl-textfield mdl-js-textfield" data-number>
+                                                                    <input class="mdl-textfield__input" type="number" max="100" min="0.1" step="0.1" value="1">
+                                                                  </div>
+                                                                </div>
                                             </div>
                         </div>
                       </div>
@@ -392,7 +400,7 @@
             </div>
           </div>
           <div class="block-author mdl-mega-footer__right-section">
-            <div class="link-author-home">created by <a href="https://www.butchi.jp/" target="_blank">IWABUCHI Yu(u)ki</a></div>
+            <div class="link-author-home">created by <a href="https://twitter.com/butchi_y" target="_blank">IWABUCHI Yu(u)ki (butchi)</a></div>
           </div>
         </footer>
       </div>
@@ -408,5 +416,5 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 ga('create', 'UA-2779957-9', 'auto');
 ga('send', 'pageview');
 </script>
-  <script type="text/javascript" src="/devidol-curve/js/script.js"></script></body>
+  <script type="text/javascript" src="js/script.js"></script></body>
 </html>

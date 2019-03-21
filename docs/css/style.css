@@ -57,10 +57,6 @@ body {
 a {
   color: #c00; }
 
-.main-content {
-  padding-top: 50px;
-  padding-bottom: 50px; }
-
 .movie-player {
   height: 360px;
   -webkit-transform-origin: 0 0;
@@ -189,11 +185,29 @@ a {
   top: 140px;
   width: 600px;
   min-height: 150px;
-  background-color: rgba(255, 255, 255, 0.3); }
+  background-color: rgba(255, 255, 255, 0.3);
+  opacity: 1;
+  visibility: visible;
+  transition: all 0.3s linear 0s; }
+  .controller-card[data-is-hidden="true"] {
+    opacity: 0;
+    visibility: hidden; }
   .controller-card [data-actions] {
     padding: 0; }
   .controller-card .controller-panel {
     padding: 20px; }
+  .controller-card .controller-max-freq .slider,
+  .controller-card .controller-thickness .slider {
+    display: inline-block;
+    width: 200px; }
+  .controller-card .controller-max-freq .textfield,
+  .controller-card .controller-thickness .textfield {
+    display: inline-block;
+    padding: 0;
+    width: 100px; }
+  .controller-card .switch-equation {
+    margin-left: 20px;
+    width: 100px; }
 
 .tab-character [data-tab-bar] {
   justify-content: flex-start; }
@@ -416,6 +430,9 @@ a {
   z-index: 10; }
 
 @media (min-width: 1025px) {
+  .main-content {
+    padding-top: 50px;
+    padding-bottom: 50px; }
     .global-footer {
       padding-top: 10px;
       padding-bottom: 40px; } }
