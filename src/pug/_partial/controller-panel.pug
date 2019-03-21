@@ -168,6 +168,11 @@ mixin controller-panel({ title, character, color })
               }],
             })
 
+            label.switch-equation.mdl-switch.mdl-js-switch.mdl-js-ripple-effect(for='switch-equation')
+              input#switch-equation.mdl-switch__input(type='checkbox', checked='')
+              span.mdl-switch__label
+                | 数式
+
       #panel-white.mdl-tabs__panel
         +controller-panel({
           title: '白',

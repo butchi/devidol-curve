@@ -48,9 +48,6 @@ const initDevidolCurve = _ => {
     $maxFreqSlidebar.val(val);
     $maxFreqNumber.val(val);
     animationPlayer.redraw();
-    if((moviePlayer.getFrame() !== 0) && moviePlayer.isPause) {
-      moviePlayer.showInfo();
-    }
   });
 
   const $maxFreqSlidebar = $('.controller-max-freq [data-slidebar] input');
@@ -179,6 +176,16 @@ const initDevidolCurve = _ => {
   });
 
   $thicknessSlidebar.trigger('change');
+
+  $('.switch-equation input[type="checkbox"]').on('change', evt => {
+    const $elm = $(evt.target);
+
+    if ($elm.prop('checked')) {
+      $('.info').show();
+    } else {
+      $('.info').hide();
+    }
+  });
 }
 
 $('body').one('mdl-componentupgraded', _evt => {
