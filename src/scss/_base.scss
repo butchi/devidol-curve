@@ -236,6 +236,23 @@ a {
   .controller-panel {
     padding: 20px;
   }
+
+  .controller-max-freq,
+  .controller-thickness {
+    .slider {
+      display: inline-block;
+
+      width: 200px;
+    }
+
+    .textfield {
+      display: inline-block;
+
+      padding: 0;
+
+      width: 100px;
+    }
+  }
 }
 
 .tab-character {
