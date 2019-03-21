@@ -260,10 +260,10 @@ DE DE DEDEDE.............`
   }
 
   showController() {
-    $('.controller-card').attr('data-is-hidden', false);
+    $('.group-controller').attr('data-is-hidden', false);
   }
 
   hideController() {
-    $('.controller-card').attr('data-is-hidden', true);
+    $('.group-controller').attr('data-is-hidden', true);
   }
 }
