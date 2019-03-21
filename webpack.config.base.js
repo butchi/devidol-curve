@@ -39,9 +39,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, DEST + BASE_DIR),
         filename: '[name]',
-        // publicPath: BASE_DIR,
-        // こっちにするとHMRが動かない？
-        publicPath: BASE_DIR + REPO_NAME + '/',
+        publicPath: '',
     },
     module: {
         // 各ファイル形式ごとのビルド設定
