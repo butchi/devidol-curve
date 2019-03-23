@@ -4,7 +4,7 @@ mixin controller-color({ title, name, type, character, defaultColor, itemArr })
     for item in itemArr
       -
         const { label, value, checked } = item;
-        const id = `controller-${name}--${type}--${item.value}`;
+        const id = `controller-${name}--${type}--${value}`;
       label.controller-compare.mdl-radio.mdl-js-radio.mdl-js-ripple-effect(for=id)
         input.mdl-radio__button(id=id, type='radio', name=`${name}-${type}`, value=value, checked=checked)
         span.mdl-radio__label
@@ -92,6 +92,14 @@ mixin controller-panel({ title, character, color })
       character,
     })
 
+mixin radio-preset({ name, label, value, checked = false })
+  -
+    const id = `controller-${name}--${type}--${value}`;
+  label.controller-preset.mdl-radio.mdl-js-radio.mdl-js-ripple-effect(for=id)
+    input.mdl-radio__button(id=id, type='radio', name=`${name}-${type}`, value=value, checked=checked)
+    span.mdl-radio__label
+      | #{label}
+
 .controller-card.mdl-card.mdl-shadow--2dp
   .mdl-card__actions(data-actions, style="color: white;")
     .tab-character.mdl-tabs.mdl-js-tabs.mdl-js-ripple-effect
@@ -106,6 +114,8 @@ mixin controller-panel({ title, character, color })
           | シマ
         a.tab-item.mdl-tabs__tab(href='#panel-hana', style="color: yellow;")
           | はな
+        a.tab-item.mdl-tabs__tab(href='#panel-preset', style="color: lightgreen;")
+          | プリセット
 
       #panel-common.mdl-tabs__panel.is-active
         .controller-panel(data-character=character)
@@ -200,3 +210,22 @@ mixin controller-panel({ title, character, color })
           character: 'hana',
           color: 'yellow',
         })
+
+      #panel-preset.mdl-tabs__panel
+        .controller-panel
+          +radio-preset({
+            name: 'preset',
+            label: 'デフォルト',
+            value: 'default',
+            checked: true,
+          })
+          +radio-preset({
+            name: 'preset',
+            label: 'モノクロ',
+            value: 'mono',
+          })
+          +radio-preset({
+            name: 'preset',
+            label: 'ネガ',
+            value: 'nega',
+          })

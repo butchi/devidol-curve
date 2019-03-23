@@ -151,7 +151,7 @@ const initDevidolCurve = _ => {
 
   const $thicknessController = $('.controller-thickness');
   $thicknessController.on('updatevalue', (evt, { value, character }) => {
-    $('.svg-canvas .svg-canvas__main').css({
+    $(`.svg-canvas .svg-canvas__main .${character}`).css({
       "stroke-width": value,
     });
     $(`.controller-thickness[data-character=${character}] [data-slidebar] input`).val(value);
@@ -176,6 +176,89 @@ const initDevidolCurve = _ => {
   });
 
   $thicknessSlidebar.trigger('change');
+
+  $('.controller-preset input[type="radio"]').on('change', evt => {
+    const setBgColor = ({ color }) => {
+      $('.area-movie').css({
+        "background-color": color,
+      });
+    };
+
+    const setCharacter = ({ character, target, color }) => {
+      if (target === 'width') {
+        console.log($(`input[name="color-${character}-${target}"]`).filter(`[value="${color}"]`).get(0));
+        $(`.svg-canvas .svg-canvas__main .${character}`).css({
+          [target]: color,
+        });
+      } else {
+        const $radio = $(`input[name="color-${character}-${target}"]`);
+
+        $(`.svg-canvas .svg-canvas__main .${character}`).css({
+          [target]: color,
+        });
+      }
+    };
+
+    const setConfig = ({ bg, aira, shima, hana }) => {
+      if (bg) {
+        setBgColor({ color: bg });
+      }
+
+      const charaLi = { aira, shima, hana };
+
+      Object.keys(charaLi).forEach(name => {
+        const character = charaLi[name];
+        if (character) {
+          Object.keys(character).forEach(key => {
+            setCharacter({
+              character: name,
+              target: key,
+              color: character[key],
+            });
+          });
+        }
+      })
+    };
+
+    const $elm = $(evt.target);
+    const value = $elm.val();
+
+    if (value === null) {
+    } else if (value === 'default') {
+      setConfig({
+        bg: '#000000',
+        aira: {
+          fill: 'red',
+          stroke: 'transparent',
+          width: 1,
+        },
+        shima: {
+          fill: 'blue',
+          stroke: 'transparent',
+          width: 1,
+        },
+        hana: {
+          fill: 'yellow',
+          stroke: 'transparent',
+          width: 1,
+        },
+      });
+    } else if (value === 'mono') {
+    } else if (value === 'nega') {
+      setConfig({
+        bg: '#ffffff',
+        aira: {
+          fill: '#00ffff',
+        },
+        shima: {
+          fill: 'yellow',
+        },
+        hana: {
+          fill: 'blue',
+        },
+      });
+    }
+  });
 
   $('.switch-equation input[type="checkbox"]').on('change', evt => {
     const $elm = $(evt.target);
