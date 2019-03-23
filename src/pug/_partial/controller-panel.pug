@@ -5,7 +5,7 @@ mixin controller-color({ title, name, type, character, defaultColor, itemArr })
       -
         const { label, value, checked } = item;
         const id = `controller-${name}--${type}--${value}`;
-      label.controller-compare.mdl-radio.mdl-js-radio.mdl-js-ripple-effect(for=id)
+      label.controller-compare.mdl-radio.mdl-js-radio.mdl-js-ripple-effect(for=id, data-color=value)
         input.mdl-radio__button(id=id, type='radio', name=`${name}-${type}`, value=value, checked=checked)
         span.mdl-radio__label
           | #{label}

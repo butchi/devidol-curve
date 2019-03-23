@@ -191,7 +191,17 @@ const initDevidolCurve = _ => {
           [target]: color,
         });
       } else {
-        const $radio = $(`input[name="color-${character}-${target}"]`);
+        const $radio = $(`.controller-color[data-character="${character}"][data-type="${target}"]`);
+
+        const $target = $radio.find(`.mdl-radio[data-color="${color}"]`);
+
+        if ($target.length > 0) {
+          $target.get(0).MaterialRadio.check()
+        } else {
+          $radio.find('.mdl-radio').each((_i, elm) => {
+            elm.MaterialRadio.uncheck();
+          });
+        }
 
         $(`.svg-canvas .svg-canvas__main .${character}`).css({
           [target]: color,
