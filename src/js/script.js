@@ -295,28 +295,31 @@ const initDevidolCurve = _ => {
 
     if (value === null) {
     } else if (value === 'default') {
+      resetConfig();
+    } else if (value === 'mono') {
+      resetConfig();
       setConfig({
-        bg: '#000000',
+        bg: 'black',
+        white: {
+          fill: 'white',
+        },
         aira: {
-          fill: 'red',
-          stroke: 'transparent',
-          width: 1,
+          fill: 'white',
         },
         shima: {
-          fill: 'blue',
-          stroke: 'transparent',
-          width: 1,
+          fill: 'white',
         },
         hana: {
-          fill: 'yellow',
-          stroke: 'transparent',
-          width: 1,
+          fill: 'white',
         },
       });
-    } else if (value === 'mono') {
     } else if (value === 'nega') {
+      resetConfig();
       setConfig({
-        bg: '#ffffff',
+        bg: 'white',
+        white: {
+          fill: 'black',
+        },
         aira: {
           fill: '#00ffff',
         },
