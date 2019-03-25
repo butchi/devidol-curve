@@ -330,6 +330,78 @@ const initDevidolCurve = _ => {
           fill: 'blue',
         },
       });
+    } else if (value === 'oscillo') {
+      resetConfig();
+      setConfig({
+        bg: 'black',
+        white: {
+          fill: 'transparent',
+          stroke: '#00ff00',
+          width: 2,
+        },
+        aira: {
+          fill: 'transparent',
+          stroke: '#00ff00',
+          width: 2,
+        },
+        shima: {
+          fill: 'transparent',
+          stroke: '#00ff00',
+          width: 2,
+        },
+        hana: {
+          fill: 'transparent',
+          stroke: '#00ff00',
+          width: 2,
+        },
+      });
+    } else if (value === 'bios') {
+      resetConfig();
+      setConfig({
+        bg: 'blue',
+        white: {
+          fill: 'yellow',
+        },
+        aira: {
+          fill: 'white',
+        },
+        shima: {
+          fill: 'white',
+        },
+        hana: {
+          fill: 'white',
+        },
+      });
+    } else if (value === 'medetai') {
+      resetConfig();
+      setConfig({
+        bg: 'white',
+        white: {
+          fill: '#c18e33',
+        },
+        aira: {
+          fill: '#e83530',
+        },
+        shima: {
+          fill: '#e83530',
+        },
+        hana: {
+          fill: '#e83530',
+        },
+      });
+    } else if (value === 'rocket') {
+      resetConfig();
+      setConfig({
+        aira: {
+          fill: 'green',
+        },
+        shima: {
+          fill: 'green',
+        },
+        hana: {
+          fill: 'green',
+        },
+      });
     }
   });
 
