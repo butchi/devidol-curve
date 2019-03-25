@@ -186,7 +186,6 @@ const initDevidolCurve = _ => {
 
     const setCharacter = ({ character, target, color }) => {
       if (target === 'width') {
-        console.log($(`input[name="color-${character}-${target}"]`).filter(`[value="${color}"]`).get(0));
         $(`.svg-canvas .svg-canvas__main .${character}`).css({
           [target]: color,
         });
@@ -209,12 +208,12 @@ const initDevidolCurve = _ => {
       }
     };
 
-    const setConfig = ({ bg, aira, shima, hana }) => {
+    const setConfig = ({ bg, white, aira, shima, hana }) => {
       if (bg) {
         setBgColor({ color: bg });
       }
 
-      const charaLi = { aira, shima, hana };
+      const charaLi = { white, aira, shima, hana };
 
       Object.keys(charaLi).forEach(name => {
         const character = charaLi[name];
