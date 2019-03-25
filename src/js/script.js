@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import lodash from 'lodash';
 
 import ns from './module/ns';
 import MoviePlayer from './module/movie-player';
@@ -184,15 +185,15 @@ const initDevidolCurve = _ => {
       });
     };
 
-    const setCharacter = ({ character, target, color }) => {
+    const setCharacter = ({ character, target, value }) => {
       if (target === 'width') {
         $(`.svg-canvas .svg-canvas__main .${character}`).css({
-          [target]: color,
+          "stroke-width": value,
         });
       } else {
         const $radio = $(`.controller-color[data-character="${character}"][data-type="${target}"]`);
 
-        const $target = $radio.find(`.mdl-radio[data-color="${color}"]`);
+        const $target = $radio.find(`.mdl-radio[data-color="${value}"]`);
 
         if ($target.length > 0) {
           $target.get(0).MaterialRadio.check()
@@ -203,7 +204,7 @@ const initDevidolCurve = _ => {
         }
 
         $(`.svg-canvas .svg-canvas__main .${character}`).css({
-          [target]: color,
+          [target]: value,
         });
       }
     };
@@ -222,7 +223,7 @@ const initDevidolCurve = _ => {
             setCharacter({
               character: name,
               target: key,
-              color: character[key],
+              value: character[key],
             });
           });
         }
@@ -230,63 +231,89 @@ const initDevidolCurve = _ => {
     };
 
     const resetConfig = (opts = {}) => {
-      const { bg, fill, stroke, width } = opts;
+      const { target } = opts;
 
-      if (bg !== false) {
+      if (target == null) {
         setConfig({
           bg: 'black',
-        });
-      }
-
-      if (fill !== false) {
-        setConfig({
           white: {
             fill: 'white',
+            stroke: 'transparent',
+            width: 1,
           },
           aira: {
             fill: 'red',
+            stroke: 'transparent',
+            width: 1,
           },
           shima: {
             fill: 'blue',
+            stroke: 'transparent',
+            width: 1,
           },
           hana: {
             fill: 'yellow',
+            stroke: 'transparent',
+            width: 1,
           },
         });
-      }
+      } else {
+        if (target.includes('bg')) {
+          setConfig({
+            bg: 'black',
+          });
+        }
 
-      if (stroke !== false) {
-        setConfig({
-          white: {
-            stroke: 'transparent',
-          },
-          aira: {
-            stroke: 'transparent',
-          },
-          shima: {
-            stroke: 'transparent',
-          },
-          hana: {
-            stroke: 'transparent',
-          },
-        });
-      }
+        if (target.includes('fill')) {
+          setConfig({
+            white: {
+              fill: 'white',
+            },
+            aira: {
+              fill: 'red',
+            },
+            shima: {
+              fill: 'blue',
+            },
+            hana: {
+              fill: 'yellow',
+            },
+          });
+        }
 
-      if (width !== false) {
-        setConfig({
-          white: {
-            width: 1,
-          },
-          aira: {
-            width: 1,
-          },
-          shima: {
-            width: 1,
-          },
-          hana: {
-            width: 1,
-          },
-        });
+        if (target.includes('stroke')) {
+          setConfig({
+            white: {
+              stroke: 'transparent',
+            },
+            aira: {
+              stroke: 'transparent',
+            },
+            shima: {
+              stroke: 'transparent',
+            },
+            hana: {
+              stroke: 'transparent',
+            },
+          });
+        }
+
+        if (target.includes('width')) {
+          setConfig({
+            white: {
+              width: 1,
+            },
+            aira: {
+              width: 1,
+            },
+            shima: {
+              width: 1,
+            },
+            hana: {
+              width: 1,
+            },
+          });
+        }
       }
     }
 
@@ -337,22 +364,22 @@ const initDevidolCurve = _ => {
         white: {
           fill: 'transparent',
           stroke: '#00ff00',
-          width: 2,
+          width: 1,
         },
         aira: {
           fill: 'transparent',
           stroke: '#00ff00',
-          width: 2,
+          width: 1,
         },
         shima: {
           fill: 'transparent',
           stroke: '#00ff00',
-          width: 2,
+          width: 1,
         },
         hana: {
           fill: 'transparent',
           stroke: '#00ff00',
-          width: 2,
+          width: 1,
         },
       });
     } else if (value === 'bios') {
