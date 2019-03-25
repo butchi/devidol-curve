@@ -12,6 +12,145 @@ let animationPlayer;
 let audioPlayer;
 
 
+const setBgColor = ({ color }) => {
+  $('.area-movie').css({
+    "background-color": color,
+  });
+};
+
+const setCharacter = ({ character, target, value }) => {
+  if (target === 'width') {
+    $(`.svg-canvas .svg-canvas__main .${character}`).css({
+      "stroke-width": value,
+    });
+  } else {
+    const $radio = $(`.controller-color[data-character="${character}"][data-type="${target}"]`);
+
+    const $target = $radio.find(`.mdl-radio[data-color="${value}"]`);
+
+    if ($target.length > 0) {
+      $target.get(0).MaterialRadio.check()
+    } else {
+      $radio.find('.mdl-radio').each((_i, elm) => {
+        elm.MaterialRadio.uncheck();
+      });
+    }
+
+    $(`.svg-canvas .svg-canvas__main .${character}`).css({
+      [target]: value,
+    });
+  }
+};
+
+const setConfig = ({ bg, white, aira, shima, hana }) => {
+  if (bg) {
+    setBgColor({ color: bg });
+  }
+
+  const charaLi = { white, aira, shima, hana };
+
+  Object.keys(charaLi).forEach(name => {
+    const character = charaLi[name];
+    if (character) {
+      Object.keys(character).forEach(key => {
+        setCharacter({
+          character: name,
+          target: key,
+          value: character[key],
+        });
+      });
+    }
+  })
+};
+
+const resetConfig = (opts = {}) => {
+  const { target } = opts;
+
+  if (target == null) {
+    setConfig({
+      bg: 'black',
+      white: {
+        fill: 'white',
+        stroke: 'transparent',
+        width: 1,
+      },
+      aira: {
+        fill: 'red',
+        stroke: 'transparent',
+        width: 1,
+      },
+      shima: {
+        fill: 'blue',
+        stroke: 'transparent',
+        width: 1,
+      },
+      hana: {
+        fill: 'yellow',
+        stroke: 'transparent',
+        width: 1,
+      },
+    });
+  } else {
+    if (target.includes('bg')) {
+      setConfig({
+        bg: 'black',
+      });
+    }
+
+    if (target.includes('fill')) {
+      setConfig({
+        white: {
+          fill: 'white',
+        },
+        aira: {
+          fill: 'red',
+        },
+        shima: {
+          fill: 'blue',
+        },
+        hana: {
+          fill: 'yellow',
+        },
+      });
+    }
+
+    if (target.includes('stroke')) {
+      setConfig({
+        white: {
+          stroke: 'transparent',
+        },
+        aira: {
+          stroke: 'transparent',
+        },
+        shima: {
+          stroke: 'transparent',
+        },
+        hana: {
+          stroke: 'transparent',
+        },
+      });
+    }
+
+    if (target.includes('width')) {
+      setConfig({
+        white: {
+          width: 1,
+        },
+        aira: {
+          width: 1,
+        },
+        shima: {
+          width: 1,
+        },
+        hana: {
+          width: 1,
+        },
+      });
+    }
+  }
+}
+
+
 const initIframeApi = _ => {
   const tag = document.createElement('script');
 
@@ -179,144 +318,6 @@ const initDevidolCurve = _ => {
   $thicknessSlidebar.trigger('change');
 
   $('.controller-preset input[type="radio"]').on('change', evt => {
-    const setBgColor = ({ color }) => {
-      $('.area-movie').css({
-        "background-color": color,
-      });
-    };
-
-    const setCharacter = ({ character, target, value }) => {
-      if (target === 'width') {
-        $(`.svg-canvas .svg-canvas__main .${character}`).css({
-          "stroke-width": value,
-        });
-      } else {
-        const $radio = $(`.controller-color[data-character="${character}"][data-type="${target}"]`);
-
-        const $target = $radio.find(`.mdl-radio[data-color="${value}"]`);
-
-        if ($target.length > 0) {
-          $target.get(0).MaterialRadio.check()
-        } else {
-          $radio.find('.mdl-radio').each((_i, elm) => {
-            elm.MaterialRadio.uncheck();
-          });
-        }
-
-        $(`.svg-canvas .svg-canvas__main .${character}`).css({
-          [target]: value,
-        });
-      }
-    };
-
-    const setConfig = ({ bg, white, aira, shima, hana }) => {
-      if (bg) {
-        setBgColor({ color: bg });
-      }
-
-      const charaLi = { white, aira, shima, hana };
-
-      Object.keys(charaLi).forEach(name => {
-        const character = charaLi[name];
-        if (character) {
-          Object.keys(character).forEach(key => {
-            setCharacter({
-              character: name,
-              target: key,
-              value: character[key],
-            });
-          });
-        }
-      })
-    };
-
-    const resetConfig = (opts = {}) => {
-      const { target } = opts;
-
-      if (target == null) {
-        setConfig({
-          bg: 'black',
-          white: {
-            fill: 'white',
-            stroke: 'transparent',
-            width: 1,
-          },
-          aira: {
-            fill: 'red',
-            stroke: 'transparent',
-            width: 1,
-          },
-          shima: {
-            fill: 'blue',
-            stroke: 'transparent',
-            width: 1,
-          },
-          hana: {
-            fill: 'yellow',
-            stroke: 'transparent',
-            width: 1,
-          },
-        });
-      } else {
-        if (target.includes('bg')) {
-          setConfig({
-            bg: 'black',
-          });
-        }
-
-        if (target.includes('fill')) {
-          setConfig({
-            white: {
-              fill: 'white',
-            },
-            aira: {
-              fill: 'red',
-            },
-            shima: {
-              fill: 'blue',
-            },
-            hana: {
-              fill: 'yellow',
-            },
-          });
-        }
-
-        if (target.includes('stroke')) {
-          setConfig({
-            white: {
-              stroke: 'transparent',
-            },
-            aira: {
-              stroke: 'transparent',
-            },
-            shima: {
-              stroke: 'transparent',
-            },
-            hana: {
-              stroke: 'transparent',
-            },
-          });
-        }
-
-        if (target.includes('width')) {
-          setConfig({
-            white: {
-              width: 1,
-            },
-            aira: {
-              width: 1,
-            },
-            shima: {
-              width: 1,
-            },
-            hana: {
-              width: 1,
-            },
-          });
-        }
-      }
-    }
-
     const $elm = $(evt.target);
     const value = $elm.val();
 
@@ -430,6 +431,22 @@ const initDevidolCurve = _ => {
         },
       });
     }
+  });
+
+  $('.shuffle-button').on('click', _evt => {
+    const [ aira, shima, hana ] = lodash.shuffle(['red', 'blue', 'yellow']);
+
+    setConfig({
+      aira: {
+        fill: aira,
+      },
+      shima: {
+        fill: shima,
+      },
+      hana: {
+        fill: hana,
+      },
+    });
   });
 
   $('.switch-equation input[type="checkbox"]').on('change', evt => {
