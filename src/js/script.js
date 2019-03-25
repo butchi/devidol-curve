@@ -229,6 +229,67 @@ const initDevidolCurve = _ => {
       })
     };
 
+    const resetConfig = (opts = {}) => {
+      const { bg, fill, stroke, width } = opts;
+
+      if (bg !== false) {
+        setConfig({
+          bg: 'black',
+        });
+      }
+
+      if (fill !== false) {
+        setConfig({
+          white: {
+            fill: 'white',
+          },
+          aira: {
+            fill: 'red',
+          },
+          shima: {
+            fill: 'blue',
+          },
+          hana: {
+            fill: 'yellow',
+          },
+        });
+      }
+
+      if (stroke !== false) {
+        setConfig({
+          white: {
+            stroke: 'transparent',
+          },
+          aira: {
+            stroke: 'transparent',
+          },
+          shima: {
+            stroke: 'transparent',
+          },
+          hana: {
+            stroke: 'transparent',
+          },
+        });
+      }
+
+      if (width !== false) {
+        setConfig({
+          white: {
+            width: 1,
+          },
+          aira: {
+            width: 1,
+          },
+          shima: {
+            width: 1,
+          },
+          hana: {
+            width: 1,
+          },
+        });
+      }
+    }
+
     const $elm = $(evt.target);
     const value = $elm.val();
 
