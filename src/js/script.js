@@ -430,6 +430,23 @@ const initDevidolCurve = _ => {
           fill: 'green',
         },
       });
+    } else if (value === 'reiwa') {
+      resetConfig();
+      setConfig({
+        bg: 'white',
+        white: {
+          fill: 'black',
+        },
+        aira: {
+          fill: '#e3a9b8',
+        },
+        shima: {
+          fill: '#524362',
+        },
+        hana: {
+          fill: 'f7dade',
+        },
+      });
     }
   });
 

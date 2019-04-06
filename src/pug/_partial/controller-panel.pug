@@ -249,6 +249,11 @@ mixin radio-preset({ name, label, value, checked = false })
             label: 'ロケット',
             value: 'rocket',
           })
+          +radio-preset({
+            name: 'preset',
+            label: '令和',
+            value: 'reiwa',
+          })
 
           button.shuffle-button.mdl-button.mdl-js-button.mdl-button--primary
             .material-icons
