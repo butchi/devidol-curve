@@ -430,6 +430,27 @@ const initDevidolCurve = _ => {
           fill: 'green',
         },
       });
+    } else if (value === 'psychedelic') {
+      resetConfig();
+      setConfig({
+        white: {
+          fill: 'orange',
+          stroke: 'lime',
+          width: 14,
+        },
+        aira: {
+          stroke: 'cyan',
+          width: 14,
+        },
+        shima: {
+          stroke: 'magenta',
+          width: 14,
+        },
+        hana: {
+          stroke: 'maroon',
+          width: 14,
+        },
+      });
     } else if (value === 'reiwa') {
       resetConfig();
       setConfig({
