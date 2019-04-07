@@ -1,5 +1,7 @@
 import $ from 'jquery';
 
+import ns from './ns';
+
 const DURATION = 91;
 
 let prev;
@@ -59,6 +61,12 @@ export default class AudioPlayer {
     prev = null;
     this.$elm.trigger('pause');
     this.cur = 0;
+  }
+
+  sync() {
+    const currentTime = ns.ytPlayer.getCurrentTime();
+
+    this.cur = currentTime;
   }
 
   get currentTime() {

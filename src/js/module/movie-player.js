@@ -37,6 +37,10 @@ export default class MoviePlayer {
         ns.ytPlayer.playVideo();
       } catch(_e) {
       }
+
+      this.syncTimer = setInterval(_ => {
+        ns.audioPlayer.sync();
+      }, 1000);
     });
 
     audioPlayer.$elm.on('pause', _ => {
@@ -48,6 +52,8 @@ export default class MoviePlayer {
         ns.ytPlayer.pauseVideo();
       } catch(_e) {
       }
+
+      clearInterval(this.syncTimer);
     });
 
     audioPlayer.$elm.on('seeking', _ => {
