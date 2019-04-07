@@ -219,6 +219,13 @@ a {
 .tab-character [data-tab-bar] {
   justify-content: flex-start; }
 
+.note {
+  margin-top: 50px;
+  color: black;
+  text-align: center; }
+  .note .heading {
+    font-weight: bold; }
+
 .global-footer {
   padding-top: 10px;
   padding-bottom: 30px; }
