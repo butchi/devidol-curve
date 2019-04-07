@@ -288,6 +288,18 @@ a {
   }
 }
 
+.note {
+  margin-top: 50px;
+
+  color: black;
+
+  text-align: center;
+
+  .heading {
+    font-weight: bold;
+  }
+}
+
 .global-footer {
   padding-top: 10px;
   padding-bottom: 30px;
