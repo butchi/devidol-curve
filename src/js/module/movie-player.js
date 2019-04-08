@@ -102,7 +102,7 @@ export default class MoviePlayer {
 
       $('.area-movie .cover').hide();
 
-      setTimeout(_ => {
+      this.hideTimer = setTimeout(_ => {
         this.hideController();
       }, 3000);
 

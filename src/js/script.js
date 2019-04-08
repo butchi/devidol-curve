@@ -506,6 +506,9 @@ const initDevidolCurve = _ => {
   };
 
   $('.area-movie').on('mouseenter', mouseenterHandler);
+  $('.area-movie').on('mouseover', _evt => {
+    clearTimeout(ns.moviePlayer.hideTimer);
+  });
   $('.area-movie').on('mouseleave', mouseleaveHandler);
   $('.area-movie').on('click', mouseenterHandler);
   $('.wrapper').on('click', evt => {
