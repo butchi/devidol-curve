@@ -310,9 +310,13 @@ const initDevidolCurve = _ => {
     $thicknessController.trigger('updatevalue', { value, character });
   });
   $thicknessNumber.on('input change', evt => {
+    const $elm = $(evt.target);
     const value = $(evt.target).val();
 
-    $thicknessController.trigger('updatevalue');
+    const $parent = $elm.closest('.controller-thickness');
+    const character = $parent.attr('data-character');
+
+    $thicknessController.trigger('updatevalue', { value, character });
   });
 
   $thicknessSlidebar.trigger('change');
