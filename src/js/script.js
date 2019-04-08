@@ -561,6 +561,7 @@ window.onYouTubeIframeAPIReady = _ => {
       controls : 0, // コントローラー
       wmode    : 'transparent', // z-indexを有効にする
       playsinline: 1, // iOSでインライン再生する 
+      origin: location.protocol + '//' + location.hostname + "/", // http://chobugyo.hatenablog.com/entry/2018/07/09/112445
     },
   });
 
