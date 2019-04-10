@@ -2,7 +2,7 @@
   "name": "devidol-curve",
   "version": "0.0.1",
   "description": "Devidol curve.",
-  "author": "IWABUCHI Yuki",
+  "author": "IWABUCHI Yuki butchi",
   "license": "MIT",
   "scripts": {
     "build": "webpack --mode production --progress",
