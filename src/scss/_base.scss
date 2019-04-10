@@ -22,9 +22,10 @@ a {
 }
 
 .main-content {
+  padding-bottom: 50px;
+
   @include mq-large {
     padding-top: 50px;
-    padding-bottom: 50px;
   }
 }
 
