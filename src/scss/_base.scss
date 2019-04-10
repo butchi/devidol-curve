@@ -17,8 +17,22 @@ a {
   color: #c00;
 }
 
-.title {
-  width: 100px;
+.layout {
+  [data-mdl="header-row"] {
+    padding-left: 20px;
+  }
+
+  .title {
+    width: 80px;
+
+    @include mq-small {
+      margin: 0;
+    }
+
+    @include mq-large {
+      width: 100px;
+    }
+  }
 }
 
 .main-content {
