@@ -57,8 +57,14 @@ body {
 a {
   color: #c00; }
 
-.title {
-  width: 100px; }
+.layout [data-mdl="header-row"] {
+  padding-left: 20px; }
+
+.layout .title {
+  width: 80px; }
+
+.main-content {
+  padding-bottom: 50px; }
 
 .movie-player {
   height: 360px;
@@ -443,15 +449,18 @@ a {
   background-color: #eee;
   z-index: 10; }
 
-@media (min-width: 1025px) {
-  .main-content {
-    padding-top: 50px;
-    padding-bottom: 50px; }
-    .global-footer {
-      padding-top: 10px;
-      padding-bottom: 40px; } }
-
 @media (max-width: 1024px) {
+    .layout .title {
+      margin: 0; }
         .global-footer .link-list .link-original-movie {
           display: block;
           margin-left: 0; } }
+
+@media (min-width: 1025px) {
+    .layout .title {
+      width: 100px; }
+    .main-content {
+      padding-top: 50px; }
+    .global-footer {
+      padding-top: 10px;
+      padding-bottom: 40px; } }
