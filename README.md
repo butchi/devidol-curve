@@ -4,6 +4,7 @@
 ## 事前に用意するもの
 - node.js (version 8.11.1以上)
 
+
 ## 環境構築
 
 開発に使うnpmパッケージをインストール
@@ -16,7 +17,41 @@ npm install
 yarn
 ```
 
-## ファイル構成
+
+## 動画準備
+
+```
+npm run download
+```
+
+あるいは、
+```
+yarn download
+```
+
+を実行。
+`src/mathematica/image/` に元動画のMP4ファイルと連番PNGが書き出されます。
+
+
+## Mathematica
+
+動作確認バージョン: Mathematica 11.3
+
+動画準備をした状態で `src/mathematica/devidol-curve-export-json.nb` を実行。
+`src/mathematica/output/fourier-array.json` が生成されます。
+
+生成されたJSONファイルを `docs/data/` に配置します。
+
+
+### 注意
+
+実際使用した動画は以下で、動画準備でダウンロードしたYouTube動画とは若干異なります。また、連番PNGはAdobe Media Encoder CC 2019を用いて640x360 12fpsで書き出しました。
+https://www.nicovideo.jp/watch/1538532843
+
+
+## Web
+
+### ファイル構成
 
 - `README.md`
   - このファイルです。
@@ -31,7 +66,8 @@ yarn
 - `src/scss`, `src/js`, `src/pug`
   - ビルドに必要な各種ソースコードです。
 
-## 開発手順
+
+### 開発手順
 
 開発時に必要なタスクは、npm scriptおよびwebpack.config.jsで管理されています。
 shellから以下のコマンドを実行することで、各種ビルド・タスク実行が可能です。
@@ -43,17 +79,20 @@ shellから以下のコマンドを実行することで、各種ビルド・タ
   - ファイルをビルドします。`webpack-dev-server`では、ビルドファイルはサーバー側で保持します。
     そのため、ファイルとして出力するには `npm run build` / `yarn build` が必要になります。
 
-## 使用言語
+
+### 使用言語
 
 - HTMLテンプレート: [pug](https://pugjs.org/api/getting-started.html)
 - CSSメタ言語: [Sass(scss)](http://sass-lang.com/)
 - Javascript: [ES2015(ECMAScript 6)](https://babeljs.io/docs/learn-es2015/)
 
-## 対応ブラウザ
+
+### 対応ブラウザ
 - 各種モダンブラウザ最新バージョン・IE11以上
   - 対応ブラウザを変更する場合、`package.json`の`browserlist`を修正することをお忘れなく
 
-## 依存ライブラリ
+
+### 依存ライブラリ
 
 `npm install`でインストールされるライブラリ（一部）です。
 全てを理解していなくても、開発は問題なく行えますが、挙動に問題がある場合・カスタマイズしたい場合などに参照してみてください。

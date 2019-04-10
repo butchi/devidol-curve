@@ -36,3 +36,7 @@ node_modules
 .node_repl_history
 
 bower_components
+src/mathematica/image/*.mp4
+src/mathematica/image/*.png
+src/mathematica/output/*.json
+src/mathematica/output/*.png
