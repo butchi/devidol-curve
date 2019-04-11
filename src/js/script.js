@@ -475,6 +475,7 @@ const initDevidolCurve = _ => {
     }
   });
 
+
   $('.shuffle-button').on('click', _evt => {
     const [ aira, shima, hana ] = lodash.shuffle(['red', 'blue', 'yellow']);
 
@@ -491,25 +492,34 @@ const initDevidolCurve = _ => {
     });
   });
 
+
+  let starTimer;
   let colorArr = ['red', 'blue', 'yellow'];
 
-  setInterval(_ => {
-    colorArr.push(colorArr.shift());
+  $('input[name="star"]').on('change', evt => {
+    if ($(evt.target).prop('checked')) {
+      starTimer = setInterval(_ => {
+        colorArr.push(colorArr.shift());
 
-    const [ aira, shima, hana ] = colorArr;
+        const [ aira, shima, hana ] = colorArr;
 
-    setConfig({
-      aira: {
-        fill: aira,
-      },
-      shima: {
-        fill: shima,
-      },
-      hana: {
-        fill: hana,
-      },
-    });
-  }, 100);
+        setConfig({
+          aira: {
+            fill: aira,
+          },
+          shima: {
+            fill: shima,
+          },
+          hana: {
+            fill: hana,
+          },
+        });
+      }, 100);
+    } else {
+      clearTimeout(starTimer);
+    }
+  });
+
 
   $('.switch-equation input[type="checkbox"]').on('change', evt => {
     const $elm = $(evt.target);
