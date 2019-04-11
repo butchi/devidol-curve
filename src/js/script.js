@@ -491,6 +491,26 @@ const initDevidolCurve = _ => {
     });
   });
 
+  let colorArr = ['red', 'blue', 'yellow'];
+
+  setInterval(_ => {
+    colorArr.push(colorArr.shift());
+
+    const [ aira, shima, hana ] = colorArr;
+
+    setConfig({
+      aira: {
+        fill: aira,
+      },
+      shima: {
+        fill: shima,
+      },
+      hana: {
+        fill: hana,
+      },
+    });
+  }, 100);
+
   $('.switch-equation input[type="checkbox"]').on('change', evt => {
     const $elm = $(evt.target);
 
