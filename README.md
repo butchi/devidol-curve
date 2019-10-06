@@ -1,6 +1,9 @@
 # devidol-curve
 =======
 
+でびどる曲線！
+https://butchi.github.io/devidol-curve/
+
 ## 事前に用意するもの
 - node.js (version 8.11.1以上)
 
